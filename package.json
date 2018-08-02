@@ -15,11 +15,15 @@
     "url": "https://github.com/vokamura/munee-trackr.git"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "materialize-css": "^0.100.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "sass": "^1.10.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
