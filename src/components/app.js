@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import Nav from './nav';
 import Home from './home';
 import ExpenseLog from './expense_log';
+import About from './about';
 
 const App = () => (
     <div>
@@ -12,6 +13,7 @@ const App = () => (
         <div className="container">
             <Route exact path="/" component={Home}/>
             <Route path="/expense-log" component={ExpenseLog}/>
+            <Route path="/about" component={About}/>
         </div>
     </div>
 );

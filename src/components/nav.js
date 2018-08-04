@@ -13,6 +13,9 @@ const Nav = props => {
                     <li>
                         <Link to="/expense-log">Expense Log</Link>
                     </li>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
                 </ul>
             </div>
         </nav>
