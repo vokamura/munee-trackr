@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import chat from './input_reducer';
+import expense from './input_reducer';
 
-export default combineReducers({ chat });
+export default combineReducers({ expense });
