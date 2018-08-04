@@ -9,29 +9,39 @@ const ExpenseLog = props => {
         //     msg.debitcredit = msg.debitcredit.toFixed(2);
         // }
         return (
-            <li key={msg.id} className="collection-item row">
-                <div className="col s2">
+            <tr key={msg.id}>
+                <td >
                     {msg.date}
-                </div>
-                <div className="col s3">
-                    <b>{msg.location}</b>
-                </div>
-                <div className="col s4">
+                </td>
+                <td >
+                    {msg.location}
+                </td>
+                <td >
                     {msg.description}
-                </div>
-                <div className="col s3">
+                </td>
+                <td >
                     ${msg.debitcredit}
-                </div>
-            </li>
+                </td>
+            </tr>
         )
     });
 
     return(
         <div>
             <h1 className="center">Munee Log</h1>
-            <ul className="collection">
-                {logElements}
-            </ul>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {logElements}
+                </tbody>
+            </table>
         </div>
     )
 }
