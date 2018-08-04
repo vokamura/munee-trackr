@@ -5,9 +5,9 @@ const ExpenseLog = props => {
     console.log('Expense log props: ', props.log);
 
     const logElements = props.log.map( msg => {
-        if(msg.debitcredit % 2 === 0) {
-            msg.debitcredit = msg.debitcredit.toFixed(2);
-        }
+        // if(msg.debitcredit % 2 === 0) {
+        //     msg.debitcredit = msg.debitcredit.toFixed(2);
+        // }
         return (
             <li key={msg.id} className="collection-item row">
                 <div className="col s2">
