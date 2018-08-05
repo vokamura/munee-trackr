@@ -11,7 +11,7 @@ const Nav = props => {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/expense-log">Expense Log</Link>
+                        <Link to="/expense-log">Munee Log</Link>
                     </li>
                     <li>
                         <Link to="/about">About</Link>
