@@ -1,51 +1,116 @@
-import React from 'react';
+import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
 
-const ExpenseLog = props => {
-    console.log('Expense log props: ', props.log);
+class ExpenseLog extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showForm: false
+        }
+    }
 
-    const logElements = props.log.map( msg => {
-        // if(msg.debitcredit % 2 === 0) {
-        //     msg.debitcredit = msg.debitcredit.toFixed(2);
-        // }
-        return (
-            <tr key={msg.id}>
-                <td >
-                    {msg.date}
-                </td>
-                <td >
-                    {msg.location}
-                </td>
-                <td >
-                    {msg.description}
-                </td>
-                <td >
-                    ${msg.debitcredit}
-                </td>
-            </tr>
-        )
-    });
-
-    return(
-        <div>
-            <h1 className="center">Munee Log</h1>
-            <ExpenseInput send={props.sendLog}/>
-            <table >
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {logElements}
-                </tbody>
-            </table>
-        </div>
-    )
+    addForm(){
+        const showForm = this.state.showForm;
+        if (!showForm){
+            this.setState({
+                showForm: true
+            });
+        } else {
+            this.setState({
+                showForm: false
+            })
+        }
+    } 
+    render(){
+        // console.log('Expense log props: ', this.props.log);
+        const { showForm } = this.state;
+        const logElements = this.props.log.map( entry => {
+            return (
+                <tr key={entry.id}>
+                    <td >
+                        {entry.date}
+                    </td>
+                    <td >
+                        {entry.location}
+                    </td>
+                    <td >
+                        {entry.description}
+                    </td>
+                    <td >
+                        ${entry.debitcredit}
+                    </td>
+                    <td>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            )
+        });
+        if(!showForm){
+            return (
+                <div>
+                <h1 className="center">Munee Log</h1>
+                <table >
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logElements}
+                    </tbody>
+                </table>
+                <div onClick={this.addForm.bind(this)} className="fixed-action-btn btn-floating green right"><i className="material-icons">add</i></div>
+            </div>
+            );
+        } else {
+            return (
+                <div>
+                <h1 className="center">Munee Log</h1>
+                <table >
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logElements}
+                    </tbody>
+                </table>
+                <div onClick={this.addForm.bind(this)} className="fixed-action-btn btn-floating green right "><i className="material-icons">add</i></div>
+                <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
+            </div>
+            )
+        }
+        
+        // return(
+        //     <div>
+        //         <h1 className="center">Munee Log</h1>
+        //         {/* <ExpenseInput send={props.sendLog}/> */}
+        //         <table >
+        //             <thead>
+        //                 <tr>
+        //                     <th>Date</th>
+        //                     <th>Location</th>
+        //                     <th>Description</th>
+        //                     <th>Amount</th>
+        //                 </tr>
+        //             </thead>
+        //             <tbody>
+        //                 {logElements}
+        //             </tbody>
+        //         </table>
+        //         <div onClick={this.addForm} className="btn-floating green right"><i className="material-icons">add</i></div>
+        //         {showEntryForm}
+        //     </div>
+        // )
+    }
 }
 
 export default db(ExpenseLog);
