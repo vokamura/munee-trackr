@@ -1,5 +1,6 @@
 import React from 'react';
 import db from '../hoc/db';
+import ExpenseInput from './expense_input';
 
 const ExpenseLog = props => {
     console.log('Expense log props: ', props.log);
@@ -29,6 +30,7 @@ const ExpenseLog = props => {
     return(
         <div>
             <h1 className="center">Munee Log</h1>
+            <ExpenseInput send={props.sendLog}/>
             <table >
                 <thead>
                     <tr>
