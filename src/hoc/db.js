@@ -5,9 +5,6 @@ import firebase from '../firebase';
 
 export default (WrappedComponent) => {
     class Db extends Component {
-        // componentDidMount(){
-        //     firebase.collection('expense-log').onSnapshot(this.props.updateExpenseLog);
-        // };
         
         dbRef = firebase.collection('expense-log');
 
@@ -16,24 +13,26 @@ export default (WrappedComponent) => {
         };
        
         sendLog = (date, loc, desc, drcr) => {
-            // console.log('From DB HOC:', loc, desc, drcr);
             const newEntry = {
                 date: date,
                 location: loc,
                 description: desc,
                 debitcredit: drcr
             }
-
             this.dbRef.add(newEntry);
         }
 
+        deleteItem = (e) => {
+            const itemRow = e.target.getAttribute('itemnumber');
+            this.dbRef.doc(`${itemRow}`).delete();
+        }
+
         render(){
-            return <WrappedComponent {...this.props} sendLog={this.sendLog}/>
+            return <WrappedComponent {...this.props} sendLog={this.sendLog} deleteItem={this.deleteItem}/>
         }
     }
 
     function mapStateToProps(state){
-        // console.log('Map State to Props', state);
         return {
             log: state.expense.log
         }

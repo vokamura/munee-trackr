@@ -22,10 +22,12 @@ class ExpenseLog extends Component {
             })
         }
     } 
+
     render(){
         // console.log('Expense log props: ', this.props.log);
         const { showForm } = this.state;
         const logElements = this.props.log.map( entry => {
+            // console.log(this.props);
             return (
                 <tr key={entry.id}>
                     <td >
@@ -41,7 +43,7 @@ class ExpenseLog extends Component {
                         ${entry.debitcredit}
                     </td>
                     <td>
-                        <button>Delete</button>
+                        <button onClick={this.props.deleteItem} itemnumber={entry.id}>Delete</button>
                     </td>
                 </tr>
             )
