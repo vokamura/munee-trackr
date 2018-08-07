@@ -23,11 +23,11 @@ class ExpenseLog extends Component {
         }
     } 
 
+
     render(){
-        // console.log('Expense log props: ', this.props.log);
         const { showForm } = this.state;
+       
         const logElements = this.props.log.map( entry => {
-            // console.log(this.props);
             return (
                 <tr key={entry.id}>
                     <td >
@@ -43,7 +43,13 @@ class ExpenseLog extends Component {
                         ${entry.debitcredit}
                     </td>
                     <td>
-                        <button onClick={this.props.deleteItem} itemnumber={entry.id}>Delete</button>
+                        Balance
+                    </td>
+                    <td>
+                        <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
+                    </td>
+                    <td>
+                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">update</i></button>
                     </td>
                 </tr>
             )
@@ -51,41 +57,47 @@ class ExpenseLog extends Component {
         if(!showForm){
             return (
                 <div>
-                <h1 className="center">Munee Log</h1>
-                <table >
+                <h1 className="center responsive-table">Munee Log</h1>
+                <table className="striped center">
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>Location</th>
                             <th>Description</th>
                             <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Delete</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         {logElements}
                     </tbody>
                 </table>
-                <div onClick={this.addForm.bind(this)} className="fixed-action-btn btn-floating green right"><i className="material-icons">add</i></div>
+                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
             </div>
             );
         } else {
             return (
                 <div>
                 <h1 className="center">Munee Log</h1>
-                <table >
+                <table className="striped center">
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>Location</th>
                             <th>Description</th>
                             <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Delete</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         {logElements}
                     </tbody>
                 </table>
-                <div onClick={this.addForm.bind(this)} className="fixed-action-btn btn-floating green right "><i className="material-icons">add</i></div>
+                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
                 <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
             </div>
             )
