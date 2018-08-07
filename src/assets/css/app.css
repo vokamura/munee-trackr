@@ -1,0 +1,9 @@
+#btnAddForm{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+}
+
+#clickBehind {
+    pointer-events: none;
+}

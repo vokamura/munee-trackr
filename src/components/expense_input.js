@@ -36,50 +36,54 @@ class ExpenseInput extends Component {
         });
     }
 
+    updateItem = (e) => {
+            console.log(this.props.log);
+        }
+
     render(){
         const { date, location, description, debitcredit, noDate, noAmount } = this.state;
-        //error is here
         return(
-            <form className="row" onSubmit={this.handleSubmit}>
+            <form style={{marginTop: 20}} className="row" onSubmit={this.handleSubmit}>
                 <div className="col s6 offset-s3">
-                <p>Please enter your details</p>
-                <label>Date</label>
-                <input
-                    required
-                    type= "text"
-                    value={date}
-                    onChange={ e => this.setState({ 
-                        date: e.target.value,
-                })}/>
-                <div className="red-text">{noDate}</div>
-                <label>Location</label>
-                <input
-                    type= "text"
-                    value={location}
-                    onChange={ e => this.setState({ 
-                        location: e.target.value,
-                })}/>
-                <label>Add Description</label>
-                <input 
-                    type="text" 
-                    value={description} 
-                    onChange={ e => this.setState({ 
-                        description: e.target.value,
-                })}/>
-                <label>Debit or Credit</label>
-                <input
-                    required
-                    type= "number"
-                    value={debitcredit}
-                    onChange={ e => this.setState({ 
-                        debitcredit: e.target.value 
-                })}/>
-                <div className="red-text">{noAmount}</div>
-                </div>
-                <button onClick={this.handleSubmit} className="waves-effect waves-light btn">
-                    Submit
+                    <h5>Please enter your income or expense details</h5>
+                    <label>Date</label>
+                    <input
+                        required
+                        type= "text"
+                        value={date}
+                        onChange={ e => this.setState({ 
+                            date: e.target.value,
+                    })}/>
+                    <div className="red-text">{noDate}</div>
+                    <label>Location</label>
+                    <input
+                        type= "text"
+                        value={location}
+                        onChange={ e => this.setState({ 
+                            location: e.target.value,
+                    })}/>
+                    <label>Add Description</label>
+                    <input 
+                        type="text" 
+                        value={description} 
+                        onChange={ e => this.setState({ 
+                            description: e.target.value,
+                    })}/>
+                    <label>Debit or Credit (Use "-" for credit)</label>
+                    <input
+                        required
+                        type= "number"
+                        value={debitcredit}
+                        onChange={ e => this.setState({ 
+                            debitcredit: e.target.value 
+                    })}/>
+                    <div className="red-text">{noAmount}</div>
+                    <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
+                        Submit
                     <i className="material-icons right">send</i>
                 </button>
+                </div>
+                
             </form>
         )
     }

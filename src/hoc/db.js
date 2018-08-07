@@ -5,7 +5,7 @@ import firebase from '../firebase';
 
 export default (WrappedComponent) => {
     class Db extends Component {
-        
+
         dbRef = firebase.collection('expense-log');
 
         componentDidMount(){
