@@ -4,12 +4,15 @@ export default () => {
     return(
         <div>
             <h1 className="center">About Munee Trackr</h1>
-            <div>
-                <p>Munee Trackr was created by Vikki Okamurato help users track their expenses</p>
-                <p>It was developed using ReactJS, Redux, Materialize, and Firebase</p>
+            <div className="center">
+                <p>Munee Trackr was created by Vikki Okamura to help users track personal expenses.  It was developed using ReactJS, Redux, Materialize, and Firebase.  This project was made as Vikki has a background in accounting and loves money.</p>
                 <div className="container">
-                    <a href="http://www.vikkiokamura.com" className="container-item row">Vikki's Portfolio</a>
-                    <a href="https://github.com/vokamura" className="container-item row">Vikki's Github</a>
+                    <div className="container-item row">
+                        <a href="http://www.vikkiokamura.com" target="_blank" >Vikki's Portfolio</a>
+                    </div>
+                    <div className="container-item row">
+                        <a href="https://github.com/vokamura" target="_blank">Vikki's Github</a>
+                    </div>
                 </div>
             </div>
         </div>
