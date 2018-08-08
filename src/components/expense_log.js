@@ -28,14 +28,20 @@ class ExpenseLog extends Component {
     render(){
         const { showForm } = this.state;
         
+        //Get running balance total
         let array = this.props.log;
         var runningTotal = array.reduce(function(sum, amount){
             let parsedNum = parseFloat(amount.debitcredit);
             return sum+parsedNum;
         }, 0);
 
-
+        //Add decimals to number if none
         const logElements = this.props.log.map( entry => {
+            let amount = parseFloat(entry.debitcredit);
+            if(amount.toFixed(0) || amount.toFixed(1)){
+                amount = amount.toFixed(2);
+            }
+
             return (
                 <tr key={entry.id}>
                     <td >
@@ -48,7 +54,7 @@ class ExpenseLog extends Component {
                         {entry.description}
                     </td>
                     <td >
-                        ${entry.debitcredit}
+                        ${amount}
                     </td>
                     <td>
                         ${runningTotal}
@@ -82,11 +88,9 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
-                <div className="row">
-                    <h5 className="col s1 offset-s6">
-                        Balance: ${runningTotal}
-                    </h5>
-                </div>
+                <h5 className="center">
+                    Total Balance: ${runningTotal}
+                </h5>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
             </div>
             );
@@ -110,11 +114,9 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
-                <div className="row">
-                    <h5 className="col s1 offset-s6">
-                        Balance: ${runningTotal}
-                    </h5>
-                </div>
+                <h5 className="center">
+                    Total Balance: ${runningTotal}
+                </h5>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
                 <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
             </div>
