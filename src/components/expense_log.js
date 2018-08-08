@@ -88,7 +88,7 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
-                <h5 className="center">
+                <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
@@ -114,7 +114,7 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
-                <h5 className="center">
+                <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
