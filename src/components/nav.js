@@ -7,7 +7,7 @@ const Nav = props => {
             <div className="nav-wrapper">
                 <Link style={{paddingLeft: '3%'}}to="/" className="brand-logo left">Munee Trackr</Link>
                 <ul className="right nav-mobile">
-                    <li c>
+                    <li>
                         <Link to="/">Home</Link>
                     </li>
                     <li >

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
+import { debug } from 'util';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -26,7 +27,14 @@ class ExpenseLog extends Component {
 
     render(){
         const { showForm } = this.state;
-       
+        
+        let array = this.props.log;
+        var runningTotal = array.reduce(function(sum, amount){
+            let parsedNum = parseFloat(amount.debitcredit);
+            return sum+parsedNum;
+        }, 0);
+
+
         const logElements = this.props.log.map( entry => {
             return (
                 <tr key={entry.id}>
@@ -43,7 +51,7 @@ class ExpenseLog extends Component {
                         ${entry.debitcredit}
                     </td>
                     <td>
-                        Balance
+                        ${runningTotal}
                     </td>
                     <td>
                         <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
@@ -61,19 +69,24 @@ class ExpenseLog extends Component {
                 <table className="striped center">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Location</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Balance</th>
-                            <th>Delete</th>
-                            <th>Update</th>
+                            <th className="col s1">Date</th>
+                            <th className="col s2">Location</th>
+                            <th className="col s3">Description</th>
+                            <th className="col s1">Amount</th>
+                            <th className="col s1">Balance</th>
+                            <th className="col s1">Delete</th>
+                            <th className="col s1">Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         {logElements}
                     </tbody>
                 </table>
+                <div className="row">
+                    <h5 className="col s1 offset-s6">
+                        Balance: ${runningTotal}
+                    </h5>
+                </div>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
             </div>
             );
@@ -97,6 +110,11 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
+                <div className="row">
+                    <h5 className="col s1 offset-s6">
+                        Balance: ${runningTotal}
+                    </h5>
+                </div>
                 <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
                 <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
             </div>
