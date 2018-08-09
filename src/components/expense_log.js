@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
-import { debug } from 'util';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -43,7 +42,7 @@ class ExpenseLog extends Component {
             }
 
             return (
-                <tr key={entry.id}>
+                <tr key={entry.id} id={entry.id}>
                     <td >
                         {entry.date}
                     </td>
@@ -63,7 +62,7 @@ class ExpenseLog extends Component {
                         <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">update</i></button>
+                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">edit</i></button>
                     </td>
                 </tr>
             )

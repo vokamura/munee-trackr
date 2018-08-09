@@ -27,8 +27,17 @@ export default (WrappedComponent) => {
             this.dbRef.doc(`${itemRow}`).delete();
         }
 
+        updateItem = (e) => {
+            const itemRow = e.target.getAttribute('itemnumber');
+            let element = document.getElementById(`${itemRow}`);
+            element.getElementsByTagName('td')[0].setAttribute("contenteditable", "");
+            element.getElementsByTagName('td')[1].setAttribute("contenteditable", "");
+            element.getElementsByTagName('td')[2].setAttribute("contenteditable", "");
+            element.getElementsByTagName('td')[3].setAttribute("contenteditable", "");
+        }
+
         render(){
-            return <WrappedComponent {...this.props} sendLog={this.sendLog} deleteItem={this.deleteItem}/>
+            return <WrappedComponent {...this.props} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
         }
     }
 
