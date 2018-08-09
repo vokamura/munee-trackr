@@ -6,8 +6,11 @@ class ExpenseLog extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showForm: false
+            showForm: false,
+            changeBtn: false
         }
+        this.addForm = this.addForm.bind(this);
+        this.changeBtn = this.changeBtn.bind(this);
     }
 
     addForm(){
@@ -23,9 +26,25 @@ class ExpenseLog extends Component {
         }
     } 
 
+    changeBtn(e){
+        const changeBtn = this.state.changeBtn;
+        console.log(e.target.getElementsByClassName('toggleEditSubmit')[0]);
+        // if(document.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit"){
+        //     console.log(changeBtn);
+        // } 
+        //     this.setState({
+        //         changeBtn: false
+        //     });
+        // } else {
+        //     this.setState({
+        //         changeBtn: true
+        //     })
+        // }
+    }
 
     render(){
-        const { showForm } = this.state;
+        const { showForm, changeBtn } = this.state;
+        console.log(changeBtn);
         
         //Get running balance total
         let array = this.props.log;
@@ -62,7 +81,7 @@ class ExpenseLog extends Component {
                         <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">edit</i></button>
+                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
                     </td>
                 </tr>
             )
@@ -90,7 +109,7 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
             </div>
             );
         } else {
@@ -116,7 +135,7 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
                 <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
             </div>
             )

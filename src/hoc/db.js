@@ -30,10 +30,11 @@ export default (WrappedComponent) => {
         updateItem = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
-            element.getElementsByTagName('td')[0].setAttribute("contenteditable", "");
-            element.getElementsByTagName('td')[1].setAttribute("contenteditable", "");
-            element.getElementsByTagName('td')[2].setAttribute("contenteditable", "");
-            element.getElementsByTagName('td')[3].setAttribute("contenteditable", "");
+            console.log('Update button pushed', element);
+            for (let i = 0; i <3; i++){
+                element.getElementsByTagName('td')[i].setAttribute("contenteditable", "");     
+            }
+            e.target.getElementsByClassName('submit')[0].innerText = "done";
         }
 
         render(){
