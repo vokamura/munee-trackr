@@ -10,7 +10,7 @@ class ExpenseLog extends Component {
             changeBtn: false
         }
         this.addForm = this.addForm.bind(this);
-        this.changeBtn = this.changeBtn.bind(this);
+        this.changeUpdateBtn = this.changeUpdateBtn.bind(this);
     }
 
     addForm(){
@@ -26,25 +26,24 @@ class ExpenseLog extends Component {
         }
     } 
 
-    changeBtn(e){
-        const changeBtn = this.state.changeBtn;
-        console.log(e.target.getElementsByClassName('toggleEditSubmit')[0]);
-        // if(document.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit"){
-        //     console.log(changeBtn);
-        // } 
-        //     this.setState({
-        //         changeBtn: false
-        //     });
-        // } else {
-        //     this.setState({
-        //         changeBtn: true
-        //     })
-        // }
+    changeUpdateBtn(e){
+        this.props.updateItem(e);
+        const {changeBtn} = this.state;
+        if(!changeBtn){
+            e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
+            this.setState({
+                changeBtn: true
+            });
+        } else {
+            e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+            this.setState({
+                changeBtn: false
+            });
+        }
     }
 
     render(){
         const { showForm, changeBtn } = this.state;
-        console.log(changeBtn);
         
         //Get running balance total
         let array = this.props.log;
@@ -81,7 +80,7 @@ class ExpenseLog extends Component {
                         <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
+                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} onClick={this.changeUpdateBtn} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
                     </td>
                 </tr>
             )
