@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
-import { debug } from 'util';
 
 class ExpenseLog extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showForm: false
+            showForm: false,
+            changeBtn: false
         }
+        this.addForm = this.addForm.bind(this);
+        this.changeUpdateBtn = this.changeUpdateBtn.bind(this);
     }
 
     addForm(){
@@ -24,9 +26,24 @@ class ExpenseLog extends Component {
         }
     } 
 
+    changeUpdateBtn(e){
+        this.props.updateItem(e);
+        const {changeBtn} = this.state;
+        if(!changeBtn){
+            e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
+            this.setState({
+                changeBtn: true
+            });
+        } else {
+            e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+            this.setState({
+                changeBtn: false
+            });
+        }
+    }
 
     render(){
-        const { showForm } = this.state;
+        const { showForm, changeBtn } = this.state;
         
         //Get running balance total
         let array = this.props.log;
@@ -43,7 +60,7 @@ class ExpenseLog extends Component {
             }
 
             return (
-                <tr key={entry.id}>
+                <tr key={entry.id} id={entry.id}>
                     <td >
                         {entry.date}
                     </td>
@@ -63,7 +80,7 @@ class ExpenseLog extends Component {
                         <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light blue lighten-3" onClick={this.props.updateItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">update</i></button>
+                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} onClick={this.changeUpdateBtn} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
                     </td>
                 </tr>
             )
@@ -91,7 +108,7 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
             </div>
             );
         } else {
@@ -117,7 +134,7 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm.bind(this)} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
                 <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
             </div>
             )
