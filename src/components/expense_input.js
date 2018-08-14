@@ -36,10 +36,6 @@ class ExpenseInput extends Component {
         });
     }
 
-    updateItem = (e) => {
-            console.log(this.props.log);
-        }
-
     render(){
         const { date, location, description, debitcredit, noDate, noAmount } = this.state;
         return(

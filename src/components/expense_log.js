@@ -7,10 +7,16 @@ class ExpenseLog extends Component {
         super(props);
         this.state = {
             showForm: false,
-            changeBtn: false
+            changeBtn: false,
+            date: '',
+            location: '',
+            description: '',
+            debitcredit: '',
         }
         this.addForm = this.addForm.bind(this);
-        this.changeUpdateBtn = this.changeUpdateBtn.bind(this);
+        this.updateInput = this.updateInput.bind(this);
+        this.handleChangeUpdateBtn = this.handleChangeUpdateBtn.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     addForm(){
@@ -26,7 +32,64 @@ class ExpenseLog extends Component {
         }
     } 
 
-    changeUpdateBtn(e){
+    insertForm() {
+        const {showForm} = this.state;
+        if(showForm){
+            return <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
+        } 
+    }
+
+    updateInput = (e) => {
+        console.log("Oninput");
+
+        const itemRow = e.target.getAttribute('itemnumber');
+        let element = document.getElementById(`${itemRow}`);
+        if (element.getElementsByClassName('updated')){
+            let dateUpdated = element.getElementsByClassName('updated')[0].innerText;
+            let locationUpdated = element.getElementsByClassName('updated')[1].innerText;
+            let descriptionUpdated = element.getElementsByClassName('updated')[2].innerText;
+            let amountUpdated = element.getElementsByClassName('updated')[3].innerText;
+            
+            this.setState({
+                date: dateUpdated,
+                location: locationUpdated,
+                description: descriptionUpdated,
+                debitcredit: amountUpdated,
+                key: itemRow
+            });
+        }
+    }
+
+    handleUpdate = (e) => {
+        e.preventDefault();
+        // const itemRow = e.target.getAttribute('itemnumber');
+        // let element = document.getElementById(`${itemRow}`);
+        // if (element.getElementsByClassName('updated')){
+        //     let dateUpdated = element.getElementsByClassName('updated')[0].innerText;
+        //     let locationUpdated = element.getElementsByClassName('updated')[1].innerText;
+        //     let descriptionUpdated = element.getElementsByClassName('updated')[2].innerText;
+        //     let amountUpdated = element.getElementsByClassName('updated')[3].innerText;
+            
+        //     this.setState({
+        //         date: dateUpdated,
+        //         location: locationUpdated,
+        //         description: descriptionUpdated,
+        //         debitcredit: amountUpdated,
+        //         key: itemRow
+        //     });
+
+            // this.props.updateLog(
+            //     this.state.date,
+            //     this.state.location,
+            //     this.state.description,
+            //     this.state.debitcredit,
+            //     this.state.key
+            // );
+        // }    
+        console.log(this.state);   
+    }
+
+    handleChangeUpdateBtn = (e) => {
         this.props.updateItem(e);
         const {changeBtn} = this.state;
         if(!changeBtn){
@@ -39,11 +102,13 @@ class ExpenseLog extends Component {
             this.setState({
                 changeBtn: false
             });
+            this.handleUpdate(e);
         }
     }
 
     render(){
-        const { showForm, changeBtn } = this.state;
+        const { showForm, changeBtn} = this.state;
+        // console.log(this.state);
         
         //Get running balance total
         let array = this.props.log;
@@ -52,42 +117,50 @@ class ExpenseLog extends Component {
             return sum+parsedNum;
         }, 0);
 
-        //Add decimals to number if none
+        //Add decimals to number if none and then render items
         const logElements = this.props.log.map( entry => {
             let amount = parseFloat(entry.debitcredit);
             if(amount.toFixed(0) || amount.toFixed(1)){
-                amount = amount.toFixed(2);
+                amount = "$" + amount.toFixed(2);
             }
-
+        
             return (
                 <tr key={entry.id} id={entry.id}>
-                    <td >
+                    <td className="updated" onChange={this.updateInput} onBlur={this.updateInput} onInput={this.updateInput}>
                         {entry.date}
                     </td>
-                    <td >
+                    <td className="updated" onChange={this.updateInput}>
                         {entry.location}
                     </td>
-                    <td >
+                    <td className="updated" onChange={this.updateInput}>
                         {entry.description}
                     </td>
-                    <td >
-                        ${amount}
-                    </td>
+                    <td className="updated" onChange={this.updateInput}>
+                        {amount}
+                    </td> 
+
                     <td>
                         ${runningTotal}
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
+                        <button 
+                            className="btn-floating waves-effect waves-light red" 
+                            onClick={this.props.deleteItem} itemnumber={entry.id}>
+                                <i id="clickBehind" className="material-icons">delete</i>
+                        </button>
                     </td>
                     <td>
-                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} onClick={this.changeUpdateBtn} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
+                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} 
+                            onClick={this.handleChangeUpdateBtn} itemnumber={entry.id}>
+                                <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
+                        </button>
                     </td>
                 </tr>
             )
         });
-        if(!showForm){
-            return (
-                <div>
+
+        return (
+            <div>
                 <h1 className="center responsive-table">Munee Log</h1>
                 <table className="striped center">
                     <thead>
@@ -109,58 +182,9 @@ class ExpenseLog extends Component {
                     Total Balance: ${runningTotal}
                 </h5>
                 <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
-            </div>
-            );
-        } else {
-            return (
-                <div>
-                <h1 className="center">Munee Log</h1>
-                <table className="striped center">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Location</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Balance</th>
-                            <th>Delete</th>
-                            <th>Update</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {logElements}
-                    </tbody>
-                </table>
-                <h5 className="center card-panel">
-                    Total Balance: ${runningTotal}
-                </h5>
-                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
-                <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
-            </div>
-            )
-        }
-        
-        // return(
-        //     <div>
-        //         <h1 className="center">Munee Log</h1>
-        //         {/* <ExpenseInput send={props.sendLog}/> */}
-        //         <table >
-        //             <thead>
-        //                 <tr>
-        //                     <th>Date</th>
-        //                     <th>Location</th>
-        //                     <th>Description</th>
-        //                     <th>Amount</th>
-        //                 </tr>
-        //             </thead>
-        //             <tbody>
-        //                 {logElements}
-        //             </tbody>
-        //         </table>
-        //         <div onClick={this.addForm} className="btn-floating green right"><i className="material-icons">add</i></div>
-        //         {showEntryForm}
-        //     </div>
-        // )
+                {this.insertForm()}
+        </div>
+        );
     }
 }
 
