@@ -15,3 +15,4 @@ export function updateExpenseLog(snapshot){
         log
     }
 }
+

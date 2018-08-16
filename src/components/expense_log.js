@@ -11,12 +11,11 @@ class ExpenseLog extends Component {
             date: '',
             location: '',
             description: '',
-            debitcredit: '',
+            debitcredit: ''
         }
         this.addForm = this.addForm.bind(this);
-        this.updateInput = this.updateInput.bind(this);
+        this.editInput = this.editInput.bind(this);
         this.handleChangeUpdateBtn = this.handleChangeUpdateBtn.bind(this);
-        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     addForm(){
@@ -39,104 +38,83 @@ class ExpenseLog extends Component {
         } 
     }
 
-    updateInput = (e) => {
-        console.log("Oninput");
+    editInput = () => {
+        const editDate = document.getElementById('editDate').innerHTML;
+        const editLocation = document.getElementById('editLocation').innerHTML;
+        const editDescription = document.getElementById('editDescription').innerHTML;
+        const editAmount = document.getElementById('editAmount').innerHTML;
 
-        const itemRow = e.target.getAttribute('itemnumber');
-        let element = document.getElementById(`${itemRow}`);
-        if (element.getElementsByClassName('updated')){
-            let dateUpdated = element.getElementsByClassName('updated')[0].innerText;
-            let locationUpdated = element.getElementsByClassName('updated')[1].innerText;
-            let descriptionUpdated = element.getElementsByClassName('updated')[2].innerText;
-            let amountUpdated = element.getElementsByClassName('updated')[3].innerText;
-            
-            this.setState({
-                date: dateUpdated,
-                location: locationUpdated,
-                description: descriptionUpdated,
-                debitcredit: amountUpdated,
-                key: itemRow
-            });
-        }
-    }
-
-    handleUpdate = (e) => {
-        e.preventDefault();
-        // const itemRow = e.target.getAttribute('itemnumber');
-        // let element = document.getElementById(`${itemRow}`);
-        // if (element.getElementsByClassName('updated')){
-        //     let dateUpdated = element.getElementsByClassName('updated')[0].innerText;
-        //     let locationUpdated = element.getElementsByClassName('updated')[1].innerText;
-        //     let descriptionUpdated = element.getElementsByClassName('updated')[2].innerText;
-        //     let amountUpdated = element.getElementsByClassName('updated')[3].innerText;
-            
-        //     this.setState({
-        //         date: dateUpdated,
-        //         location: locationUpdated,
-        //         description: descriptionUpdated,
-        //         debitcredit: amountUpdated,
-        //         key: itemRow
-        //     });
-
-            // this.props.updateLog(
-            //     this.state.date,
-            //     this.state.location,
-            //     this.state.description,
-            //     this.state.debitcredit,
-            //     this.state.key
-            // );
-        // }    
-        console.log(this.state);   
+        this.setState({
+            date: editDate,
+            location: editLocation,
+            description: editDescription,
+            debitcredit: editAmount
+        });
     }
 
     handleChangeUpdateBtn = (e) => {
-        this.props.updateItem(e);
         const {changeBtn} = this.state;
+
+        this.props.updateItem(e);
+
         if(!changeBtn){
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
+
             this.setState({
                 changeBtn: true
             });
+
+            
         } else {
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+            let key = e.target.getAttribute('itemnumber');
+
             this.setState({
-                changeBtn: false
+                changeBtn: false,
+                key: key
             });
-            this.handleUpdate(e);
+
+            this.props.sendData(
+                this.state.date,
+                this.state.location,
+                this.state.description,
+                this.state.debitcredit,
+                key
+            )
         }
     }
 
     render(){
-        const { showForm, changeBtn} = this.state;
-        // console.log(this.state);
-        
-        //Get running balance total
+        const { changeBtn} = this.state;
+        console.log(this.state);        
+
         let array = this.props.log;
         var runningTotal = array.reduce(function(sum, amount){
             let parsedNum = parseFloat(amount.debitcredit);
             return sum+parsedNum;
         }, 0);
 
-        //Add decimals to number if none and then render items
-        const logElements = this.props.log.map( entry => {
-            let amount = parseFloat(entry.debitcredit);
-            if(amount.toFixed(0) || amount.toFixed(1)){
-                amount = "$" + amount.toFixed(2);
-            }
+        const logElements = 
+        this.props.log.map( entry => {
+            // let amount = parseFloat(entry.debitcredit);
+            // if(amount.toFixed(0) || amount.toFixed(1)){
+            //     amount = "$" + amount.toFixed(2);
+            // }
         
             return (
                 <tr key={entry.id} id={entry.id}>
-                    <td className="updated" onChange={this.updateInput} onBlur={this.updateInput} onInput={this.updateInput}>
+                    <td className="updated" id="editDate" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.date}
                     </td>
-                    <td className="updated" onChange={this.updateInput}>
+                    <td className="updated" id="editLocation" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.location}
                     </td>
-                    <td className="updated" onChange={this.updateInput}>
+                    <td className="updated" id="editDescription" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.description}
                     </td>
-                    <td className="updated" onChange={this.updateInput}>
-                        {amount}
+                    <td className="updated" id="editAmount" onChange={this.editInput} onBlur={this.editInput}>
+                        {/* {amount} */}
+                        {entry.debitcredit}
                     </td> 
 
                     <td>

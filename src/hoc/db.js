@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateExpenseLog } from '../actions';
 import firebase from '../firebase';
+import { resolve } from 'path';
+import { rejects } from 'assert';
 
 export default (WrappedComponent) => {
     class Db extends Component {
@@ -9,7 +11,7 @@ export default (WrappedComponent) => {
         dbRef = firebase.collection('expense-log');
 
         componentDidMount(){
-            this.dbRef.orderBy('location').onSnapshot(this.props.updateExpenseLog);
+            this.dbRef.orderBy('date').onSnapshot(this.props.updateExpenseLog);
         };
        
         sendLog = (date, loc, desc, drcr) => {
@@ -22,32 +24,21 @@ export default (WrappedComponent) => {
             this.dbRef.add(newEntry);
         }
 
-        updateLog = (date, loc, desc, drcr, key) => {
-            const updateEntry = {
-                date: date,
-                location: loc,
-                description: desc,
-                debitcredit: drcr
+        sendData = (date, loc, desc, drcr, key) => {
+            if (date !== ""){
+                this.dbRef.doc(`${key}`).update({date:date});
             }
-
-            // this.dbRef.doc(`${key}`).update(updateEntry).then(function(querySnapshot) {
-                console.log('This is the key', key);
-
-            // this.dbRef.doc('R2RDCBP7QPkJsliH94ZQ').update(updateEntry).then(function(doc) {
-            //         console.log('Data back', doc.data());
-            //         console.log("Document successfully updated!");
-            // }).catch(function(error) {
-            //     console.error("Error updating document: ", error);
-            // });
-            this.dbRef.doc(`${key}`).get().then(doc => {
-                if(!doc.exists){
-                    this.dbRef.doc(`${key}`).set(updateEntry);
-                } else {
-                    this.dbRef.doc(`${key}`).update(updateEntry);
-                }
-            });
+            if (loc !== ""){
+                this.dbRef.doc(`${key}`).update({location: loc});
+            }
+            if (desc !== ""){
+                this.dbRef.doc(`${key}`).update({description: desc});
+            }
+            if (drcr !== ""){
+                this.dbRef.doc(`${key}`).update({debitcredit: drcr});
+            }
         }
-
+           
         deleteItem = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
             this.dbRef.doc(`${itemRow}`).delete();
@@ -62,7 +53,7 @@ export default (WrappedComponent) => {
         }
 
         render(){
-            return <WrappedComponent {...this.props} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
+            return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
         }
     }
 
