@@ -55,15 +55,13 @@ class ExpenseLog extends Component {
     handleChangeUpdateBtn = (e) => {
         const {changeBtn} = this.state;
 
-        this.props.updateItem(e);
-
         if(!changeBtn){
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
 
             this.setState({
                 changeBtn: true
             });
-
+            this.props.updateItemOn(e);
             
         } else {
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
@@ -81,6 +79,7 @@ class ExpenseLog extends Component {
                 this.state.debitcredit,
                 key
             )
+            this.props.updateItemOff(e);
         }
     }
 
