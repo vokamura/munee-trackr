@@ -7,10 +7,15 @@ class ExpenseLog extends Component {
         super(props);
         this.state = {
             showForm: false,
-            changeBtn: false
+            changeBtn: false,
+            date: '',
+            location: '',
+            description: '',
+            debitcredit: ''
         }
         this.addForm = this.addForm.bind(this);
-        this.changeUpdateBtn = this.changeUpdateBtn.bind(this);
+        this.editInput = this.editInput.bind(this);
+        this.handleChangeUpdateBtn = this.handleChangeUpdateBtn.bind(this);
     }
 
     addForm(){
@@ -26,68 +31,114 @@ class ExpenseLog extends Component {
         }
     } 
 
-    changeUpdateBtn(e){
-        this.props.updateItem(e);
+    insertForm() {
+        const {showForm} = this.state;
+        if(showForm){
+            return <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
+        } 
+    }
+
+    editInput = () => {
+        const editDate = document.getElementById('editDate').innerHTML;
+        const editLocation = document.getElementById('editLocation').innerHTML;
+        const editDescription = document.getElementById('editDescription').innerHTML;
+        const editAmount = document.getElementById('editAmount').innerHTML;
+
+        this.setState({
+            date: editDate,
+            location: editLocation,
+            description: editDescription,
+            debitcredit: editAmount
+        });
+    }
+
+    handleChangeUpdateBtn = (e) => {
         const {changeBtn} = this.state;
+
+        this.props.updateItem(e);
+
         if(!changeBtn){
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
+
             this.setState({
                 changeBtn: true
             });
+
+            
         } else {
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+            let key = e.target.getAttribute('itemnumber');
+
             this.setState({
-                changeBtn: false
+                changeBtn: false,
+                key: key
             });
+
+            this.props.sendData(
+                this.state.date,
+                this.state.location,
+                this.state.description,
+                this.state.debitcredit,
+                key
+            )
         }
     }
 
     render(){
-        const { showForm, changeBtn } = this.state;
-        
-        //Get running balance total
+        const { changeBtn} = this.state;
+        console.log(this.state);        
+
         let array = this.props.log;
         var runningTotal = array.reduce(function(sum, amount){
             let parsedNum = parseFloat(amount.debitcredit);
             return sum+parsedNum;
         }, 0);
 
-        //Add decimals to number if none
-        const logElements = this.props.log.map( entry => {
-            let amount = parseFloat(entry.debitcredit);
-            if(amount.toFixed(0) || amount.toFixed(1)){
-                amount = amount.toFixed(2);
-            }
-
+        const logElements = 
+        this.props.log.map( entry => {
+            // let amount = parseFloat(entry.debitcredit);
+            // if(amount.toFixed(0) || amount.toFixed(1)){
+            //     amount = "$" + amount.toFixed(2);
+            // }
+        
             return (
                 <tr key={entry.id} id={entry.id}>
-                    <td >
+                    <td className="updated" id="editDate" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.date}
                     </td>
-                    <td >
+                    <td className="updated" id="editLocation" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.location}
                     </td>
-                    <td >
+                    <td className="updated" id="editDescription" onChange={this.editInput} onBlur={this.editInput}>
                         {entry.description}
                     </td>
-                    <td >
-                        ${amount}
-                    </td>
+                    <td className="updated" id="editAmount" onChange={this.editInput} onBlur={this.editInput}>
+                        {/* {amount} */}
+                        {entry.debitcredit}
+                    </td> 
+
                     <td>
                         ${runningTotal}
                     </td>
                     <td>
-                        <button className="btn-floating waves-effect waves-light red" onClick={this.props.deleteItem} itemnumber={entry.id}><i id="clickBehind" className="material-icons">delete</i></button>
+                        <button 
+                            className="btn-floating waves-effect waves-light red" 
+                            onClick={this.props.deleteItem} itemnumber={entry.id}>
+                                <i id="clickBehind" className="material-icons">delete</i>
+                        </button>
                     </td>
                     <td>
-                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} onClick={this.changeUpdateBtn} itemnumber={entry.id}><i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i></button>
+                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} 
+                            onClick={this.handleChangeUpdateBtn} itemnumber={entry.id}>
+                                <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
+                        </button>
                     </td>
                 </tr>
             )
         });
-        if(!showForm){
-            return (
-                <div>
+
+        return (
+            <div>
                 <h1 className="center responsive-table">Munee Log</h1>
                 <table className="striped center">
                     <thead>
@@ -109,58 +160,9 @@ class ExpenseLog extends Component {
                     Total Balance: ${runningTotal}
                 </h5>
                 <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
-            </div>
-            );
-        } else {
-            return (
-                <div>
-                <h1 className="center">Munee Log</h1>
-                <table className="striped center">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Location</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Balance</th>
-                            <th>Delete</th>
-                            <th>Update</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {logElements}
-                    </tbody>
-                </table>
-                <h5 className="center card-panel">
-                    Total Balance: ${runningTotal}
-                </h5>
-                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">close</i></div>
-                <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
-            </div>
-            )
-        }
-        
-        // return(
-        //     <div>
-        //         <h1 className="center">Munee Log</h1>
-        //         {/* <ExpenseInput send={props.sendLog}/> */}
-        //         <table >
-        //             <thead>
-        //                 <tr>
-        //                     <th>Date</th>
-        //                     <th>Location</th>
-        //                     <th>Description</th>
-        //                     <th>Amount</th>
-        //                 </tr>
-        //             </thead>
-        //             <tbody>
-        //                 {logElements}
-        //             </tbody>
-        //         </table>
-        //         <div onClick={this.addForm} className="btn-floating green right"><i className="material-icons">add</i></div>
-        //         {showEntryForm}
-        //     </div>
-        // )
+                {this.insertForm()}
+        </div>
+        );
     }
 }
 
