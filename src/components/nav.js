@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = props => {
     return (
-        <nav className="teal lighten-1">
+        <nav className="green darken-3">
             <div className="nav-wrapper">
                 <Link style={{paddingLeft: '3%'}}to="/" className="brand-logo left">Munee Trackr</Link>
                 <ul className="right nav-mobile">

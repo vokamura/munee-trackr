@@ -105,6 +105,7 @@ class ExpenseLog extends Component {
 
     render(){
         const { changeBtn} = this.state;
+        console.log(this.state);
 
         let array = this.props.log;
         var runningTotal = array.reduce(function(sum, amount){
@@ -138,10 +139,10 @@ class ExpenseLog extends Component {
                         {logElements}
                     </tbody>
                 </table>
-                <h5 className="center card-panel">
+                <h5 className="center card-panel green lighten-5">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green right pulse"><i className="material-icons">add</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green darken-1 right pulse"><i className="material-icons">add</i></div>
                 {this.insertForm()}
         </div>
         );
