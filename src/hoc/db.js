@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateExpenseLog } from '../actions';
 import firebase from '../firebase';
-import { resolve } from 'path';
-import { rejects } from 'assert';
 
 export default (WrappedComponent) => {
     class Db extends Component {
@@ -44,7 +42,7 @@ export default (WrappedComponent) => {
             this.dbRef.doc(`${itemRow}`).delete();
         }
 
-        updateItem = (e) => {
+        updateItemOn = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
             for (let i = 0; i <4; i++){
@@ -52,8 +50,16 @@ export default (WrappedComponent) => {
             }
         }
 
+        updateItemOff = (e) => {
+            const itemRow = e.target.getAttribute('itemnumber');
+            let element = document.getElementById(`${itemRow}`);
+            for (let i = 0; i <4; i++){
+                element.getElementsByTagName('td')[i].setAttribute("contenteditable", false);     
+            }
+        }
+
         render(){
-            return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
+            return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItemOn={this.updateItemOn} updateItemOff={this.updateItemOff}/>
         }
     }
 
