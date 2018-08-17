@@ -15,8 +15,6 @@ class ExpenseLog extends Component {
             debitcredit: ''
         }
         this.addForm = this.addForm.bind(this);
-        this.editInput = this.editInput.bind(this);
-        this.handleChangeUpdateBtn = this.handleChangeUpdateBtn.bind(this);
     }
 
     addForm(){
@@ -55,7 +53,8 @@ class ExpenseLog extends Component {
 
     handleChangeUpdateBtn = (e) => {
         const {changeBtn} = this.state;
-
+        const rows = document.getElementsByTagName('tr');
+        
         if(!changeBtn){
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
 
@@ -63,8 +62,13 @@ class ExpenseLog extends Component {
                 changeBtn: true
             });
 
+            for (var i=0; i < rows.length-1; i++){
+                if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                    document.getElementsByClassName('update')[i].disabled = true;
+                } 
+            }
+
             this.props.updateItemOn(e);
-            
         } else {
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
             let key = e.target.getAttribute('itemnumber');
@@ -90,6 +94,12 @@ class ExpenseLog extends Component {
             })
 
             this.props.updateItemOff(e);
+
+            for (var i=0; i < rows.length-1; i++){
+                if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                    document.getElementsByClassName('update')[i].disabled = false;
+                } 
+            }
         }
     }
 
