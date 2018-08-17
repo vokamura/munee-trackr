@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
+import ExpenseItems from './expense_items';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -61,6 +62,7 @@ class ExpenseLog extends Component {
             this.setState({
                 changeBtn: true
             });
+
             this.props.updateItemOn(e);
             
         } else {
@@ -79,13 +81,20 @@ class ExpenseLog extends Component {
                 this.state.debitcredit,
                 key
             )
+
+            this.setState({
+                date: '',
+                location: '',
+                description: '',
+                debitcredit: ''
+            })
+
             this.props.updateItemOff(e);
         }
     }
 
     render(){
         const { changeBtn} = this.state;
-        console.log(this.state);        
 
         let array = this.props.log;
         var runningTotal = array.reduce(function(sum, amount){
@@ -95,44 +104,8 @@ class ExpenseLog extends Component {
 
         const logElements = 
         this.props.log.map( entry => {
-            // let amount = parseFloat(entry.debitcredit);
-            // if(amount.toFixed(0) || amount.toFixed(1)){
-            //     amount = "$" + amount.toFixed(2);
-            // }
-        
             return (
-                <tr key={entry.id} id={entry.id}>
-                    <td className="updated" id="editDate" onChange={this.editInput} onBlur={this.editInput}>
-                        {entry.date}
-                    </td>
-                    <td className="updated" id="editLocation" onChange={this.editInput} onBlur={this.editInput}>
-                        {entry.location}
-                    </td>
-                    <td className="updated" id="editDescription" onChange={this.editInput} onBlur={this.editInput}>
-                        {entry.description}
-                    </td>
-                    <td className="updated" id="editAmount" onChange={this.editInput} onBlur={this.editInput}>
-                        {/* {amount} */}
-                        {entry.debitcredit}
-                    </td> 
-
-                    <td>
-                        ${runningTotal}
-                    </td>
-                    <td>
-                        <button 
-                            className="btn-floating waves-effect waves-light red" 
-                            onClick={this.props.deleteItem} itemnumber={entry.id}>
-                                <i id="clickBehind" className="material-icons">delete</i>
-                        </button>
-                    </td>
-                    <td>
-                        <button className={changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} 
-                            onClick={this.handleChangeUpdateBtn} itemnumber={entry.id}>
-                                <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
-                        </button>
-                    </td>
-                </tr>
+                <ExpenseItems changeBtn={changeBtn} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
             )
         });
 

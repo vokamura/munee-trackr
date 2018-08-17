@@ -1,13 +1,11 @@
 import React from 'react';
 
 export default (props) => {
-    let amount = parseFloat(props.entry.debitcredit);
+    let amount = parseFloat(props.entry.runningTotal);
         if(amount.toFixed(0) || amount.toFixed(1)){
             amount = amount.toFixed(2);
         }
 
-    // console.log(props.changeBtn);
-    
     return (
         <tr key={props.entry.id} id={props.entry.id}>
             <td className="updated" id="editDate" onChange={props.editInput} onBlur={props.editInput}>
@@ -20,8 +18,8 @@ export default (props) => {
                 {props.entry.description}
             </td>
             <td className="updated" id="editAmount" onChange={props.editInput} onBlur={props.editInput}>
-                {/* ${props.entry.debitcredit} */}
-                ${amount}
+                {props.entry.debitcredit}
+                {/* ${amount} */}
             </td> 
 
             <td>
