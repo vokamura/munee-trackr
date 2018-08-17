@@ -15,7 +15,7 @@ class ExpenseInput extends Component {
         if (date === "" || location === "" || description === "" || debitcredit === ""){
             return false;
         }
-
+      
         this.props.send(
             date,
             location,
@@ -31,24 +31,24 @@ class ExpenseInput extends Component {
         });
     }
 
+    // noDate(){
+    //     if(date === "" && showForm){
+    //         return "Please enter a date";
+    //     }
+    // }
+
+    // noAmount(){
+    //     if(debitcredit === "" && showForm){
+    //         return "Please enter an amount";
+    //     }
+    // }
+
     render(){
         const { date, location, description, debitcredit, showForm } = this.state;
 
         const enterFields = function initialField(){
             if(date === "" && location === "" && description === "" && debitcredit === ""){
-                return "Please enter fields below"
-            }
-        }
-
-        const noDate = function blankDate(){
-            if(date === "" && showForm){
-                return "Please enter a date";
-            }
-        }
-
-        const noAmount = function blankAmount(){
-            if(debitcredit === "" && showForm){
-                return "Please enter an amount";
+                return "** All Fields Below Are Required **"
             }
         }
 
@@ -65,7 +65,7 @@ class ExpenseInput extends Component {
                         onChange={ e => this.setState({ 
                             date: e.target.value,
                     })}/>
-                    <div className="red-text">{noDate()}</div>
+                    {/* <div className="red-text">{noDate()}</div> */}
 
                     <label>Location</label>
                     <input
@@ -91,8 +91,8 @@ class ExpenseInput extends Component {
                         onChange={ e => this.setState({ 
                             debitcredit: e.target.value 
                     })}/>
-
-                    <div className="red-text">{noAmount()}</div>
+                    {/* <div className="red-text">{noAmount()}</div> */}
+                    
                     <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
                         Submit
                     <i className="material-icons right">send</i>

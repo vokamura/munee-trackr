@@ -33,7 +33,7 @@ export default (props) => {
                 </button>
             </td>
             <td>
-                <button className={props.changeBtn ? "btn-floating waves-effect waves-light green lighten-3" : "btn-floating waves-effect waves-light blue lighten-3"} 
+                <button className={props.changeBtn ? "btn-floating waves-effect waves-light green lighten-3 update" : "btn-floating waves-effect waves-light blue lighten-3 update"} 
                     onClick={props.handleChangeUpdateBtn} 
                     itemnumber={props.entry.id}>
                         <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
