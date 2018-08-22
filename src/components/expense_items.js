@@ -1,10 +1,16 @@
 import React from 'react';
 
 export default (props) => {
+
     let amount = parseFloat(props.entry.runningTotal);
         if(amount.toFixed(0) || amount.toFixed(1)){
             amount = amount.toFixed(2);
         }
+
+        let lineamount = parseFloat(props.lineBalance);
+            if(lineamount.toFixed(0) || lineamount.toFixed(1)){
+                lineamount = lineamount.toFixed(2);
+            }
 
     return (
         <tr key={props.entry.id} id={props.entry.id}>
@@ -23,7 +29,7 @@ export default (props) => {
             </td> 
 
             <td>
-                ${props.runningTotal}
+                ${lineamount}
             </td>
             <td>
                 <button 

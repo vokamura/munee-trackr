@@ -12,3 +12,8 @@ h1, a {
 #clickBehind {
     pointer-events: none;
 }
+
+.logoImage {
+    max-width: 15%;
+    max-height: 15%
+}
