@@ -1,4 +1,6 @@
 import React from 'react';
+import githublogo from '../assets/images/githublogo.png';
+import linkedinlogo from '../assets/images/linkedinlogo.png';
 
 export default () => {
     return(
@@ -14,8 +16,15 @@ export default () => {
 
 
                 <div className="container">
-                        <a href="http://www.vikkiokamura.com" target="_blank" >Vikki's Portfolio</a>
-                        <a href="https://github.com/vokamura" target="_blank">Vikki's Github</a>
+                    <div>
+                        <a href="https://github.com/vokamura" target="_blank">
+                            <img className="logoImage" src={githublogo}/>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vikki-okamura/" target="_blank">
+                            <img className="logoImage" src={linkedinlogo}/>
+                        </a>
+                    </div>
+                    <a href="http://www.vikkiokamura.com" target="_blank">Portfolio</a>
                 </div>
             </div>
         </div>

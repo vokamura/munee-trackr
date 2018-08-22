@@ -105,24 +105,40 @@ class ExpenseLog extends Component {
 
     render(){
         const { changeBtn} = this.state;
-        console.log(this.state);
 
-        let array = this.props.log;
-        var runningTotal = array.reduce(function(sum, amount){
+        //Gets total running balance, turns it into a number, and then adds necessary decimals
+        let runningTotal = this.props.log.reduce(function(sum, amount){
             let parsedNum = parseFloat(amount.debitcredit);
             return sum+parsedNum;
         }, 0);
+        if(runningTotal.toFixed(0) || runningTotal.toFixed(1)){
+            runningTotal = runningTotal.toFixed(2);
+        }
 
+        var lineBalance;
+        var currentBalance;
+
+        //Adds each entry to the log
         const logElements = 
-        this.props.log.map( entry => {
-            return (
-                <ExpenseItems changeBtn={changeBtn} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
-            )
-        });
+            this.props.log.map( (entry, index) => {
+                lineBalance = 0;
+
+                if(index === 0){
+                    lineBalance = parseFloat(this.props.log[0].debitcredit);
+                } else {
+                    for (var i=index; i >=0; i--){
+                        currentBalance =  parseFloat(this.props.log[i].debitcredit);
+                        lineBalance += currentBalance;
+                    }
+                }
+                return (
+                    <ExpenseItems lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
+                )
+            });
 
         return (
             <div>
-                <h1 className="center responsive-table">Munee Log</h1>
+                <h1 className="center responsive-table">Munee Trackr</h1>
                 <table className="striped center">
                     <thead>
                         <tr>
