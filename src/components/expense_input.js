@@ -31,18 +31,6 @@ class ExpenseInput extends Component {
         });
     }
 
-    // noDate(){
-    //     if(date === "" && showForm){
-    //         return "Please enter a date";
-    //     }
-    // }
-
-    // noAmount(){
-    //     if(debitcredit === "" && showForm){
-    //         return "Please enter an amount";
-    //     }
-    // }
-
     render(){
         const { date, location, description, debitcredit, showForm } = this.state;
 

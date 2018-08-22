@@ -46,7 +46,8 @@ export default (WrappedComponent) => {
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
             for (let i = 0; i <4; i++){
-                element.getElementsByTagName('td')[i].setAttribute("contenteditable", "");     
+                element.getElementsByTagName('td')[i].setAttribute("contenteditable", "");
+                element.getElementsByTagName('td')[i].classList.add("highlightCells");     
             }
         }
 
@@ -54,7 +55,9 @@ export default (WrappedComponent) => {
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
             for (let i = 0; i <4; i++){
-                element.getElementsByTagName('td')[i].setAttribute("contenteditable", false);     
+                element.getElementsByTagName('td')[i].setAttribute("contenteditable", false);    
+                element.getElementsByTagName('td')[i].classList.remove("highlightCells");     
+ 
             }
         }
 
