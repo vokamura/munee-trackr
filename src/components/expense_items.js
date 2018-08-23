@@ -2,7 +2,7 @@ import React from 'react';
 
 export default (props) => {
 
-    let amount = parseFloat(props.entry.runningTotal);
+    let amount = parseFloat(props.entry.debitcredit);
         if(amount.toFixed(0) || amount.toFixed(1)){
             amount = amount.toFixed(2);
         }
@@ -24,7 +24,7 @@ export default (props) => {
                 {props.entry.description}
             </td>
             <td className="updated" id="editAmount" onChange={props.editInput} onBlur={props.editInput}>
-                {props.entry.debitcredit}
+                ${props.entry.debitcredit}
                 {/* ${amount} */}
             </td> 
 

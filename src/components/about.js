@@ -1,6 +1,7 @@
 import React from 'react';
 import githublogo from '../assets/images/githublogo.png';
 import linkedinlogo from '../assets/images/linkedinlogo.png';
+import portfoliologo from '../assets/images/portfoliologo.jpg';
 
 export default () => {
     return(
@@ -15,17 +16,21 @@ export default () => {
                 <p>Munee Trackr was created by Vikki Okamura to help users track personal expenses.  It was developed using ReactJS, Redux, Materialize, and Firebase.  This project was made as Vikki has a background in accounting and loves money.</p>
 
 
-                <div className="container">
-                    <div>
-                        <a href="https://github.com/vokamura" target="_blank">
-                            <img className="logoImage" src={githublogo}/>
-                        </a>
-                        <a href="https://www.linkedin.com/in/vikki-okamura/" target="_blank">
-                            <img className="logoImage" src={linkedinlogo}/>
-                        </a>
-                    </div>
-                    <a href="http://www.vikkiokamura.com" target="_blank">Portfolio</a>
+                <div className="logoContainer">
+                <a href="https://github.com/vokamura" target="_blank">
+                    <img className="logoImage" src={githublogo}/>
+                    <p className="text-center">Vikki's Github</p>
+                </a>
+                <a href="https://www.linkedin.com/in/vikki-okamura/" target="_blank">
+                    <img className="logoImage" src={linkedinlogo}/>
+                    <p className="text-center">Vikki's LinkedIn</p>
+                </a>
+                    <a href="http://www.vikkiokamura.com" target="_blank">
+                        <img className="logoImage" src={portfoliologo} />
+                        <p className="text-center">Vikki's Portfolio</p>
+                    </a>
                 </div>
+
             </div>
         </div>
     )

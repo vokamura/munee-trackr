@@ -75,7 +75,14 @@ class ExpenseLog extends Component {
             let element = document.getElementById(`${itemRow}`);
             let newElement = element.getElementsByTagName("td")[3].textContent;
 
+
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
+
+            if(newElement.includes("$")){
+                var newNumber = newElement.substr(1);
+                newElement = parseFloat(newNumber);
+            }
+
 
             if(regexAmount.test(newElement)){
 
@@ -111,10 +118,8 @@ class ExpenseLog extends Component {
                 }
 
             } else {
-                console.log("invalid");
+                alert("Enter number only");
             }
-
-            
         }
     }
 

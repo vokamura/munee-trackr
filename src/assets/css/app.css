@@ -13,12 +13,43 @@ h1, a {
     pointer-events: none;
 }
 
-.logoImage {
-    max-width: 15%;
-    max-height: 15%
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
 }
+
+.logoImage {
+    max-height: 15vh;
+    margin: 25px;
+}
+
 
 .highlightCells {
     border: 3px solid blue;
     /* box-sizing: content-box; */
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 576px) { 
+    .logoContainer{
+        flex-direction: column;
+        margin: 0 auto;
+        align-items: center;
+    }
+    .logoImage {
+        margin: 0 auto;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {...}  */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {...}  */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...}  */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {...} */
