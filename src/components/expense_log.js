@@ -70,36 +70,51 @@ class ExpenseLog extends Component {
 
             this.props.updateItemOn(e);
         } else {
-            e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
-            let key = e.target.getAttribute('itemnumber');
 
-            this.setState({
-                changeBtn: false,
-                key: key
-            });
+            const itemRow = e.target.getAttribute('itemnumber');
+            let element = document.getElementById(`${itemRow}`);
+            let newElement = element.getElementsByTagName("td")[3].textContent;
 
-            this.props.sendData(
-                this.state.date,
-                this.state.location,
-                this.state.description,
-                this.state.debitcredit,
-                key
-            )
+            const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
-            this.setState({
-                date: '',
-                location: '',
-                description: '',
-                debitcredit: ''
-            })
+            if(regexAmount.test(newElement)){
 
-            this.props.updateItemOff(e);
+                e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+                let key = e.target.getAttribute('itemnumber');
 
-            for (var i=0; i < rows.length-1; i++){
-                if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
-                    document.getElementsByClassName('update')[i].disabled = false;
-                } 
+                this.setState({
+                    changeBtn: false,
+                    key: key
+                });
+                
+                this.props.sendData(
+                    this.state.date,
+                    this.state.location,
+                    this.state.description,
+                    this.state.debitcredit,
+                    key
+                )
+    
+                this.setState({
+                    date: '',
+                    location: '',
+                    description: '',
+                    debitcredit: ''
+                })
+    
+                this.props.updateItemOff(e);
+    
+                for (var i=0; i < rows.length-1; i++){
+                    if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                        document.getElementsByClassName('update')[i].disabled = false;
+                    } 
+                }
+
+            } else {
+                console.log("invalid");
             }
+
+            
         }
     }
 
@@ -115,22 +130,20 @@ class ExpenseLog extends Component {
             runningTotal = runningTotal.toFixed(2);
         }
 
-        var lineBalance;
-        var currentBalance;
-
         //Adds each entry to the log
         const logElements = 
             this.props.log.map( (entry, index) => {
-                lineBalance = 0;
 
+                //Get line balance totals
+                let lineBalance = 0;
                 if(index === 0){
                     lineBalance = parseFloat(this.props.log[0].debitcredit);
                 } else {
                     for (var i=index; i >=0; i--){
-                        currentBalance =  parseFloat(this.props.log[i].debitcredit);
-                        lineBalance += currentBalance;
+                        lineBalance += parseFloat(this.props.log[i].debitcredit);
                     }
                 }
+
                 return (
                     <ExpenseItems lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
