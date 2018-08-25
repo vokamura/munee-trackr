@@ -24,7 +24,7 @@ export default (props) => {
                 {props.entry.description}
             </td>
             <td className="updated" id="editAmount" onChange={props.editInput} onBlur={props.editInput}>
-                ${props.entry.debitcredit}
+                {props.entry.debitcredit}
                 {/* ${amount} */}
             </td> 
 

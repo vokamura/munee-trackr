@@ -35,41 +35,74 @@ class ExpenseInput extends Component {
         const { date, location, description, debitcredit, showForm } = this.state;
 
         const enterFields = function initialField(){
-            if(date === "" && location === "" && description === "" && debitcredit === ""){
+            if(date === "" || location === "" || description === "" || debitcredit === ""){
                 return "** All Fields Below Are Required **"
+            }
+        }
+
+        const noDate = function dateField(){
+            if(date === ""){
+                return "Please enter date using mm/dd/yy format"
+            }
+        }
+
+        const noLocation = function locationField(){
+            if(location ===""){
+                return "Please enter a location"
+            }
+        }
+
+        const noDescription = function descriptionField(){
+            if(description === ""){
+                return "Please enter a description"
+            }
+        }
+
+        const noAmount = function amountField(){
+            if(amount ===""){
+                return "Please enter an amount (numbers and 1 decimal point only)"
             }
         }
 
         return(
             <form style={{marginTop: 20}} className="row" onSubmit={this.handleSubmit}>
                 <div className="col s6 offset-s3">
+
                     <h5>Please enter your income or expense details</h5>
                     <div className="red-text">{enterFields()}</div>
 
-                    <label>Date</label>
-                    <input
-                        type= "text"
-                        value={date}
-                        onChange={ e => this.setState({ 
-                            date: e.target.value,
-                    })}/>
-                    {/* <div className="red-text">{noDate()}</div> */}
+                    <label className="red-text">{noDate()}</label>  
+                    <div>
+                        <label>Date (Please use mm/dd/yy format)</label>
+                        <input
+                            type= "text"
+                            value={date}
+                            onChange={ e => this.setState({ 
+                                date: e.target.value,
+                        })}/>
+                    </div>
 
-                    <label>Location</label>
-                    <input
-                        type= "text"
-                        value={location}
-                        onChange={ e => this.setState({ 
-                            location: e.target.value,
-                    })}/>
+                    <label className="red-text">{noLocation()}</label>
+                    <div>
+                        <label>Location</label>
+                        <input
+                            type= "text"
+                            value={location}
+                            onChange={ e => this.setState({ 
+                                location: e.target.value,
+                        })}/>
+                    </div>
 
-                    <label>Add Description</label>
-                    <input 
-                        type="text" 
-                        value={description} 
-                        onChange={ e => this.setState({ 
-                            description: e.target.value,
-                    })}/>
+                    <label className="red-text">{noDescription()}</label>
+                    <div>
+                        <label>Add Description</label>
+                        <input 
+                            type="text" 
+                            value={description} 
+                            onChange={ e => this.setState({ 
+                                description: e.target.value,
+                        })}/>
+                    </div>
 
                     <label>Debit or Credit (Use "-" for credit)</label>
                     <input
