@@ -5,7 +5,7 @@ const Nav = props => {
     return (
         <nav className="green darken-3">
             <div className="nav-wrapper">
-                <Link style={{paddingLeft: '3%'}}to="/" className="brand-logo left">Munee Trackr</Link>
+                <Link to="/" className="brand-logo left">Munee Trackr</Link>
                 <ul className="right nav-mobile">
                     <li >
                         <Link to="/">Home</Link>
