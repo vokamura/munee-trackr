@@ -70,22 +70,39 @@ class ExpenseLog extends Component {
 
             this.props.updateItemOn(e);
         } else {
-
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
-            let newElement = element.getElementsByTagName("td")[3].textContent;
 
+            let newDate = element.getElementsByTagName("td")[0].textContent;
+            let newPlace = element.getElementsByTagName("td")[1].textContent;
+            let newDescription = element.getElementsByTagName("td")[2].textContent;
+            let newAmount = element.getElementsByTagName("td")[3].textContent;
 
+            const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+            const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
+            const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
-            if(newElement.includes("$")){
-                var newNumber = newElement.substr(1);
-                newElement = parseFloat(newNumber);
+            if(newAmount.includes("$")){
+                var newNumber = newAmount.substr(1);
+                newAmount = parseFloat(newNumber);
             }
+            if(!regexAmount.test(newAmount)){
+                alert("Enter number only"); 
+            } 
+            if (!dateRegex.test(newDate)){
+                alert("Please enter date");
+            } 
+            if (!placeRegex.test(newPlace)){
+                alert("Please enter a place between 3 and 20 characters");
+            } 
+            if (!descriptionRegex.test(newDescription)){
+                alert("Please enter description between 3 and 20 characters");
+            } 
 
+            // && placeRegex.test(newPlace) && descriptionRegex.test(newDescription)
 
-            if(regexAmount.test(newElement)){
-
+            if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
                 let key = e.target.getAttribute('itemnumber');
 
@@ -116,10 +133,9 @@ class ExpenseLog extends Component {
                         document.getElementsByClassName('update')[i].disabled = false;
                     } 
                 }
-
-            } else {
-                alert("Enter number only");
             }
+
+
         }
     }
 

@@ -11,8 +11,12 @@ class ExpenseInput extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
-        
-        if (date === "" || location === "" || description === "" || debitcredit === ""){
+
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+
+        if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
             return false;
         }
       
@@ -40,21 +44,25 @@ class ExpenseInput extends Component {
             }
         }
 
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
         const noDate = function dateField(){
-            if(date === ""){
-                return "Please enter date using mm/dd/yy format"
+            
+            if(date === "" || !dateRegex.test(date)){
+                return "Please enter date using mm/dd/yyyy format"
             }
         }
 
+        const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
         const noLocation = function locationField(){
-            if(location ===""){
-                return "Please enter a location"
+            if(location ==="" || !placeRegex.test(location)){
+                return "Please enter a location between 3 and 20 characters long"
             }
         }
 
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
         const noDescription = function descriptionField(){
-            if(description === ""){
-                return "Please enter a description"
+            if(description === "" || !descriptionRegex.test(description)){
+                return "Please enter a description between 3 and 35 characters long"
             }
         }
 
@@ -65,7 +73,7 @@ class ExpenseInput extends Component {
         }
 
         return(
-            <form style={{marginTop: 20}} className="row" onSubmit={this.handleSubmit}>
+            <form id="addForm" style={{marginTop: 20}} className="row"  onSubmit={this.handleSubmit}>
                 <div className="col s6 offset-s3">
 
                     <h5>Please enter your income or expense details</h5>
@@ -73,7 +81,7 @@ class ExpenseInput extends Component {
 
                     <label className="red-text">{noDate()}</label>  
                     <div>
-                        <label>Date (Please use mm/dd/yy format)</label>
+                        <label>Date (Please use mm/dd/yyyy format)</label>
                         <input
                             type= "text"
                             value={date}
@@ -117,7 +125,8 @@ class ExpenseInput extends Component {
                     <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
                         Submit
                     <i className="material-icons right">send</i>
-                </button>
+                    </button>
+                    <div>Press green pulsing button to close</div>
                 </div>
                 
             </form>
