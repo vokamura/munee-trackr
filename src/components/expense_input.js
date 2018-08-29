@@ -11,8 +11,8 @@ class ExpenseInput extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
-        
-        if (date === "" || location === "" || description === "" || debitcredit === ""){
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (date === "" || !dateRegex.test(date) || location === "" || description === "" || debitcredit === ""){
             return false;
         }
       
@@ -40,9 +40,13 @@ class ExpenseInput extends Component {
             }
         }
 
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        
+
         const noDate = function dateField(){
-            if(date === ""){
-                return "Please enter date using mm/dd/yy format"
+            
+            if(date === "" || !dateRegex.test(date)){
+                return "Please enter date using mm/dd/yyyy format"
             }
         }
 
@@ -65,7 +69,7 @@ class ExpenseInput extends Component {
         }
 
         return(
-            <form style={{marginTop: 20}} className="row" onSubmit={this.handleSubmit}>
+            <form id="addForm" style={{marginTop: 20}} className="row"  onSubmit={this.handleSubmit}>
                 <div className="col s6 offset-s3">
 
                     <h5>Please enter your income or expense details</h5>
@@ -73,7 +77,7 @@ class ExpenseInput extends Component {
 
                     <label className="red-text">{noDate()}</label>  
                     <div>
-                        <label>Date (Please use mm/dd/yy format)</label>
+                        <label>Date (Please use mm/dd/yyyy format)</label>
                         <input
                             type= "text"
                             value={date}
@@ -117,7 +121,8 @@ class ExpenseInput extends Component {
                     <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
                         Submit
                     <i className="material-icons right">send</i>
-                </button>
+                    </button>
+                    <div>Press green pulsing button to close</div>
                 </div>
                 
             </form>
