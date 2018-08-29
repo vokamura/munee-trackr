@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Righteous');
+.brand-logo {
+    padding-left: 12px !important;
+}
 
 h1, a {
     font-family: 'Righteous', 'Times New Roman', Times, serif;
