@@ -11,8 +11,12 @@ class ExpenseInput extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
+
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-        if (date === "" || !dateRegex.test(date) || location === "" || description === "" || debitcredit === ""){
+        const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+
+        if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
             return false;
         }
       
@@ -41,8 +45,6 @@ class ExpenseInput extends Component {
         }
 
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-        
-
         const noDate = function dateField(){
             
             if(date === "" || !dateRegex.test(date)){
@@ -50,15 +52,17 @@ class ExpenseInput extends Component {
             }
         }
 
+        const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
         const noLocation = function locationField(){
-            if(location ===""){
-                return "Please enter a location"
+            if(location ==="" || !placeRegex.test(location)){
+                return "Please enter a location between 3 and 20 characters long"
             }
         }
 
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
         const noDescription = function descriptionField(){
-            if(description === ""){
-                return "Please enter a description"
+            if(description === "" || !descriptionRegex.test(description)){
+                return "Please enter a description between 3 and 35 characters long"
             }
         }
 
