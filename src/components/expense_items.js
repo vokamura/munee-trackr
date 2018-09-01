@@ -28,7 +28,7 @@ export default (props) => {
                 {/* ${amount} */}
             </td> 
 
-            <td>
+            <td id="lineAmount">
                 ${lineamount}
             </td>
             <td>

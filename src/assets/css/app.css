@@ -40,6 +40,10 @@ td {
     border: 3px solid transparent;
 }
 
+#editAmount, #lineAmount {
+    text-align: right;
+}
+
 .logoContainer {
     display: flex;
     justify-content: center;
