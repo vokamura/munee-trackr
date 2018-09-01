@@ -6,7 +6,7 @@ import portfoliologo from '../assets/images/portfoliologo.jpg';
 export default () => {
     return(
         <div>
-            <h1 className="center">About Munee Trackr</h1>
+            <h3 className="center">About Munee Trackr</h3>
             <div className="center">
 
                 <p>Munee Trackr allows you to track income and expenses.</p>
