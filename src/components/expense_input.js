@@ -126,7 +126,7 @@ class ExpenseInput extends Component {
                         Submit
                     <i className="material-icons right">send</i>
                     </button>
-                    <div>Press green pulsing button to close</div>
+                    <div>Press red cancel button to close</div>
                 </div>
                 
             </form>
