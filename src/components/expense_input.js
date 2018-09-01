@@ -81,9 +81,9 @@ class ExpenseInput extends Component {
 
                     <label className="red-text">{noDate()}</label>  
                     <div>
-                        <label>Date (Please use mm/dd/yyyy format)</label>
+                        <label>Date</label>
                         <input
-                            type= "text"
+                            type= "date"
                             value={date}
                             onChange={ e => this.setState({ 
                                 date: e.target.value,
