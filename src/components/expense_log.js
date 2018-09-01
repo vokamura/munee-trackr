@@ -140,7 +140,8 @@ class ExpenseLog extends Component {
     }
 
     render(){
-        const { changeBtn} = this.state;
+        const { changeBtn, showForm} = this.state;
+        var formSymbol = "add";
 
         //Gets total running balance, turns it into a number, and then adds necessary decimals
         let runningTotal = this.props.log.reduce(function(sum, amount){
@@ -169,7 +170,11 @@ class ExpenseLog extends Component {
                     <ExpenseItems lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
-
+        if (showForm){
+            formSymbol = "close";
+        } else {
+            formSymbol = "add";
+        }
         return (
             <div>
                 <h3 className="center responsive-table">Income and Expenses</h3>
@@ -192,7 +197,7 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel green lighten-5">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm} id="btnAddForm" className="btn-floating green darken-1 right pulse"><i className="material-icons">add</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className={showForm ? "btn-floating red darken-1 right pulse" : "btn-floating green darken-1 right pulse"}><i className="material-icons">{formSymbol}</i></div>
                 {this.insertForm()}
             </div>
         );
