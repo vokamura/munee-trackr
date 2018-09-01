@@ -172,7 +172,7 @@ class ExpenseLog extends Component {
 
         return (
             <div>
-                <h1 className="center responsive-table">Munee Trackr</h1>
+                <h3 className="center responsive-table">Income and Expenses</h3>
                 <table className="striped center">
                     <thead>
                         <tr>
@@ -194,7 +194,7 @@ class ExpenseLog extends Component {
                 </h5>
                 <div onClick={this.addForm} id="btnAddForm" className="btn-floating green darken-1 right pulse"><i className="material-icons">add</i></div>
                 {this.insertForm()}
-        </div>
+            </div>
         );
     }
 }
