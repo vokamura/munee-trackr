@@ -32,6 +32,14 @@ form {
     margin-left: 10vw;
 }
 
+#borderStructure {
+  border-collapse: separate;  
+}
+
+td {
+    border: 3px solid transparent;
+}
+
 .logoContainer {
     display: flex;
     justify-content: center;

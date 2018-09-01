@@ -178,7 +178,7 @@ class ExpenseLog extends Component {
         return (
             <div>
                 <h3 className="center responsive-table">Income and Expenses</h3>
-                <table className="striped center">
+                <table id="borderStructure" className="striped center">
                     <thead>
                         <tr>
                             <th className="col s1">Date</th>
