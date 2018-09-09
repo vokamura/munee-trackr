@@ -46,17 +46,13 @@ class ExpenseLog extends Component {
         }
     }
 
+    //Make divs contenteditable and sets state onchange/onblur
     editInput = () => {
         const editDate = document.getElementById('editDate').innerHTML;
         const editLocation = document.getElementById('editLocation').innerHTML;
         const editDescription = document.getElementById('editDescription').innerHTML;
         const editAmount = document.getElementById('editAmount').innerHTML;
 
-        // editDate.keypress(function(event){
-        //     if(event.keyCode == 13){
-        //         event.preventDefault();
-        //     }
-        // });
         this.setState({
             date: editDate,
             location: editLocation,
@@ -104,7 +100,6 @@ class ExpenseLog extends Component {
             }
 
             if(!regexAmount.test(newAmount)){
-                // alert("Enter number only"); 
                 this.setState({
                     insertError: 'Enter Numbers Only'
                 });
@@ -116,13 +111,11 @@ class ExpenseLog extends Component {
             //     });
             // } 
             if (!placeRegex.test(newPlace)){
-                // alert("Please enter a place between 3 and 20 characters");
                 this.setState({
                     insertError: 'Please enter a location'
                 });
             } 
             if (!descriptionRegex.test(newDescription)){
-                // alert("Please enter description between 3 and 20 characters");
                 this.setState({
                     insertError: 'Please enter a description'
                 });
