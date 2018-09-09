@@ -12,7 +12,8 @@ class ExpenseLog extends Component {
             date: '',
             location: '',
             description: '',
-            debitcredit: ''
+            debitcredit: '',
+            insertError: ''
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -37,12 +38,25 @@ class ExpenseLog extends Component {
         } 
     }
 
+    //Prevents enter key from being pressed in the contenteditable divs
+    enterKey = (event) => {
+        if(event.keyCode == 13 || event.which == 13){
+            event.preventDefault();
+            return false;
+        }
+    }
+
     editInput = () => {
         const editDate = document.getElementById('editDate').innerHTML;
         const editLocation = document.getElementById('editLocation').innerHTML;
         const editDescription = document.getElementById('editDescription').innerHTML;
         const editAmount = document.getElementById('editAmount').innerHTML;
 
+        // editDate.keypress(function(event){
+        //     if(event.keyCode == 13){
+        //         event.preventDefault();
+        //     }
+        // });
         this.setState({
             date: editDate,
             location: editLocation,
@@ -52,11 +66,12 @@ class ExpenseLog extends Component {
     }
 
     handleChangeUpdateBtn = (e) => {
-        const {changeBtn} = this.state;
+        const {changeBtn, insertError} = this.state;
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
+            // document.getElementsByClassName('toggleDelete')[0].innerText = "cancel";
 
             this.setState({
                 changeBtn: true
@@ -87,22 +102,37 @@ class ExpenseLog extends Component {
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
             }
+
             if(!regexAmount.test(newAmount)){
-                alert("Enter number only"); 
+                // alert("Enter number only"); 
+                this.setState({
+                    insertError: 'Enter Numbers Only'
+                });
             } 
-            if (!dateRegex.test(newDate)){
-                alert("Please enter date");
-            } 
+            // if (!dateRegex.test(newDate)){
+            //     // alert("Please enter date");
+            //     this.setState({
+            //         insertError: 'Please enter a date'
+            //     });
+            // } 
             if (!placeRegex.test(newPlace)){
-                alert("Please enter a place between 3 and 20 characters");
+                // alert("Please enter a place between 3 and 20 characters");
+                this.setState({
+                    insertError: 'Please enter a location'
+                });
             } 
             if (!descriptionRegex.test(newDescription)){
-                alert("Please enter description between 3 and 20 characters");
+                // alert("Please enter description between 3 and 20 characters");
+                this.setState({
+                    insertError: 'Please enter a description'
+                });
             } 
 
             // && placeRegex.test(newPlace) && descriptionRegex.test(newDescription)
 
-            if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
+            // if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
+                if (regexAmount.test(newAmount)){
+
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
                 let key = e.target.getAttribute('itemnumber');
 
@@ -134,13 +164,11 @@ class ExpenseLog extends Component {
                     } 
                 }
             }
-
-
         }
     }
 
     render(){
-        const { changeBtn, showForm} = this.state;
+        const { changeBtn, showForm, insertError} = this.state;
         var formSymbol = "add";
 
         //Gets total running balance, turns it into a number, and then adds necessary decimals
@@ -167,7 +195,7 @@ class ExpenseLog extends Component {
                 }
 
                 return (
-                    <ExpenseItems lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
+                    <ExpenseItems enterKey={(e)=>{this.enterKey(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
         if (showForm){
@@ -178,6 +206,7 @@ class ExpenseLog extends Component {
         return (
             <div>
                 <h3 className="center responsive-table">Income and Expenses</h3>
+                <h5 className="center-align red-text text-darken-1">{insertError}</h5>
                 <table id="borderStructure" className="striped center">
                     <thead>
                         <tr>
