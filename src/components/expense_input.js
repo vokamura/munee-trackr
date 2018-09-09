@@ -21,8 +21,6 @@ class ExpenseInput extends Component {
         const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
 
         // if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
-        
-       
         if (location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
             console.log("Can't subit");
             return false;
@@ -116,8 +114,8 @@ class ExpenseInput extends Component {
         // }
 
         return(
-            <form id="addForm" style={{marginTop: 20}} className="row"  onSubmit={this.handleSubmit}>
-                <div className="col s6 offset-s3">
+            <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
+                <div className="col s10 offset-s1">
 
                     <h5>Please enter your income or expense details</h5>
                     <div className="red-text">{enterFields()}</div>
