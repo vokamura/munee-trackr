@@ -66,8 +66,11 @@ class ExpenseLog extends Component {
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
+            //Change update button to done, and change delete button to cancel
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
-            // document.getElementsByClassName('toggleDelete')[0].innerText = "cancel";
+            const itemRow = e.target.getAttribute('itemnumber');
+            let element = document.getElementById(`${itemRow}`);
+            element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
 
             this.setState({
                 changeBtn: true
@@ -126,7 +129,12 @@ class ExpenseLog extends Component {
             // if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
                 if (regexAmount.test(newAmount)){
 
+                //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
+                const itemRow = e.target.getAttribute('itemnumber');
+                let element = document.getElementById(`${itemRow}`);
+                element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
+                
                 let key = e.target.getAttribute('itemnumber');
 
                 this.setState({
