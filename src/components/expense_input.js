@@ -16,13 +16,16 @@ class ExpenseInput extends Component {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
 
-        // const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
         const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
         const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
 
+        this.locationCheck(location);
+        this.descriptionCheck(description);
+        this.amountCheck(debitcredit);
+
         // if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
         if (location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
-            console.log("Can't subit");
             return false;
         }
 
@@ -32,7 +35,7 @@ class ExpenseInput extends Component {
             description,
             debitcredit
         );
-        console.log(date);
+
         this.setState({ 
             date: '',
             location: '',
@@ -41,19 +44,43 @@ class ExpenseInput extends Component {
         });
     }
 
-    // locationCheck = () => {
-    //     const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
-    //     if (location === "" || !placeRegex.test(location)){
-    //         this.setState({
-    //             locationError:"Please enter a location"
-    //         });
-    //         return locationError;
-    //     } else {
-    //         this.setState({
-    //             locationError:""
-    //         });
-    //     }
-    // }
+    locationCheck = (location) => {
+        const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
+        if (location === "" || !placeRegex.test(location)){
+            this.setState({
+                locationError:"Please enter a location"
+            });
+        } else {
+            this.setState({
+                locationError:""
+            });
+        }
+    }
+
+    descriptionCheck = (description) => {
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+        if (description === "" || !descriptionRegex.test(description)){
+            this.setState({
+                descriptionError:"Please enter a location"
+            });
+        } else {
+            this.setState({
+                descriptionError:""
+            });
+        }
+    }
+
+    amountCheck = (debitcredit) => {
+        if (debitcredit === ""){
+            this.setState({
+                amountError:"Please enter an amount"
+            });
+        } else {
+            this.setState({
+                amountError:""
+            });
+        }
+    }
 
     render(){
         const { date, location, description, debitcredit, locationError, descriptionError, amountError } = this.state;
@@ -63,55 +90,6 @@ class ExpenseInput extends Component {
                 return "** All Fields Below Are Required **"
             }
         }
-
-       
-      
-        // if (description === "" || !descriptionRegex.test(description)){
-        //     this.setState({
-        //         descriptionError:"Please enter a location"
-        //     });
-        // } else {
-        //     this.setState({
-        //         descriptionError:""
-        //     });
-        // }
-
-        // if (debitcredit === ""){
-        //     this.setState({
-        //         amountError:"Please enter an amount"
-        //     });
-        // } else {
-        //     this.setState({
-        //         amountError:""
-        //     });
-        // }
-
-        // const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-        // const noDate = function dateField(){
-        //     if(date === "" || !dateRegex.test(date)){
-        //         return "Please enter date using mm/dd/yyyy format"
-        //     }
-        // }
-
-        // const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
-        // const noLocation = function locationField(){
-        //     if(location ==="" || !placeRegex.test(location)){
-        //         return "Please enter a location between 3 and 20 characters long"
-        //     }
-        // }
-
-        // const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
-        // const noDescription = function descriptionField(){
-        //     if(description === "" || !descriptionRegex.test(description)){
-        //         return "Please enter a description between 3 and 35 characters long"
-        //     }
-        // }
-
-        // const noAmount = function amountField(){
-        //     if(amount ===""){
-        //         return "Please enter an amount (numbers and 1 decimal point only)"
-        //     }
-        // }
 
         return(
             <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
@@ -131,7 +109,7 @@ class ExpenseInput extends Component {
                         })}/>
                     </div>
 
-                    {/* <div className="red-text">{this.locationCheck}</div> */}
+                    <div className="red-text">{locationError}</div>
                     <div>
                         <label>Location</label>
                         <input
@@ -142,7 +120,7 @@ class ExpenseInput extends Component {
                         })}/>
                     </div>
 
-                    {/* <div className="red-text">{descriptionError}</div> */}
+                    <div className="red-text">{descriptionError}</div>
                     <div>
                         <label>Add Description</label>
                         <input 
@@ -153,7 +131,7 @@ class ExpenseInput extends Component {
                         })}/>
                     </div>
 
-                    {/* <div className="red-text">{amountError}</div> */}
+                    <div className="red-text">{amountError}</div>
                     <div>
                         <label>Debit or Credit (Use "-" for credit)</label>
                         <input
