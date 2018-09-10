@@ -6,7 +6,7 @@ class ExpenseInput extends Component {
         location: '',
         description: '',
         debitcredit: '',
-        datError: '',
+        dateError: '',
         locationError: '',
         descriptionError: '',
         amountError: ''
@@ -23,9 +23,10 @@ class ExpenseInput extends Component {
         this.locationCheck(location);
         this.descriptionCheck(description);
         this.amountCheck(debitcredit);
+        this.dateCheck(date);
 
-        // if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
-        if (location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
+        if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
+        // if (location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
             return false;
         }
 
@@ -42,6 +43,19 @@ class ExpenseInput extends Component {
             description: '',
             debitcredit: ''
         });
+    }
+
+    dateCheck = (date) => {
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (date === "" || !dateRegex.test(date)){
+            this.setState({
+                dateError:"Please enter a date"
+            });
+        } else {
+            this.setState({
+                dateError:""
+            });
+        }
     }
 
     locationCheck = (location) => {
@@ -83,7 +97,7 @@ class ExpenseInput extends Component {
     }
 
     render(){
-        const { date, location, description, debitcredit, locationError, descriptionError, amountError } = this.state;
+        const { date, location, description, debitcredit, dateError, locationError, descriptionError, amountError } = this.state;
 
         const enterFields = function initialField(){
             if(date === "" || location === "" || description === "" || debitcredit === ""){
@@ -98,18 +112,18 @@ class ExpenseInput extends Component {
                     <h5>Please enter your income or expense details</h5>
                     <div className="red-text">{enterFields()}</div>
 
-                    {/* <label className="red-text">{noDate()}</label>   */}
+                    <label className="red-text">{dateError}</label>  
                     <div>
                         <label>Date</label>
                         <input
-                            type= "date"
+                            // type= "date"
                             value={date}
                             onChange={ e => this.setState({ 
                                 date: e.target.value,
                         })}/>
                     </div>
 
-                    <div className="red-text">{locationError}</div>
+                    <label className="red-text">{locationError}</label>
                     <div>
                         <label>Location</label>
                         <input
@@ -120,7 +134,7 @@ class ExpenseInput extends Component {
                         })}/>
                     </div>
 
-                    <div className="red-text">{descriptionError}</div>
+                    <label className="red-text">{descriptionError}</label>
                     <div>
                         <label>Add Description</label>
                         <input 
@@ -131,7 +145,7 @@ class ExpenseInput extends Component {
                         })}/>
                     </div>
 
-                    <div className="red-text">{amountError}</div>
+                    <label className="red-text">{amountError}</label>
                     <div>
                         <label>Debit or Credit (Use "-" for credit)</label>
                         <input
