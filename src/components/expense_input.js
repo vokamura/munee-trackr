@@ -26,7 +26,6 @@ class ExpenseInput extends Component {
         this.dateCheck(date);
 
         if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
-        // if (location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
             return false;
         }
 
