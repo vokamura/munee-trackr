@@ -7,10 +7,10 @@ export default (props) => {
             amount = amount.toFixed(2);
         }
 
-        let lineamount = parseFloat(props.lineBalance);
-            if(lineamount.toFixed(0) || lineamount.toFixed(1)){
-                lineamount = lineamount.toFixed(2);
-            }
+    let lineamount = parseFloat(props.lineBalance);
+        if(lineamount.toFixed(0) || lineamount.toFixed(1)){
+            lineamount = lineamount.toFixed(2);
+        }
 
     return (
         <tr key={props.entry.id} id={props.entry.id}>

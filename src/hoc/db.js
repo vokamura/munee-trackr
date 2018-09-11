@@ -38,8 +38,25 @@ export default (WrappedComponent) => {
         }
            
         deleteItem = (e) => {
+            console.log(e.target.innerText);
             const itemRow = e.target.getAttribute('itemnumber');
-            this.dbRef.doc(`${itemRow}`).delete();
+            console.log(itemRow);
+            if(e.target.innerText === "delete"){
+                this.dbRef.doc(`${itemRow}`).delete();
+            } else {
+                let element = document.getElementById(`${itemRow}`);
+                element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
+                element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
+                this.updateItemOff(e);
+                const rows = document.getElementsByTagName('tr');
+                for (var i=0; i < rows.length-1; i++){
+                    if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                        document.getElementsByClassName('update')[i].disabled = false;
+                        document.getElementsByClassName('update')[i].classList.remove("green");
+                        document.getElementsByClassName("update")[i].classList.add("light-blue");
+                    } 
+                }
+            }
         }
 
         updateItemOn = (e) => {
