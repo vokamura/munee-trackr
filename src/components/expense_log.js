@@ -107,12 +107,13 @@ class ExpenseLog extends Component {
                     insertError: 'Enter Numbers Only'
                 });
             } 
-            // if (!dateRegex.test(newDate)){
-            //     // alert("Please enter date");
-            //     this.setState({
-            //         insertError: 'Please enter a date'
-            //     });
-            // } 
+
+            if (!dateRegex.test(newDate)){
+                this.setState({
+                    insertError: 'Please enter a date'
+                });
+            } 
+
             if (!placeRegex.test(newPlace)){
                 this.setState({
                     insertError: 'Please enter a location'
@@ -127,7 +128,7 @@ class ExpenseLog extends Component {
             // && placeRegex.test(newPlace) && descriptionRegex.test(newDescription)
 
             // if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
-                if (regexAmount.test(newAmount)){
+            if (regexAmount.test(newAmount)){
 
                 //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
@@ -154,11 +155,13 @@ class ExpenseLog extends Component {
                     date: '',
                     location: '',
                     description: '',
-                    debitcredit: ''
+                    debitcredit: '',
+                    insertError: ''
                 })
     
                 this.props.updateItemOff(e);
-    
+                
+                //If a button is editable, it disables all other edit buttons
                 for (var i=0; i < rows.length-1; i++){
                     if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                         document.getElementsByClassName('update')[i].disabled = false;
