@@ -38,9 +38,7 @@ export default (WrappedComponent) => {
         }
            
         deleteItem = (e) => {
-            console.log(e.target.innerText);
             const itemRow = e.target.getAttribute('itemnumber');
-            console.log(itemRow);
             if(e.target.innerText === "delete"){
                 this.dbRef.doc(`${itemRow}`).delete();
             } else {
