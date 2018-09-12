@@ -99,6 +99,8 @@ class ExpenseLog extends Component {
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
             //If the amount includes a dollar sign, take it out and convert to a number
+
+
             if(newAmount.includes("$")){
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
