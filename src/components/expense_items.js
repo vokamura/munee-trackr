@@ -2,15 +2,22 @@ import React from 'react';
 
 export default (props) => {
 
-    let amount = parseFloat(props.entry.debitcredit);
-        if(amount.toFixed(0) || amount.toFixed(1)){
-            amount = amount.toFixed(2);
-        }
+    //If the number doesn't have a $, then add a $ to the number
+    if(!props.entry.debitcredit.includes("$")){
+        props.entry.debitcredit = "$" + props.entry.debitcredit;
+        console.log(props.entry.debitcredit);
+    }
 
+    let amount = parseFloat(props.entry.debitcredit);
+    if(amount.toFixed(0) || amount.toFixed(1)){
+        amount = amount.toFixed(2);
+    }
+
+    //Adds decimals in for line item balances
     let lineamount = parseFloat(props.lineBalance);
-        if(lineamount.toFixed(0) || lineamount.toFixed(1)){
-            lineamount = lineamount.toFixed(2);
-        }
+    if(lineamount.toFixed(0) || lineamount.toFixed(1)){
+        lineamount = lineamount.toFixed(2);
+    }
 
     return (
         <tr key={props.entry.id} id={props.entry.id}>
@@ -25,7 +32,7 @@ export default (props) => {
             </td>
             <td className="updated" id="editAmount" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.debitcredit}
-                {/* ${amount} */}
+                {/* {amount} */}
             </td> 
 
             <td id="lineAmount">

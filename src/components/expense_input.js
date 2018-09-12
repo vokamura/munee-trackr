@@ -84,6 +84,8 @@ class ExpenseInput extends Component {
     }
 
     amountCheck = (debitcredit) => {
+
+
         if (debitcredit === ""){
             this.setState({
                 amountError:"Please enter an amount"
