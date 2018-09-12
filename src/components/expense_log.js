@@ -91,15 +91,18 @@ class ExpenseLog extends Component {
             let newPlace = element.getElementsByTagName("td")[1].textContent;
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
+            console.log(newAmount);
 
             const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
+            //If the amount includes a dollar sign, take it out and convert to a number
             if(newAmount.includes("$")){
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
+                console.log(newAmount);
             }
 
             if(!regexAmount.test(newAmount)){
@@ -137,17 +140,18 @@ class ExpenseLog extends Component {
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 
                 let key = e.target.getAttribute('itemnumber');
-
+                
                 this.setState({
                     changeBtn: false,
-                    key: key
+                    key: key,
                 });
                 
                 this.props.sendData(
                     this.state.date,
                     this.state.location,
                     this.state.description,
-                    this.state.debitcredit,
+                    // this.state.debitcredit,
+                    newAmount,
                     key
                 )
     
@@ -158,7 +162,7 @@ class ExpenseLog extends Component {
                     debitcredit: '',
                     insertError: ''
                 })
-    
+
                 this.props.updateItemOff(e);
                 
                 //If a button is editable, it disables all other edit buttons
@@ -214,13 +218,13 @@ class ExpenseLog extends Component {
                 <table id="borderStructure" className="striped center">
                     <thead>
                         <tr>
-                            <th className="col s1">Date</th>
-                            <th className="col s2">Location</th>
-                            <th className="col s3">Description</th>
-                            <th className="col s1">Amount</th>
-                            <th className="col s1">Balance</th>
-                            <th className="col s1">Delete</th>
-                            <th className="col s1">Update</th>
+                            <th className="col s1 center-align">Date</th>
+                            <th className="col s2 center-align">Location</th>
+                            <th className="col s3 center-align">Description</th>
+                            <th className="col s1 center-align">Amount</th>
+                            <th className="col s1 center-align">Balance</th>
+                            <th className="col s1 center-align">Delete</th>
+                            <th className="col s1 center-align">Update</th>
                         </tr>
                     </thead>
                     <tbody>
