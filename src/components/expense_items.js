@@ -1,16 +1,15 @@
 import React from 'react';
 
 export default (props) => {
-
-    //If the number doesn't have a $, then add a $ to the number
-    if(!props.entry.debitcredit.includes("$")){
-        props.entry.debitcredit = "$" + props.entry.debitcredit;
-        console.log(props.entry.debitcredit);
-    }
-
+ 
     let amount = parseFloat(props.entry.debitcredit);
     if(amount.toFixed(0) || amount.toFixed(1)){
         amount = amount.toFixed(2);
+    }
+    //If the number doesn't have a $, then add a $ to the number
+    if(!amount.includes("$")){
+        amount = "$" + amount;
+        console.log(amount);
     }
 
     //Adds decimals in for line item balances
@@ -31,8 +30,8 @@ export default (props) => {
                 {props.entry.description}
             </td>
             <td className="updated" id="editAmount" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
-                {props.entry.debitcredit}
-                {/* {amount} */}
+                {/* {props.entry.debitcredit} */}
+                {amount}
             </td> 
 
             <td id="lineAmount">
