@@ -92,7 +92,6 @@ class ExpenseLog extends Component {
             let newPlace = element.getElementsByTagName("td")[1].textContent;
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
-            console.log(newAmount);
 
             const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
@@ -103,7 +102,12 @@ class ExpenseLog extends Component {
             if(newAmount.includes("$")){
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
-                console.log(newAmount);
+            }
+
+            //If the amount doesn't have any or enough decimals, add them in
+            if(newAmount.toFixed(0) || newAmount.toFixed(1)){
+                newAmount = parseFloat(newAmount);
+                newAmount = newAmount.toFixed(2);
             }
 
             if(!regexAmount.test(newAmount)){
