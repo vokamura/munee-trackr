@@ -108,6 +108,7 @@ class ExpenseLog extends Component {
             if(newAmount.toFixed(0) || newAmount.toFixed(1)){
                 newAmount = parseFloat(newAmount);
                 newAmount = newAmount.toFixed(2);
+                console.log(newAmount);
             }
 
             if(!regexAmount.test(newAmount)){
@@ -132,6 +133,8 @@ class ExpenseLog extends Component {
                     insertError: 'Please enter a description'
                 });
             } 
+
+            element.getElementsByTagName("td")[3].textContent = "$" + newAmount;
 
             // && placeRegex.test(newPlace) && descriptionRegex.test(newDescription)
 
