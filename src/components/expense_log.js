@@ -100,17 +100,14 @@ class ExpenseLog extends Component {
 
             //If the amount includes a dollar sign, take it out and convert to a number
 
-
             if(newAmount.includes("$")){
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
             }
-
+            newAmount = parseFloat(newAmount);
             //If the amount doesn't have any or enough decimals, add them in
             if(newAmount.toFixed(0) || newAmount.toFixed(1)){
-                newAmount = parseFloat(newAmount);
                 newAmount = newAmount.toFixed(2);
-                console.log(newAmount);
             }
 
             if(!regexAmount.test(newAmount)){
