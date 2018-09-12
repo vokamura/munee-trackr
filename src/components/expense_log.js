@@ -31,6 +31,7 @@ class ExpenseLog extends Component {
         }
     } 
 
+    //Show input form component
     insertForm() {
         const {showForm} = this.state;
         if(showForm){

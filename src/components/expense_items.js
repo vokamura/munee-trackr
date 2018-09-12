@@ -9,7 +9,6 @@ export default (props) => {
     //If the number doesn't have a $, then add a $ to the number
     if(!amount.includes("$")){
         amount = "$" + amount;
-        console.log(amount);
     }
 
     //Adds decimals in for line item balances
@@ -20,7 +19,7 @@ export default (props) => {
 
     return (
         <tr key={props.entry.id} id={props.entry.id}>
-            <td className="updated" id="editDate" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated center-align" id="editDate" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.date}
             </td>
             <td className="updated" id="editLocation" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
@@ -37,14 +36,14 @@ export default (props) => {
             <td id="lineAmount">
                 ${lineamount}
             </td>
-            <td>
+            <td className="center-align">
                 <button 
                     className="btn-floating waves-effect waves-light red" 
                     onClick={props.deleteItem} itemnumber={props.entry.id}>
                         <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                 </button>
             </td>
-            <td>
+            <td className="center-align">
                 <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
                     onClick={props.handleChangeUpdateBtn} 
                     itemnumber={props.entry.id}>
