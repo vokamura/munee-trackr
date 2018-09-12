@@ -46,6 +46,7 @@ td {
 
 #editAmount, #lineAmount {
     text-align: right;
+    padding-right: 3%;
 }
 
 .highlightCells {

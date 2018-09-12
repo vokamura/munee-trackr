@@ -49,6 +49,7 @@ export default (WrappedComponent) => {
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
                 this.updateItemOff(e);
                 const rows = document.getElementsByTagName('tr');
+                //turn off disable for update button, toggle update button back to edit
                 for (var i=0; i < rows.length-1; i++){
                     if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                         document.getElementsByClassName('update')[i].disabled = false;
