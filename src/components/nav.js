@@ -5,7 +5,7 @@ const Nav = props => {
     return (
         <nav className="green darken-3">
             <div className="nav-wrapper">
-                <Link to="/" className="brand-logo left">Munee Trackr</Link>
+                <Link to="/" className="brand-logo left">Munee Loggr</Link>
                 <ul className="right nav-mobile">
                     <li >
                         <Link to="/">Home</Link>

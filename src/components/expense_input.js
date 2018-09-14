@@ -29,6 +29,7 @@ class ExpenseInput extends Component {
             return false;
         }
 
+        console.log(this.props);
         this.props.send(
             date,
             location,
@@ -48,7 +49,7 @@ class ExpenseInput extends Component {
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
         if (date === "" || !dateRegex.test(date)){
             this.setState({
-                dateError:"Please enter a date"
+                dateError:"Please enter a date using mm/dd/yyyy form"
             });
         } else {
             this.setState({
