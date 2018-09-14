@@ -16,6 +16,12 @@ class ExpenseLog extends Component {
         this.addForm = this.addForm.bind(this);
     }
 
+    hideModal = () => {
+        this.setState({
+            showSplash: false
+        });
+    }
+
     addForm(){
         const showForm = this.state.showForm;
         if (!showForm){
@@ -218,9 +224,12 @@ class ExpenseLog extends Component {
 
         return (
             <div>
+
+                <Splash showSplash={showSplash} hideModal={this.hideModal} />
+
                 <h3 className="center responsive-table">Income and Expenses</h3>
                 <h5 className="center-align red-text text-darken-1">{insertError}</h5>
-                <table id="borderStructure" className="striped center">
+                <table id="borderStructure" className="center highlight">
                     <thead className="green lighten-5">
                         <tr>
                             <th className="col s1 center-align">Date</th>
