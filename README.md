@@ -1,4 +1,4 @@
-# Munee Trackr
+# Munee Loggr
 
 > A money tracker using ReactJS, Redux, and Firebase
 

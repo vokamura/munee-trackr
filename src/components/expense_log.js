@@ -51,6 +51,20 @@ class ExpenseLog extends Component {
         }
     }
 
+    //Checks the length on inputs
+    lengthCheck = (event) => {
+        if(event.target.innerText.length > 19){
+            console.log(event.target.innerText.length);
+            event.preventDefault();
+            return false;
+        };
+    }
+
+    keyPresses = (event) =>{
+        this.enterKey(event);
+        this.lengthCheck(event);
+    }
+
     //Make divs contenteditable and sets state onchange/onblur
     editInput = () => {
         const editDate = document.getElementById('editDate').innerHTML;
@@ -97,8 +111,6 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
 
-            console.log(newDate, newPlace, newDescription, newAmount);
-
             const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
@@ -117,33 +129,30 @@ class ExpenseLog extends Component {
 
             if(!regexAmount.test(newAmount)){
                 this.setState({
-                    insertError: 'Enter Numbers Only'
+                    insertError: 'Enter a dollar amount'
                 });
             } 
 
             if (!dateRegex.test(newDate)){
                 this.setState({
-                    insertError: 'Please enter a date'
+                    insertError: 'Enter a date with the format mm/dd/yyyy'
                 });
             } 
 
             if (!placeRegex.test(newPlace)){
                 this.setState({
-                    insertError: 'Please enter a location'
+                    insertError: 'Enter a location between 3 and 20 characters'
                 });
             } 
             if (!descriptionRegex.test(newDescription)){
                 this.setState({
-                    insertError: 'Please enter a description'
+                    insertError: 'Enter a description'
                 });
             } 
 
             element.getElementsByTagName("td")[3].textContent = "$" + newAmount;
 
-            // && placeRegex.test(newPlace) && descriptionRegex.test(newDescription)
-
-            // if (regexAmount.test(newAmount)  && dateRegex.test(newDate)){
-            if (regexAmount.test(newAmount)){
+            if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
 
                 //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
@@ -212,7 +221,7 @@ class ExpenseLog extends Component {
                 }
 
                 return (
-                    <ExpenseItems enterKey={(e)=>{this.enterKey(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
+                    <ExpenseItems keyPresses={(e)=>{this.keyPresses(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
 
