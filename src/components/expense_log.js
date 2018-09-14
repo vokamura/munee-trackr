@@ -122,6 +122,7 @@ class ExpenseLog extends Component {
                 newAmount = parseFloat(newNumber);
             }
             newAmount = parseFloat(newAmount);
+
             //If the amount doesn't have any or enough decimals, add them in
             if(newAmount.toFixed(0) || newAmount.toFixed(1)){
                 newAmount = newAmount.toFixed(2);
@@ -202,6 +203,7 @@ class ExpenseLog extends Component {
             let parsedNum = parseFloat(amount.debitcredit);
             return sum+parsedNum;
         }, 0);
+
         if(runningTotal.toFixed(0) || runningTotal.toFixed(1)){
             runningTotal = runningTotal.toFixed(2);
         }
@@ -225,6 +227,7 @@ class ExpenseLog extends Component {
                 )
             });
 
+        //Changes icon for the input form
         if (showForm){
             formSymbol = "close";
         } else {
