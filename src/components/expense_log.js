@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import db from '../hoc/db';
 import ExpenseInput from './expense_input';
 import ExpenseItems from './expense_items';
+import Splash from './splash';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -9,11 +10,8 @@ class ExpenseLog extends Component {
         this.state = {
             showForm: false,
             changeBtn: false,
-            date: '',
-            location: '',
-            description: '',
-            debitcredit: '',
-            insertError: ''
+            insertError: '',
+            showSplash: true
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -27,7 +25,7 @@ class ExpenseLog extends Component {
         } else {
             this.setState({
                 showForm: false
-            })
+            });
         }
     } 
 
@@ -93,13 +91,14 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
 
+            console.log(newDate, newPlace, newDescription, newAmount);
+
             const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
             //If the amount includes a dollar sign, take it out and convert to a number
-
             if(newAmount.includes("$")){
                 var newNumber = newAmount.substr(1);
                 newAmount = parseFloat(newNumber);
@@ -152,21 +151,16 @@ class ExpenseLog extends Component {
                     changeBtn: false,
                     key: key,
                 });
-                
+
                 this.props.sendData(
-                    this.state.date,
-                    this.state.location,
-                    this.state.description,
-                    // this.state.debitcredit,
+                    newDate,
+                    newPlace,
+                    newDescription,
                     newAmount,
                     key
                 )
-    
+
                 this.setState({
-                    date: '',
-                    location: '',
-                    description: '',
-                    debitcredit: '',
                     insertError: ''
                 })
 
@@ -178,12 +172,14 @@ class ExpenseLog extends Component {
                         document.getElementsByClassName('update')[i].disabled = false;
                     } 
                 }
+
             }
         }
+
     }
 
     render(){
-        const { changeBtn, showForm, insertError} = this.state;
+        const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
 
         //Gets total running balance, turns it into a number, and then adds necessary decimals
@@ -213,17 +209,19 @@ class ExpenseLog extends Component {
                     <ExpenseItems enterKey={(e)=>{this.enterKey(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
+
         if (showForm){
             formSymbol = "close";
         } else {
             formSymbol = "add";
         }
+
         return (
             <div>
                 <h3 className="center responsive-table">Income and Expenses</h3>
                 <h5 className="center-align red-text text-darken-1">{insertError}</h5>
                 <table id="borderStructure" className="striped center">
-                    <thead>
+                    <thead className="green lighten-5">
                         <tr>
                             <th className="col s1 center-align">Date</th>
                             <th className="col s2 center-align">Location</th>
