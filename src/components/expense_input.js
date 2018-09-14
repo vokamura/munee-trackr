@@ -29,7 +29,6 @@ class ExpenseInput extends Component {
             return false;
         }
 
-        console.log(this.props);
         this.props.send(
             date,
             location,
@@ -85,8 +84,6 @@ class ExpenseInput extends Component {
     }
 
     amountCheck = (debitcredit) => {
-
-
         if (debitcredit === ""){
             this.setState({
                 amountError:"Please enter an amount"
@@ -159,7 +156,6 @@ class ExpenseInput extends Component {
                                 debitcredit: e.target.value 
                         })}/>
                     </div>
-                   
                     
                     <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
                         Submit

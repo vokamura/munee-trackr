@@ -108,3 +108,34 @@ th {
         text-overflow: ellipsis;
     }
 } 
+
+.modalSplash {
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2;
+  }
+
+  .splashInstructions {
+      font-size: 1.5rem !important;
+  }
+
+  @media only screen and (max-width: 576px) { 
+    .splashInstructions {
+        font-size: 1rem !important;
+    }
+}
+
+  #splashText {
+      margin-top: 15vmin;
+      padding: 1%;
+  }
+  
+  .display-block {
+    display: block;
+  }
+  
+  .display-none {
+    display: none;
+  }
