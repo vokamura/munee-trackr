@@ -19,16 +19,16 @@ export default (props) => {
 
     return (
         <tr key={props.entry.id} id={props.entry.id}>
-            <td className="updated center-align" id="editDate" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated center-align" id="editDate"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.date}
             </td>
-            <td className="updated" id="editLocation" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated" id="editLocation"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.location}
             </td>
-            <td className="updated" id="editDescription" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated" id="editDescription" onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.description}
             </td>
-            <td className="updated" id="editAmount" onKeyPress={(e) => props.enterKey(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated" id="editAmount"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {/* {props.entry.debitcredit} */}
                 {amount}
             </td> 
