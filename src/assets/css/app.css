@@ -28,11 +28,20 @@ form {
     position: fixed;
     left: 0;
     top: 0;
-    width: 75vw;
-    height: 85vh;
+    width: 70vw;
+    height: 80vh;
     z-index: 2;
     background-color: rgba(0,0,0, .9);
     /* margin-left: 5vw; */
+}
+
+@media only screen and (max-width: 400px) { 
+    form {
+        height: 90vh;
+    }
+    input {
+        margin: 0 !important;
+    }
 }
 
 #addForm {
