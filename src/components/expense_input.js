@@ -111,8 +111,9 @@ class ExpenseInput extends Component {
             <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
                 <div className="col s10 offset-s1">
 
-                    <h5>Please enter your income or expense details</h5>
-                    <div className="red-text">{enterFields()}</div>
+                    <div className="center-align">Please enter your income or expense details</div>
+                    <div className="center-align">Use + for income, and - for expenses</div>
+                    <div className="red-text center-align">{enterFields()}</div>
 
                     <label className="red-text">{dateError}</label>  
                     <div>
