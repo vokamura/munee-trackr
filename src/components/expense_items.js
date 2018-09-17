@@ -22,10 +22,10 @@ export default (props) => {
             <td className="updated center-align tooLong" id="editDate"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.date}
             </td>
-            <td className="updated tooLong" id="editLocation"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated tooLong center-align" id="editLocation"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.location}
             </td>
-            <td className="updated tooLong" id="editDescription" onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
+            <td className="updated tooLong center-align hide-on-small-only" id="editDescription" onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                 {props.entry.description}
             </td>
             <td className="updated tooLong" id="editAmount"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
@@ -33,7 +33,7 @@ export default (props) => {
                 {amount}
             </td> 
 
-            <td id="lineAmount">
+            <td id="lineAmount" className="hide-on-small-only">
                 ${lineamount}
             </td>
             <td className="center-align">
