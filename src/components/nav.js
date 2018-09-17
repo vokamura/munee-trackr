@@ -12,7 +12,6 @@ class Nav extends Component {
 
     addAbout(){
         const {showAbout} = this.state;
-        console.log("about clicked");
         if (!showAbout){
             this.setState({
                 showAbout: true
@@ -25,8 +24,6 @@ class Nav extends Component {
     } 
 
     hideAbout = () => {
-        const {showAbout} = this.state;
-        console.log("closed clicked");
         this.setState({
             showAbout: false
         });
@@ -46,10 +43,6 @@ class Nav extends Component {
                     <Link to="/" className="brand-logo left">Munee Loggr</Link>
                     <ul className="right nav-mobile">
                         <li >
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li >
-                            {/* <Link to="/about">About</Link> */}
                             <a onClick={this.addAbout.bind(this)}>About</a>
                         </li>
                     </ul>
