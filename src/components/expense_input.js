@@ -105,66 +105,68 @@ class ExpenseInput extends Component {
         }
 
         return(
-            <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
-                <div className="col s10 offset-s1">
+            <div className="formShadow" onClick={this.props.hideForm}>
+                <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
+                    <div className="col s10 offset-s1">
 
-                    <div className="center-align">Please enter your income or expense details</div>
-                    {/* <div className="center-align">Use + for income, and - for expenses</div> */}
-                    <div className="red-text center-align">{enterFields()}</div>
+                        <div className="center-align">Please enter your income or expense details</div>
+                        {/* <div className="center-align">Use + for income, and - for expenses</div> */}
+                        <div className="red-text center-align">{enterFields()}</div>
 
-                    <label className="red-text">{dateError}</label>  
-                    <div>
-                        <label>Date</label>
-                        <input
-                            // type= "date"
-                            value={date}
-                            onChange={ e => this.setState({ 
-                                date: e.target.value,
-                        })}/>
+                        <label className="red-text">{dateError}</label>  
+                        <div>
+                            <label>Date</label>
+                            <input
+                                // type= "date"
+                                value={date}
+                                onChange={ e => this.setState({ 
+                                    date: e.target.value,
+                            })}/>
+                        </div>
+
+                        <label className="red-text">{locationError}</label>
+                        <div>
+                            <label>Location</label>
+                            <input
+                                type= "text"
+                                value={location}
+                                onChange={ e => this.setState({ 
+                                    location: e.target.value,
+                            })}/>
+                        </div>
+
+                        <label className="red-text">{descriptionError}</label>
+                        <div>
+                            <label>Add Description</label>
+                            <input 
+                                type="text" 
+                                value={description} 
+                                onChange={ e => this.setState({ 
+                                    description: e.target.value,
+                            })}/>
+                        </div>
+
+                        <label className="red-text">{amountError}</label>
+                        <div>
+                            <label>Debit or Credit (Use "-" for credit)</label>
+                            <input
+                                required
+                                type= "number"
+                                value={debitcredit}
+                                onChange={ e => this.setState({ 
+                                    debitcredit: e.target.value 
+                            })}/>
+                        </div>
+                        
+                        <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
+                            Submit
+                            <i className="material-icons right">send</i>
+                        </button>
+                        <div className="teal-text text-lighten-2">Click anywhere to close</div>
                     </div>
-
-                    <label className="red-text">{locationError}</label>
-                    <div>
-                        <label>Location</label>
-                        <input
-                            type= "text"
-                            value={location}
-                            onChange={ e => this.setState({ 
-                                location: e.target.value,
-                        })}/>
-                    </div>
-
-                    <label className="red-text">{descriptionError}</label>
-                    <div>
-                        <label>Add Description</label>
-                        <input 
-                            type="text" 
-                            value={description} 
-                            onChange={ e => this.setState({ 
-                                description: e.target.value,
-                        })}/>
-                    </div>
-
-                    <label className="red-text">{amountError}</label>
-                    <div>
-                        <label>Debit or Credit (Use "-" for credit)</label>
-                        <input
-                            required
-                            type= "number"
-                            value={debitcredit}
-                            onChange={ e => this.setState({ 
-                                debitcredit: e.target.value 
-                        })}/>
-                    </div>
-                    
-                    <button onClick={this.handleSubmit} className="waves-effect waves-light btn right">
-                        Submit
-                        <i className="material-icons right">send</i>
-                    </button>
-                    <div>Press red cancel button to close</div>
-                </div>
                 
-            </form>
+                </form>
+            </div>
         )
     }
 }

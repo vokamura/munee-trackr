@@ -5,11 +5,11 @@ import portfoliologo from '../assets/images/portfoliologo.jpg';
 
 export default (props) => {
     return(
-        <div onClick={props.hideAbout} className={props.showAbout ? "aboutShadow display-none" : "aboutShadow display-block"}>
+        <div onClick={props.hideAbout} className={props.showAbout ? "modalShadow display-none" : "modalShadow display-block"}>
             <div className="aboutBody center">
-                <h4 className="teal-text text-lighten-2">About Munee Trackr</h4>
+                <h4 className="teal-text text-lighten-2">About Munee Loggr</h4>
 
-                    <p>Munee Trackr allows you to track income and expenses.</p>
+                    <p>Munee Loggr allows you to track income and expenses.</p>
                     
                     <p>It's a content management system, where users can see what entries have already been made, add new entries, update old entries, and delete entries.</p>
 

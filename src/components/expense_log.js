@@ -11,7 +11,7 @@ class ExpenseLog extends Component {
             showForm: false,
             changeBtn: false,
             insertError: '',
-            showSplash: true
+            showSplash: true,
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -35,11 +35,17 @@ class ExpenseLog extends Component {
         }
     } 
 
+    hideForm = () => {
+        this.setState({
+            showForm: false
+        });
+    }
+
     //Show input form component
     insertForm() {
         const {showForm} = this.state;
         if(showForm){
-            return <ExpenseInput send={this.props.sendLog} showForm={this.state.showForm}/>
+            return <ExpenseInput send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
         } 
     }
 
