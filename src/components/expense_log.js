@@ -116,11 +116,13 @@ class ExpenseLog extends Component {
             const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
-            //If the amount includes a dollar sign, take it out and convert to a number
+            //If the amount includes anything except numbers, take it out and convert to a number
             if(newAmount.includes("$")){
-                var newNumber = newAmount.substr(1);
+                let characterRegex = /[^a-zA-Z0-9-. ]/gm;
+                let newNumber = newAmount.replace(characterRegex, "");
                 newAmount = parseFloat(newNumber);
             }
+            console.log(newAmount);
             newAmount = parseFloat(newAmount);
 
             //If the amount doesn't have any or enough decimals, add them in

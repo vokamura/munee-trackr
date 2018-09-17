@@ -109,7 +109,7 @@ class ExpenseInput extends Component {
                 <div className="col s10 offset-s1">
 
                     <div className="center-align">Please enter your income or expense details</div>
-                    <div className="center-align">Use + for income, and - for expenses</div>
+                    {/* <div className="center-align">Use + for income, and - for expenses</div> */}
                     <div className="red-text center-align">{enterFields()}</div>
 
                     <label className="red-text">{dateError}</label>  
