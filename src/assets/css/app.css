@@ -131,6 +131,7 @@ nav p {
 @media only screen and (max-width: 576px) { 
     .logoImage {
         margin: 0 auto;
+        width: 50px;
     }
 }
 
