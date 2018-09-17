@@ -3,9 +3,9 @@ import githublogo from '../assets/images/githublogo.png';
 import linkedinlogo from '../assets/images/linkedinlogo.png';
 import portfoliologo from '../assets/images/portfoliologo.jpg';
 
-export default () => {
+export default (props) => {
     return(
-        <div>
+        <div onClick={props.hideAbout} className={props.showAbout ? "modalSplash display-none" : "modalSplash display-block"}>
             <h3 className="center">About Munee Trackr</h3>
             <div className="center">
 
