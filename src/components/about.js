@@ -7,7 +7,7 @@ export default (props) => {
     return(
         <div onClick={props.hideAbout} className={props.showAbout ? "aboutShadow display-none" : "aboutShadow display-block"}>
             <div className="aboutBody center">
-                <h3 className="center">About Munee Trackr</h3>
+                <h3 className="teal-text text-lighten-2">About Munee Trackr</h3>
 
                     <p>Munee Trackr allows you to track income and expenses.</p>
                     
