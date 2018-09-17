@@ -23,6 +23,31 @@ h1, a {
 }
     
 /* FORM INPUT */
+.formShadow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* background: rgba(0, 0, 0, 0.9); */
+    z-index: 2;
+    cursor: pointer;
+  }
+
+/* .formBody {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    height: 70%;
+    color: white;
+    background-color: rgba(0,0,0, .9);
+    transform: translate(-50%, -50%);
+    padding: 5%;
+    border: 3px solid green;
+    box-sizing: border-box;
+} */
+
 form {
     color: white;
     position: fixed;
@@ -85,11 +110,10 @@ th {
 }
 
 /* ABOUT PAGE */
-.aboutShadow {
+.modalShadow {
     position: fixed;
     width: 100%;
     height: 100%;
-    /* background: rgba(0, 0, 0, 0.9); */
     z-index: 2;
     cursor: pointer;
   }
@@ -104,7 +128,6 @@ th {
     background-color: rgba(0,0,0, .9);
     transform: translate(-50%, -50%);
     padding: 5%;
-    /* width: 94%; */
     border: 3px solid green;
     box-sizing: border-box;
 }
@@ -136,16 +159,30 @@ nav p {
 }
 
 /* SPLASH MODAL */
-.modalSplash {
+.splashShadow {
     position: fixed;
-    width: 80%;
-    height: 80%;
-    background: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* background: rgba(0, 0, 0, 0.9); */
     z-index: 2;
     cursor: pointer;
+  }
+
+.splashBody {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    height: 70%;
+    color: white;
+    background-color: rgba(0,0,0, .9);
+    transform: translate(-50%, -50%);
+    padding: 5%;
     border: 3px solid green;
     box-sizing: border-box;
-  }
+}
 
   .splashInstructions {
       font-size: 1.5rem !important;
@@ -158,8 +195,7 @@ nav p {
 }
 
   #splashText {
-      margin-top: 15vmin;
-      padding: 1%;
+      padding: 5%;
   }
   
   .display-block {
