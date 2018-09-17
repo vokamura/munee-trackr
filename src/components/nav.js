@@ -26,8 +26,9 @@ class Nav extends Component {
 
     hideAbout = () => {
         const {showAbout} = this.state;
+        console.log("closed clicked");
         this.setState({
-            showAbout: true
+            showAbout: false
         });
     }
 
