@@ -105,7 +105,7 @@ class ExpenseInput extends Component {
         }
 
         return(
-            <div className="formShadow" onClick={this.props.hideForm}>
+            <div className="formShadow" onClick={this.props.hideForm.bind(this)}>
                 <form id="addForm" className="row"  onSubmit={this.handleSubmit}>
                     <div className="col s10 offset-s1">
 
