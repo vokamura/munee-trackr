@@ -35,10 +35,13 @@ class ExpenseLog extends Component {
         }
     } 
 
-    hideForm = () => {
-        this.setState({
-            showForm: false
-        });
+    hideForm = (e) => {
+        e.stopPropagation();
+        if (e.target == document.getElementsByClassName("formShadow")[0]) {
+            this.setState({
+                showForm: false
+            });
+        }
     }
 
     //Show input form component

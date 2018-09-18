@@ -30,7 +30,7 @@ h1, a {
     top: 0;
     left: 0;
     /* background: rgba(0, 0, 0, 0.9); */
-    z-index: 2;
+    z-index: 1;
     cursor: pointer;
   }
 
@@ -55,7 +55,7 @@ form {
     top: 0;
     width: 70vw;
     height: 80vh;
-    z-index: 2;
+    z-index: 3;
     background-color: rgba(0,0,0, .9);
 }
 
