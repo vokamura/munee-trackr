@@ -182,6 +182,7 @@ nav p {
     padding: 5%;
     border: 3px solid green;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
   .splashInstructions {
