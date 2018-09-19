@@ -11,9 +11,9 @@ export default (props) => {
 
                     <p>Munee Loggr allows you to track income and expenses.</p>
                     
-                    <p>It's a content management system, where users can see what entries have already been made, add new entries, update old entries, and delete entries.</p>
+                    <p>It's a content management system, that performs create, read, update, and delete (CRUD) functions.</p>
 
-                    <p>Munee Trackr was created by Vikki Okamura to help users track personal expenses.  It was developed using ReactJS, Redux, Materialize, and Firebase. </p> 
+                    <p>Created by Vikki Okamura to help users track personal expenses.  Developed using ReactJS, Redux, Materialize, and Firebase. </p> 
                     
                     <p> This project was made as Vikki has a background in accounting and loves money.</p>
 
