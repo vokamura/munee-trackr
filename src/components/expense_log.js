@@ -62,7 +62,6 @@ class ExpenseLog extends Component {
 
     //Checks the length on inputs
     lengthCheck = (event) => {
-        console.log(event.target);
         if(event.target.innerText.length > 19){
             console.log(event.target.innerText.length);
             event.preventDefault();
@@ -91,7 +90,7 @@ class ExpenseLog extends Component {
     }
 
     handleChangeUpdateBtn = (e) => {
-        const {changeBtn, insertError} = this.state;
+        const {changeBtn} = this.state;
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
@@ -274,6 +273,7 @@ class ExpenseLog extends Component {
                 </h5>
                 <div onClick={this.addForm} id="btnAddForm" className={showForm ? "btn-floating red darken-1 right pulse" : "btn-floating green darken-1 right pulse"}><i className="material-icons">{formSymbol}</i></div>
                 {this.insertForm()}
+
             </div>
         );
     }
