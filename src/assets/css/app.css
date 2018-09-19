@@ -206,3 +206,16 @@ nav p {
   .display-none {
     display: none;
   }
+
+  .deleteModal {
+    background-color: #e8f5e9;
+    color: black;
+    text-align: center;
+    height: 15%;
+    position: fixed;
+    top: 35%;
+    right: 35%;
+    width: 15%;
+    z-index: 3;
+    border: 1px solid green;
+  }

@@ -53,9 +53,32 @@ export default (WrappedComponent) => {
            
         deleteItem = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
+            //If the button is a delete button, delete that row
+
             if(e.target.innerText === "delete"){
-                this.dbRef.doc(`${itemRow}`).delete();
+                //Used vanilla JS to create delete modal and elements in it
+                console.log("Delete this?");
+                let node = document.createElement("div");
+                let textNode = document.createTextNode("Are you sure you want to delete?");
+                node.appendChild(textNode);
+                node.classList.add("deleteModal");
+
+                let deleteButton = document.createElement("button");
+                let deleteTextNode = document.createTextNode("Delete");
+                deleteButton.appendChild(deleteTextNode);
+
+                let cancelButton = document.createElement("button");
+                let cancelTextNode = document.createTextNode("Cancel");
+                cancelButton.appendChild(cancelTextNode);
+
+                document.getElementById("root").appendChild(node);
+                node.appendChild(deleteButton);
+                node.appendChild(cancelTextNode);
+
+
+                // this.dbRef.doc(`${itemRow}`).delete();
             } else {
+                //Turn delete button into cancel and turn update into edit.  
                 let element = document.getElementById(`${itemRow}`);
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
