@@ -56,11 +56,13 @@ export default (WrappedComponent) => {
             //If the button is a delete button, delete that row
 
             if(e.target.innerText === "delete"){
+                e.preventDefault();
                 //Used vanilla JS to create delete modal and elements in it
-                console.log("Delete this?");
                 let node = document.createElement("div");
-                let textNode = document.createTextNode("Are you sure you want to delete?");
-                node.appendChild(textNode);
+                let pNode = document.createElement("p");
+                let textNode = document.createTextNode("Are you sure you want to delete this item?");
+                pNode.appendChild(textNode);
+                node.appendChild(pNode);
                 node.classList.add("deleteModal");
 
                 let deleteButton = document.createElement("button");
@@ -73,10 +75,17 @@ export default (WrappedComponent) => {
 
                 document.getElementById("root").appendChild(node);
                 node.appendChild(deleteButton);
-                node.appendChild(cancelTextNode);
+                node.appendChild(cancelButton);
 
+                deleteButton.addEventListener("click", function(){
+                    firebase.collection('expense-log').doc(`${itemRow}`).delete();
+                    document.getElementById("root").removeChild(node);
+                });
 
-                // this.dbRef.doc(`${itemRow}`).delete();
+                cancelButton.addEventListener("click", function(){
+                    document.getElementById("root").removeChild(node);
+                });
+                
             } else {
                 //Turn delete button into cancel and turn update into edit.  
                 let element = document.getElementById(`${itemRow}`);
