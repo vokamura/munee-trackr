@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 class ExpenseInput extends Component {
-    state = { 
+   constructor(props){
+    super(props);
+    this.state = { 
         date: '',
         location: '',
         description: '',
@@ -11,21 +13,20 @@ class ExpenseInput extends Component {
         descriptionError: '',
         amountError: ''
     }
+   }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
 
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-        const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
-        const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
 
         this.locationCheck(location);
         this.descriptionCheck(description);
         this.amountCheck(debitcredit);
         this.dateCheck(date);
 
-        if (date === "" || !dateRegex.test(date) || location === "" || !placeRegex.test(location) || description === "" || !descriptionRegex.test(description) || debitcredit === ""){
+        if (date === "" || !dateRegex.test(date) || location === ""  || description === ""  || debitcredit === ""){
             return false;
         }
 
@@ -95,6 +96,14 @@ class ExpenseInput extends Component {
         }
     }
 
+    lengthCheck = (event) => {
+        if(event.target.value.length > 19){
+            console.log(event.target.value.length);
+            event.preventDefault();
+            return false;
+        };
+    }
+
     render(){
         const { date, location, description, debitcredit, dateError, locationError, descriptionError, amountError } = this.state;
 
@@ -118,6 +127,7 @@ class ExpenseInput extends Component {
                             <label>Date</label>
                             <input
                                 // type= "date"
+                                placeholder="mm/dd/yyyy"
                                 value={date}
                                 onChange={ e => this.setState({ 
                                     date: e.target.value,
@@ -128,22 +138,28 @@ class ExpenseInput extends Component {
                         <div>
                             <label>Location</label>
                             <input
+                                placeholder="Where did you make the income or purchase?"
                                 type= "text"
                                 value={location}
                                 onChange={ e => this.setState({ 
                                     location: e.target.value,
-                            })}/>
+                                })}
+                                onKeyPress={this.lengthCheck}
+                            />
                         </div>
 
                         <label className="red-text">{descriptionError}</label>
                         <div>
                             <label>Add Description</label>
                             <input 
+                                placeholder="Describe your income or purchase"
                                 type="text" 
                                 value={description} 
                                 onChange={ e => this.setState({ 
                                     description: e.target.value,
-                            })}/>
+                                })}
+                                onKeyPress={this.lengthCheck}
+                            />
                         </div>
 
                         <label className="red-text">{amountError}</label>
@@ -151,6 +167,7 @@ class ExpenseInput extends Component {
                             <label>Debit or Credit (Use "-" for credit)</label>
                             <input
                                 required
+                                placeholder="00.00"
                                 type= "number"
                                 value={debitcredit}
                                 onChange={ e => this.setState({ 
