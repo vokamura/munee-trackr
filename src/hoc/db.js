@@ -58,32 +58,34 @@ export default (WrappedComponent) => {
             if(e.target.innerText === "delete"){
                 e.preventDefault();
                 //Used vanilla JS to create delete modal and elements in it
+                let shadow = document.createElement("div");
                 let node = document.createElement("div");
                 let pNode = document.createElement("p");
                 let textNode = document.createTextNode("Are you sure you want to delete this item?");
                 pNode.appendChild(textNode);
                 node.appendChild(pNode);
+                shadow.appendChild(node);
                 node.classList.add("deleteModal");
+                shadow.classList.add("deleteShadow");
+                document.getElementById("root").appendChild(shadow);
 
                 let deleteButton = document.createElement("button");
                 let deleteTextNode = document.createTextNode("Delete");
                 deleteButton.appendChild(deleteTextNode);
+                node.appendChild(deleteButton);
 
                 let cancelButton = document.createElement("button");
                 let cancelTextNode = document.createTextNode("Cancel");
                 cancelButton.appendChild(cancelTextNode);
-
-                document.getElementById("root").appendChild(node);
-                node.appendChild(deleteButton);
                 node.appendChild(cancelButton);
 
                 deleteButton.addEventListener("click", function(){
                     firebase.collection('expense-log').doc(`${itemRow}`).delete();
-                    document.getElementById("root").removeChild(node);
+                    document.getElementById("root").removeChild(shadow);
                 });
 
                 cancelButton.addEventListener("click", function(){
-                    document.getElementById("root").removeChild(node);
+                    document.getElementById("root").removeChild(shadow);
                 });
                 
             } else {
