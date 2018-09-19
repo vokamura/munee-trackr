@@ -130,6 +130,7 @@ th {
     padding: 5%;
     border: 3px solid green;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 nav p {
@@ -144,7 +145,7 @@ nav p {
 
 .logoImage {
     width: 70px;
-    margin: 25px;
+    margin: 0 25px;
 }
 
 .logoContainer a {
@@ -176,6 +177,7 @@ nav p {
     top: 50%;
     width: 80%;
     height: 70%;
+    min-height: 430px;
     color: white;
     background-color: rgba(0,0,0, .9);
     transform: translate(-50%, -50%);
@@ -183,6 +185,7 @@ nav p {
     border: 3px solid green;
     box-sizing: border-box;
     cursor: pointer;
+    overflow-y: auto;
 }
 
   .splashInstructions {
@@ -190,6 +193,15 @@ nav p {
   }
 
 @media only screen and (max-width: 576px) { 
+    .splashInstructions h2 {
+        font-size: 1rem !important;
+    }
+    .splashInstructions {
+        font-size: 1rem !important;
+    }
+}
+
+@media only screen and (max-height: 600px) { 
     .splashInstructions {
         font-size: 1rem !important;
     }
