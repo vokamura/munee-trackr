@@ -122,7 +122,7 @@ class ExpenseLog extends Component {
 
             const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
-            const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+            const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
             //If the amount includes anything except numbers, take it out and convert to a number
@@ -131,7 +131,7 @@ class ExpenseLog extends Component {
                 let newNumber = newAmount.replace(characterRegex, "");
                 newAmount = parseFloat(newNumber);
             }
-            console.log(newAmount);
+
             newAmount = parseFloat(newAmount);
 
             //If the amount doesn't have any or enough decimals, add them in

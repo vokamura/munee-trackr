@@ -9,7 +9,20 @@ export default (WrappedComponent) => {
         dbRef = firebase.collection('expense-log');
 
         componentDidMount(){
+            this.deleteOld();
             this.dbRef.orderBy('date').onSnapshot(this.props.updateExpenseLog);
+        };
+
+        //When app is loaded, deletes documents older than 2 hours - might have a bug
+        //Take this.deleteOld() from componentDidMount if stops working
+        deleteOld(){
+            const time = Date.now() -  (2 * 60 * 60 * 1000);
+            this.dbRef.orderBy('timestamp').where("timestamp", "<", time)
+                .onSnapshot(function(querySnapshot){
+                    querySnapshot.forEach(function(doc){
+                        firebase.collection('expense-log').doc(`${doc.id}`).delete();
+                    })
+                })
         };
        
         sendLog = (date, loc, desc, drcr) => {
@@ -17,10 +30,11 @@ export default (WrappedComponent) => {
                 date: date,
                 location: loc,
                 description: desc,
-                debitcredit: drcr
+                debitcredit: drcr,
+                timestamp: Date.now()
             }
             this.dbRef.add(newEntry);
-        }
+        };
 
         sendData = (date, loc, desc, drcr, key) => {
             if (date !== ""){
@@ -56,7 +70,7 @@ export default (WrappedComponent) => {
                     } 
                 }
             }
-        }
+        };
 
         updateItemOn = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
@@ -65,7 +79,7 @@ export default (WrappedComponent) => {
                 element.getElementsByTagName('td')[i].setAttribute("contenteditable", "");
                 element.getElementsByTagName('td')[i].classList.add("highlightCells");     
             }
-        }
+        };
 
         updateItemOff = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
@@ -75,18 +89,18 @@ export default (WrappedComponent) => {
                 element.getElementsByTagName('td')[i].classList.remove("highlightCells");     
  
             }
-        }
+        };
 
         render(){
             return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItemOn={this.updateItemOn} updateItemOff={this.updateItemOff}/>
-        }
+        };
     }
 
     function mapStateToProps(state){
         return {
             log: state.expense.log
         }
-    }
+    };
 
     return connect(mapStateToProps, { updateExpenseLog })(Db);
 }

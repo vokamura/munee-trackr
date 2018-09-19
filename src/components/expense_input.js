@@ -18,7 +18,7 @@ class ExpenseInput extends Component {
 
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
         const placeRegex = /[a-zA-Z0-9]{3,20}/gm;
-        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
 
         this.locationCheck(location);
         this.descriptionCheck(description);
@@ -71,7 +71,7 @@ class ExpenseInput extends Component {
     }
 
     descriptionCheck = (description) => {
-        const descriptionRegex = /[a-zA-Z0-9\s]{3,35}/gm;
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
         if (description === "" || !descriptionRegex.test(description)){
             this.setState({
                 descriptionError:"Please enter a location"
