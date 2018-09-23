@@ -250,7 +250,7 @@ class ExpenseLog extends Component {
 
                 <Splash showSplash={showSplash} hideModal={this.hideModal} />
 
-                <h4 className="center responsive-table">Income and Expenses</h4>
+                <h4 className="center responsive-table projectTitle">Income and Expenses</h4>
                 <h5 className="center-align red-text text-darken-1">{insertError}</h5>
                 <table id="borderStructure" className="center highlight">
                     <thead className="green lighten-5">

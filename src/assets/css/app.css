@@ -6,6 +6,11 @@
 h1, a {
     font-family: 'Righteous', 'Times New Roman', Times, serif;
 }
+
+.projectTitle {
+    margin-top: 2%;
+}
+
 #btnAddForm{
     position: fixed;
     bottom: 5%;
@@ -123,14 +128,13 @@ th {
     left: 50%;
     top: 50%;
     width: 80%;
-    height: 70%;
     color: white;
     background-color: rgba(0,0,0, .9);
     transform: translate(-50%, -50%);
-    padding: 5%;
+    padding: 2%;
     border: 3px solid green;
     box-sizing: border-box;
-    /* overflow-y: auto; */
+    overflow-y: auto;
 }
 
 @media only screen and (max-height: 600px){
@@ -186,8 +190,6 @@ nav p {
     left: 50%;
     top: 50%;
     width: 80%;
-    height: 70%;
-    min-height: 430px;
     color: white;
     background-color: rgba(0,0,0, .9);
     transform: translate(-50%, -50%);
@@ -195,11 +197,12 @@ nav p {
     border: 3px solid green;
     box-sizing: border-box;
     cursor: pointer;
-    overflow-y: auto;
 }
 
   .splashInstructions {
       font-size: 1.5rem !important;
+      margin-top: 0;
+      margin-bottom: 0;
   }
 
 @media only screen and (max-width: 576px) { 
