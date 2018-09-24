@@ -19,7 +19,7 @@ class ExpenseInput extends Component {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
 
-        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        const dateRegex = /^(1[0-2]|0[1-9])\/(3[01]|[12][0-9]|0[1-9])\/[0-9]{4}$/gm;
 
         this.locationCheck(location);
         this.descriptionCheck(description);
@@ -46,7 +46,7 @@ class ExpenseInput extends Component {
     }
 
     dateCheck = (date) => {
-        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        const dateRegex = /^(1[0-2]|0[1-9])\/(3[01]|[12][0-9]|0[1-9])\/[0-9]{4}$/gm;
         if (date === "" || !dateRegex.test(date)){
             this.setState({
                 dateError:"Please enter a date using mm/dd/yyyy form"
