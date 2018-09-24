@@ -47,12 +47,13 @@ h1, a {
     background-color: rgba(0,0,0, .9);
     margin: 5% auto;
     overflow-y: auto;
+    overflow-x: auto;
     height: 80vh;
 }
 
-@media only screen and (max-width: 400px) { 
-    input {
-        margin: 0 !important;
+@media only screen and (max-width: 430px){
+    #addForm {
+        height: 65vh;
     }
 }
 

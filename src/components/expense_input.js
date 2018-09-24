@@ -136,9 +136,9 @@ class ExpenseInput extends Component {
 
                         <label className="red-text">{locationError}</label>
                         <div>
-                            <label>Location</label>
+                            <label>Location (3 to 20 characters)</label>
                             <input
-                                placeholder="Where did you make the income or purchase?"
+                                placeholder="Enter a location"
                                 type= "text"
                                 value={location}
                                 onChange={ e => this.setState({ 
@@ -150,7 +150,7 @@ class ExpenseInput extends Component {
 
                         <label className="red-text">{descriptionError}</label>
                         <div>
-                            <label>Add Description</label>
+                            <label>Description (3 to 20 characters)</label>
                             <input 
                                 placeholder="Describe your income or purchase"
                                 type="text" 
