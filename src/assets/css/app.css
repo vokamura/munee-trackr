@@ -34,49 +34,26 @@ h1, a {
     height: 100%;
     top: 0;
     left: 0;
-    /* background: rgba(0, 0, 0, 0.9); */
     z-index: 1;
     cursor: pointer;
   }
 
-/* .formBody {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 80%;
-    height: 70%;
+#addForm {
+    padding-top: 5%;
+    padding-bottom: 5%;
     color: white;
-    background-color: rgba(0,0,0, .9);
-    transform: translate(-50%, -50%);
-    padding: 5%;
-    border: 3px solid green;
-    box-sizing: border-box;
-} */
-
-form {
-    color: white;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 70vw;
-    height: 80vh;
+    width: 380px;
     z-index: 3;
     background-color: rgba(0,0,0, .9);
+    margin: 5% auto;
+    overflow-y: auto;
+    height: 80vh;
 }
 
 @media only screen and (max-width: 400px) { 
-    form {
-        height: 90vh;
-    }
     input {
         margin: 0 !important;
     }
-}
-
-#addForm {
-    margin-left: 10vw;
-    margin-top: 5%;
-    padding-top: 5%;
 }
 
 /* TABLE */
