@@ -63,7 +63,7 @@ class ExpenseLog extends Component {
     //Checks the length on inputs
     lengthCheck = (event) => {
         if(event.target.innerText.length > 19){
-            console.log(event.target.innerText.length);
+            // console.log(event.target.innerText.length);
             event.preventDefault();
             return false;
         };
@@ -120,7 +120,7 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
 
-            const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+            const dateRegex = /^(1[0-2]|0[1-9])\/(3[01]|[12][0-9]|0[1-9])\/[0-9]{4}$/gm;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
