@@ -254,11 +254,11 @@ class ExpenseLog extends Component {
                     <thead className="green lighten-5">
                         <tr>
                             <th className="col s2 m1 center-align">Date</th>
-                            <th className="col s2 m2 center-align editLocation">Location</th>
+                            <th className="col m2 hide-on-small-only center-align editLocation">Location</th>
                             <th className="col m3 hide-on-small-only center-align ">Description</th>
                             <th className="col s2 m1 center-align">Amount</th>
-                            <th className="col m1 hide-on-small-only center-align ">Balance</th>
-                            <th className="col s1 m1 center-align">Delete/Update</th>
+                            <th className="col s2 m1  center-align ">Balance</th>
+                            <th className="col s1 m1 center-align">Delete/ Update</th>
                             <th className="col s1 hide-on-med-and-up center-align">More</th>
                         </tr>
                     </thead>
