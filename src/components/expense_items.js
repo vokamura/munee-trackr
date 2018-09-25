@@ -47,7 +47,7 @@ export default (props) => {
                             <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
                     </button>
                 </td>
-                <td className="center-align hide-on-med-and-up">
+                <td className="center-align hide-on-med-and-up" id="moreColumn">
                     <button className="btn-floating waves-effect waves-light purple darken-1" 
                         onClick={props.showMore} 
                         itemnumber={props.entry.id}>

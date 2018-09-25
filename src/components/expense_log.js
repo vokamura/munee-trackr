@@ -280,13 +280,13 @@ class ExpenseLog extends Component {
                 <table id="borderStructure" className="center highlight">
                     <thead className="green lighten-5">
                         <tr>
-                            <th className="col s3 m1 center-align">Date</th>
+                            <th className="col s3 m1 center-align" id="date">Date</th>
                             <th className="col m2 hide-on-small-only center-align editLocation">Location</th>
                             <th className="col m3 hide-on-small-only center-align ">Description</th>
                             <th className="col s2 m1 center-align">Amount</th>
-                            <th className="col s2 m1  center-align ">Balance</th>
-                            <th className="col s1 m1 center-align">Delete/ Update</th>
-                            <th className="col s1 hide-on-med-and-up center-align">More</th>
+                            <th className="col s2 m1 center-align">Balance</th>
+                            <th className="col s1 m1 center-align" id="deleteUpdate">Delete/ Update</th>
+                            <th className="col hide-on-med-and-up center-align" id="moreColumn">More</th>
                         </tr>
                     </thead>
                     <tbody>
