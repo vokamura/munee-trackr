@@ -13,7 +13,8 @@ class ExpenseLog extends Component {
             changeBtn: false,
             insertError: '',
             showSplash: true,
-            showMore: false
+            showMore: false,
+            targetID: ''
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -209,23 +210,23 @@ class ExpenseLog extends Component {
         const showMore = this.state.showMore;
         if(!showMore){
             this.setState({
-                showMore: true
+                showMore: true,
+                targetID: e.target.getAttribute("itemnumber")
             });
         } 
     }
 
     hideMore = () =>{
-        if (document.getElementsByClassName("moreShadow")) {
             this.setState({
-                showMore: false
+                showMore: false,
+                targetID: ''
             });
-        }
     }
 
     insertMore(){
-        const {showMore} = this.state;
+        const {showMore, targetID} = this.state;
         if(showMore){
-            return <MoreWindow shoreMore={showMore} hideMore={this.hideMore.bind(this)}/>
+            return <MoreWindow shoreMore={showMore} hideMore={this.hideMore.bind(this)}  targetID={targetID} log={this.props.log}/>
         }
     }
 
