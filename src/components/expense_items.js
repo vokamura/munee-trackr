@@ -42,12 +42,17 @@ export default (props) => {
                     onClick={props.deleteItem} itemnumber={props.entry.id}>
                         <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                 </button>
-            </td>
-            <td className="center-align">
                 <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
                     onClick={props.handleChangeUpdateBtn} 
                     itemnumber={props.entry.id}>
                         <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
+                </button>
+            </td>
+            <td className="center-align hide-on-med-and-up">
+                <button className="btn-floating waves-effect waves-light purple darken-1" 
+                    // onClick={props.handleChangeUpdateBtn} 
+                    itemnumber={props.entry.id}>
+                        <i id="clickBehind" className="material-icons submit toggleEditSubmit">add_circle_outline</i>
                 </button>
             </td>
         </tr>
