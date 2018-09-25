@@ -120,7 +120,7 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
 
-            const dateRegex = /^(1[0-2]|0[1-9])\/(3[01]|[12][0-9]|0[1-9])\/[0-9]{4}$/gm;
+            const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
@@ -163,9 +163,7 @@ class ExpenseLog extends Component {
             } 
 
             element.getElementsByTagName("td")[3].textContent = "$" + newAmount;
-
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
-
                 //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
                 const itemRow = e.target.getAttribute('itemnumber');
