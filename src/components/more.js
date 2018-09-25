@@ -11,6 +11,7 @@ export default (props) => {
     return(
         <div className="moreShadow" onClick={props.hideMore} className={props.showMore ? "moreShadow display-none" : "moreShadow display-block"}>
             <div className="moreBody center-align">
+                <h4>Entry Details</h4>
                 <p>Date: {itemID.date}</p>
                 <p>Location: {itemID.location}</p>
                 <p>Description: {itemID.description}</p>

@@ -286,7 +286,7 @@ class ExpenseLog extends Component {
                             <th className="col s2 m1 center-align">Amount</th>
                             <th className="col s2 m1 center-align">Balance</th>
                             <th className="col s1 m1 center-align" id="deleteUpdate">Delete/ Update</th>
-                            <th className="col hide-on-med-and-up center-align" id="moreColumn">More</th>
+                            <th className="col hide-on-med-and-up center-align" id="moreColumn">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
