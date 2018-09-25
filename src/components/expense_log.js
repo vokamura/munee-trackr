@@ -3,6 +3,7 @@ import db from '../hoc/db';
 import ExpenseInput from './expense_input';
 import ExpenseItems from './expense_items';
 import Splash from './splash';
+import MoreWindow from './more';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ class ExpenseLog extends Component {
             changeBtn: false,
             insertError: '',
             showSplash: true,
+            showMore: false
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -203,6 +205,28 @@ class ExpenseLog extends Component {
 
     }
 
+    showMore(e){
+        console.log(e.target);
+        const showMore = this.state.showMore;
+        if(!showMore){
+            this.setState({
+                showMore: true
+            });
+            return <MoreWindow/>
+        } else {
+            this.setState({
+                showMore: false
+            });
+        }
+    }
+
+    insertMore(){
+        const {showMore} = this.state;
+        if(showMore){
+            return <MoreWindow />
+        }
+    }
+
     render(){
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
@@ -232,7 +256,7 @@ class ExpenseLog extends Component {
                 }
 
                 return (
-                    <ExpenseItems keyPresses={(e)=>{this.keyPresses(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
+                    <ExpenseItems showMore={(e)=>this.showMore(e)} keyPresses={(e)=>{this.keyPresses(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
 
@@ -271,7 +295,7 @@ class ExpenseLog extends Component {
                 </h5>
                 <div onClick={this.addForm} id="btnAddForm" className={showForm ? "btn-floating red darken-1 right pulse" : "btn-floating green darken-1 right pulse"}><i className="material-icons">{formSymbol}</i></div>
                 {this.insertForm()}
-
+                {this.insertMore()}
             </div>
         );
     }
