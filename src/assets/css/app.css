@@ -86,6 +86,7 @@ th {
 #editAmount, #lineAmount {
     text-align: right;
     padding-right: 3%;
+    word-break: break-all;
 }
 
 .highlightCells {
@@ -274,4 +275,24 @@ nav p {
     border: 3px solid green;
     box-sizing: border-box;
     overflow-y: auto;
+}
+
+#moreColumn{
+    padding: 15px 0px;
+    width: 50px;
+}
+
+#date {
+    width: 100px;
+
+}
+
+@media only screen and (max-width: 569px){
+    #deleteUpdate {
+        width: 65px;
+        padding: 15px 0px;
+    }
+    #date {
+        padding: 15px 0px;
+    }
 }
