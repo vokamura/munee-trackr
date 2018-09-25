@@ -206,14 +206,16 @@ class ExpenseLog extends Component {
     }
 
     showMore(e){
-        console.log(e.target);
         const showMore = this.state.showMore;
         if(!showMore){
             this.setState({
                 showMore: true
             });
-            return <MoreWindow/>
-        } else {
+        } 
+    }
+
+    hideMore = () =>{
+        if (document.getElementsByClassName("moreShadow")) {
             this.setState({
                 showMore: false
             });
@@ -223,7 +225,7 @@ class ExpenseLog extends Component {
     insertMore(){
         const {showMore} = this.state;
         if(showMore){
-            return <MoreWindow />
+            return <MoreWindow shoreMore={showMore} hideMore={this.hideMore.bind(this)}/>
         }
     }
 
@@ -271,7 +273,7 @@ class ExpenseLog extends Component {
             <div>
 
                 <Splash showSplash={showSplash} hideModal={this.hideModal} />
-
+                
                 <h4 className="center responsive-table projectTitle">Income and Expenses</h4>
                 <h5 className="center-align red-text text-darken-1">{insertError}</h5>
                 <table id="borderStructure" className="center highlight">
