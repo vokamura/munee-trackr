@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ExpenseItems extends Component {
-    constructor(props){
-        super(props);
-    }
-    render(){
-
-        let amount = parseFloat(this.props.entry.debitcredit);
+export default (props) => {
+        let amount = parseFloat(props.entry.debitcredit);
         if(amount.toFixed(0) || amount.toFixed(1)){
             amount = amount.toFixed(2);
         }
@@ -16,23 +11,23 @@ class ExpenseItems extends Component {
         }
     
         //Adds decimals in for line item balances
-        let lineamount = parseFloat(this.props.lineBalance);
+        let lineamount = parseFloat(props.lineBalance);
         if(lineamount.toFixed(0) || lineamount.toFixed(1)){
             lineamount = lineamount.toFixed(2);
         }
     
         return (
-            <tr key={this.props.entry.id} id={this.props.entry.id}>
-                <td className="updated center-align tooLong" id="editDate"  onKeyPress={(e) => this.props.keyPresses(e)} onChange={this.props.editInput} onBlur={this.props.editInput}>
-                    {this.props.entry.date}
+            <tr key={props.entry.id} id={props.entry.id}>
+                <td className="updated center-align tooLong" id="editDate"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
+                    {props.entry.date}
                 </td>
-                <td className="updated tooLong center-align hide-on-small-only" id="editLocation"  onKeyPress={(e) => this.props.keyPresses(e)} onChange={this.props.editInput} onBlur={this.props.editInput}>
-                    {this.props.entry.location}
+                <td className="updated tooLong center-align hide-on-small-only" id="editLocation"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
+                    {props.entry.location}
                 </td>
-                <td className="updated tooLong center-align hide-on-small-only" id="editDescription" onKeyPress={(e) => this.props.keyPresses(e)} onChange={this.props.editInput} onBlur={this.props.editInput}>
-                    {this.props.entry.description}
+                <td className="updated tooLong center-align hide-on-small-only" id="editDescription" onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
+                    {props.entry.description}
                 </td>
-                <td className="updated tooLong" id="editAmount"  onKeyPress={(e) => this.props.keyPresses(e)} onChange={this.props.editInput} onBlur={this.props.editInput}>
+                <td className="updated tooLong" id="editAmount"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
                     {/* {props.entry.debitcredit} */}
                     {amount}
                 </td> 
@@ -43,25 +38,22 @@ class ExpenseItems extends Component {
                 <td className="center-align">
                     <button 
                         className="btn-floating waves-effect waves-light red" 
-                        onClick={this.props.deleteItem} itemnumber={this.props.entry.id}>
+                        onClick={props.deleteItem} itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                     </button>
-                    <button className={this.props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
-                        onClick={this.props.handleChangeUpdateBtn} 
-                        itemnumber={this.props.entry.id}>
+                    <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
+                        onClick={props.handleChangeUpdateBtn} 
+                        itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
                     </button>
                 </td>
                 <td className="center-align hide-on-med-and-up">
                     <button className="btn-floating waves-effect waves-light purple darken-1" 
-                        // onClick={more} 
-                        itemnumber={this.props.entry.id}>
+                        onClick={props.showMore} 
+                        itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons submit toggleEditSubmit">add_circle_outline</i>
                     </button>
                 </td>
             </tr>
         )
-    }
 }
-
-export default ExpenseItems;
