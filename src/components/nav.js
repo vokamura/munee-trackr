@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import About from './about';
 
 class Nav extends Component {
@@ -40,7 +39,7 @@ class Nav extends Component {
         return (
             <nav className="green darken-3">
                 <div className="nav-wrapper">
-                    <Link to="/" className="brand-logo left">Munee Loggr</Link>
+                    <h3 className="brand-logo left">Munee Logger</h3>
                     <ul className="right nav-mobile">
                         <li >
                             <a onClick={this.addAbout.bind(this)}>About</a>
