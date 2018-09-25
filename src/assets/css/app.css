@@ -92,6 +92,10 @@ th {
     border: 3px solid green;
 }
 
+td button {
+    margin: 2%;
+}
+
 /* ABOUT PAGE */
 .modalShadow {
     position: fixed;
