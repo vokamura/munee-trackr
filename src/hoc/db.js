@@ -90,6 +90,7 @@ export default (WrappedComponent) => {
                 
             } else {
                 //Turn delete button into cancel and turn update into edit.  
+                console.log("Cancel");
                 let element = document.getElementById(`${itemRow}`);
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
@@ -103,6 +104,22 @@ export default (WrappedComponent) => {
                         document.getElementsByClassName("update")[i].classList.add("light-blue");
                     } 
                 }
+
+                //Upon cancel button being pressed, data will return to original inputs
+                let key = e.target.getAttribute('itemnumber');
+                this.dbRef.doc(key).get().then(function(doc){
+                    if(doc.exists){
+                        let originalDoc = doc.data();
+                        element.getElementsByTagName('td')[0].innerText = originalDoc.date;
+                        element.getElementsByTagName('td')[1].innerText = originalDoc.location;
+                        element.getElementsByTagName('td')[2].innerText = originalDoc.description;
+                        element.getElementsByTagName('td')[3].innerText = originalDoc.debitcredit;
+
+                    } else {
+                        console.log("No such document!");
+                    }
+                });
+
             }
         };
 
