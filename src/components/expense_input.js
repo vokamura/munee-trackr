@@ -73,7 +73,7 @@ class ExpenseInput extends Component {
     }
 
     descriptionCheck = (description) => {
-        const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
+        const descriptionRegex = /[a-zA-Z0-9\s]{3,30}/gm;
         if (description === "" || !descriptionRegex.test(description)){
             this.setState({
                 descriptionError:"Please enter a location"
@@ -98,7 +98,7 @@ class ExpenseInput extends Component {
     }
 
     lengthCheck = (event) => {
-        if(event.target.value.length > 19){
+        if(event.target.value.length > 29){
             event.preventDefault();
             return false;
         };
@@ -150,7 +150,7 @@ class ExpenseInput extends Component {
 
                         <label className="red-text">{descriptionError}</label>
                         <div>
-                            <label>Description (3 to 20 characters)</label>
+                            <label>Description (3 to 30 characters)</label>
                             <input 
                                 placeholder="Describe your income or purchase"
                                 type="text" 
