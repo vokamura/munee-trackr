@@ -65,7 +65,7 @@ class ExpenseLog extends Component {
 
     //Checks the length on inputs
     lengthCheck = (event) => {
-        if(event.target.innerText.length > 19){
+        if(event.target.innerText.length > 29){
             // console.log(event.target.innerText.length);
             event.preventDefault();
             return false;
@@ -125,7 +125,7 @@ class ExpenseLog extends Component {
 
             const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
-            const descriptionRegex = /[a-zA-Z0-9\s]{3,20}/gm;
+            const descriptionRegex = /[a-zA-Z0-9\s]{3,30}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
 
             //If the amount includes anything except numbers, take it out and convert to a number
@@ -156,7 +156,7 @@ class ExpenseLog extends Component {
 
             if (!placeRegex.test(newPlace)){
                 this.setState({
-                    insertError: 'Enter a location between 3 and 20 characters'
+                    insertError: 'Enter a location between 3 and 30 characters'
                 });
             } 
             if (!descriptionRegex.test(newDescription)){
@@ -280,7 +280,7 @@ class ExpenseLog extends Component {
                 <table id="borderStructure" className="center highlight">
                     <thead className="green lighten-5">
                         <tr>
-                            <th className="col s2 m1 center-align">Date</th>
+                            <th className="col s3 m1 center-align">Date</th>
                             <th className="col m2 hide-on-small-only center-align editLocation">Location</th>
                             <th className="col m3 hide-on-small-only center-align ">Description</th>
                             <th className="col s2 m1 center-align">Amount</th>
