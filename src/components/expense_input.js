@@ -13,6 +13,12 @@ class ExpenseInput extends Component {
         descriptionError: '',
         amountError: ''
     }
+    this.dateInput = React.createRef();
+    this.focusDateInput = this.focusDateInput.bind(this);
+   }
+
+   focusDateInput() {
+       this.dateInput.current.focus();
    }
 
     handleSubmit = (e) => {
@@ -43,6 +49,7 @@ class ExpenseInput extends Component {
             description: '',
             debitcredit: ''
         });
+        this.focusDateInput();
     }
 
     dateCheck = (date) => {
@@ -126,6 +133,7 @@ class ExpenseInput extends Component {
                         <div>
                             <label>Date</label>
                             <input
+                                ref={this.dateInput}
                                 // type= "date"
                                 placeholder="mm/dd/yyyy"
                                 value={date}
