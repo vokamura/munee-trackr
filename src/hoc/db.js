@@ -90,7 +90,6 @@ export default (WrappedComponent) => {
                 
             } else {
                 //Turn delete button into cancel and turn update into edit.  
-                console.log("Cancel");
                 let element = document.getElementById(`${itemRow}`);
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
@@ -113,7 +112,7 @@ export default (WrappedComponent) => {
                         element.getElementsByTagName('td')[0].innerText = originalDoc.date;
                         element.getElementsByTagName('td')[1].innerText = originalDoc.location;
                         element.getElementsByTagName('td')[2].innerText = originalDoc.description;
-                        element.getElementsByTagName('td')[3].innerText = originalDoc.debitcredit;
+                        element.getElementsByTagName('td')[3].innerText = "$" + originalDoc.debitcredit;
 
                     } else {
                         console.log("No such document!");
