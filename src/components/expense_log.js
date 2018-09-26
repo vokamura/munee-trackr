@@ -66,7 +66,6 @@ class ExpenseLog extends Component {
     //Checks the length on inputs
     lengthCheck = (event) => {
         if(event.target.innerText.length > 29){
-            // console.log(event.target.innerText.length);
             event.preventDefault();
             return false;
         };
