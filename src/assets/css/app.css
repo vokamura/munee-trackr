@@ -253,6 +253,10 @@ nav p {
     cursor: pointer;
 }
 
+.deleteModal p {
+    margin-bottom: 0;
+}
+
 .moreShadow {
     position: fixed;
     top: 0;
