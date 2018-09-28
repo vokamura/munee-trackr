@@ -28,22 +28,20 @@ export default (props) => {
                     {props.entry.description}
                 </td>
                 <td className="updated tooLong" id="editAmount"  onKeyPress={(e) => props.keyPresses(e)} onChange={props.editInput} onBlur={props.editInput}>
-                    {/* {props.entry.debitcredit} */}
                     {amount}
                 </td> 
     
                 <td id="lineAmount" className="">
                     ${lineamount}
                 </td>
-                <td className="center-align">
+                <td className="center-align hide-on-small-only">
                     <button 
                         className="btn-floating waves-effect waves-light red" 
                         onClick={props.deleteItem} itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                     </button>
                     <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
-                        onClick={props.handleChangeUpdateBtn} 
-                        itemnumber={props.entry.id}>
+                        onClick={props.handleChangeUpdateBtn} itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
                     </button>
                 </td>

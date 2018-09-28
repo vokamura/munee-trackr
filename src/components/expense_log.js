@@ -4,6 +4,7 @@ import ExpenseInput from './expense_input';
 import ExpenseItems from './expense_items';
 import Splash from './splash';
 import MoreWindow from './more';
+import firebase from '../firebase';
 
 class ExpenseLog extends Component {
     constructor(props){
@@ -215,17 +216,202 @@ class ExpenseLog extends Component {
         } 
     }
 
-    hideMore = () =>{
+    hideMore = (e) =>{
+        e.stopPropagation();
+        if(!e.target.matches("button")){
             this.setState({
                 showMore: false,
                 targetID: ''
             });
+        }
+
     }
+
+    deleteMoreItem = (event) => {
+        const {targetID} = this.state;
+        console.log(this.state);
+        console.log(this);
+        console.log(event.target.innerText);
+        if(event.target.innerText === "delete"){
+            //Used vanilla JS to create delete modal and elements in it
+            let shadow = document.createElement("div");
+            let node = document.createElement("div");
+            let pNode = document.createElement("p");
+            let textNode = document.createTextNode("Are you sure you want to delete this item?");
+            pNode.appendChild(textNode);
+            node.appendChild(pNode);
+            shadow.appendChild(node);
+            node.classList.add("deleteModal");
+            shadow.classList.add("deleteShadow");
+            document.getElementById("root").appendChild(shadow);
+
+            let deleteButton = document.createElement("button");
+            let deleteTextNode = document.createTextNode("Delete");
+            deleteButton.appendChild(deleteTextNode);
+            node.appendChild(deleteButton);
+
+            let cancelButton = document.createElement("button");
+            let cancelTextNode = document.createTextNode("Cancel");
+            cancelButton.appendChild(cancelTextNode);
+            node.appendChild(cancelButton);
+
+            deleteButton.addEventListener("click", function(){
+                firebase.collection('expense-log').doc(`${targetID}`).delete();
+                document.getElementById("root").removeChild(shadow);
+                this.setState({
+                    showMore: false,
+                    targetID: ''
+                });
+            }.bind(this));
+
+            cancelButton.addEventListener("click", function(){
+                document.getElementById("root").removeChild(shadow);
+            });
+        } 
+        
+    }
+
+    updateMoreItem = (event) => {
+        console.log(this.state.targetID);
+        console.log(event.target);
+        const {targetID} = this.state;
+        let element = document.getElementsByClassName("moreBody")[0];
+        console.log(element);
+        console.log(element.getElementsByClassName("toggleEditSubmit")[0].innerText);
+
+        if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
+            for (let i = 0; i <4; i++){
+                element.getElementsByTagName("span")[i].setAttribute("contenteditable", "");
+                element.getElementsByTagName("span")[i].classList.add("highlightCells");     
+            }
+            event.target.getElementsByClassName("toggleEditSubmit")[0].innerText = "done";
+            element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
+
+        } else {
+            let newDate = element.getElementsByTagName("span")[0].textContent;
+            let newPlace = element.getElementsByTagName("span")[1].textContent;
+            let newDescription = element.getElementsByTagName("span")[2].textContent;
+            let newAmount = element.getElementsByTagName("span")[3].textContent;
+            console.log(newDate, newPlace, newDescription, newAmount);
+
+            const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
+            const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
+            const descriptionRegex = /[a-zA-Z0-9\s]{3,30}/gm;
+            const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
+
+            if(newAmount.includes("$")){
+                let characterRegex = /[^a-zA-Z0-9-. ]/gm;
+                let newNumber = newAmount.replace(characterRegex, "");
+                newAmount = parseFloat(newNumber);
+            }
+
+            newAmount = parseFloat(newAmount);
+
+            //If the amount doesn't have any or enough decimals, add them in
+            // if(newAmount.toFixed(0) || newAmount.toFixed(1)){
+            //     newAmount = newAmount.toFixed(2);
+            // }
+
+            // if(!regexAmount.test(newAmount)){
+            //     this.setState({
+            //         insertError: 'Enter a dollar amount'
+            //     });
+            // } 
+
+            // if (!dateRegex.test(newDate)){
+            //     this.setState({
+            //         insertError: 'Enter a date with the format mm/dd/yyyy'
+            //     });
+            // } 
+
+            // if (!placeRegex.test(newPlace)){
+            //     this.setState({
+            //         insertError: 'Enter a location between 3 and 30 characters'
+            //     });
+            // } 
+            // if (!descriptionRegex.test(newDescription)){
+            //     this.setState({
+            //         insertError: 'Enter a description'
+            //     });
+            // } 
+
+            if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
+                //Toggle done button to edit and cancel button to delete
+                element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"
+                element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
+            
+                let key = targetID;
+            
+                this.setState({
+                    key: key,
+                });
+
+                this.props.sendData(
+                    newDate,
+                    newPlace,
+                    newDescription,
+                    newAmount,
+                    key
+                )
+
+//             this.setState({
+//                 insertError: ''
+//             })
+
+//             this.props.updateItemOff(e);
+            
+//             //If a button is editable, it disables all other edit buttons
+//             for (var i=0; i < rows.length-1; i++){
+//                 if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+//                     document.getElementsByClassName('update')[i].disabled = false;
+//                 } 
+//             }
+                    if(!e.target.matches("span")){
+                        this.setState({
+                            showMore: false,
+                            // targetID: ''
+                        });
+                    }
+
+        }
+
+
+        }
+
+    }
+
+    editMoreInput = () => {
+        // if(event.target.matches("span")){
+        //     this.setState({
+        //         showMore: true,
+        //     });
+            console.log("hello");
+        // }
+
+        // const editDate = document.getElementById('editDate').innerHTML;
+        // const editLocation = document.getElementById('editLocation').innerHTML;
+        // const editDescription = document.getElementById('editDescription').innerHTML;
+        // const editAmount = document.getElementById('editAmount').innerHTML;
+
+        // this.setState({
+        //     date: editDate,
+        //     location: editLocation,
+        //     description: editDescription,
+        //     debitcredit: editAmount
+        // });
+    }
+    
 
     insertMore(){
         const {showMore, targetID} = this.state;
         if(showMore){
-            return <MoreWindow shoreMore={showMore} hideMore={this.hideMore.bind(this)}  targetID={targetID} log={this.props.log}/>
+            return <MoreWindow 
+                    shoreMore={showMore} hideMore={this.hideMore.bind(this)}  
+                    deleteMoreItem={this.deleteMoreItem} 
+                    updateMoreItem={this.updateMoreItem}
+                    editMoreInput={()=>{this.editMoreInput()}} 
+                    targetID={targetID} 
+                    log={this.props.log}/>
         }
     }
 
@@ -258,7 +444,17 @@ class ExpenseLog extends Component {
                 }
 
                 return (
-                    <ExpenseItems showMore={(e)=>this.showMore(e)} keyPresses={(e)=>{this.keyPresses(e)}} lineBalance={lineBalance} changeBtn={changeBtn} entriesArray={this.props.log} editInput={()=>{this.editInput()}} key={entry.id} entry={entry} runningTotal={runningTotal} deleteItem={(e)=>{this.props.deleteItem(e)}} handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
+                    <ExpenseItems 
+                        showMore={(e)=>this.showMore(e)} 
+                        keyPresses={(e)=>{this.keyPresses(e)}} 
+                        lineBalance={lineBalance} 
+                        changeBtn={changeBtn} 
+                        entriesArray={this.props.log} 
+                        editInput={()=>{this.editInput()}} 
+                        key={entry.id} entry={entry} 
+                        runningTotal={runningTotal} 
+                        deleteItem={(e)=>{this.props.deleteItem(e)}} 
+                        handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
 
@@ -284,8 +480,8 @@ class ExpenseLog extends Component {
                             <th className="col m3 hide-on-small-only center-align ">Description</th>
                             <th className="col s2 m1 center-align">Amount</th>
                             <th className="col s2 m1 center-align">Balance</th>
-                            <th className="col s1 m1 center-align" id="deleteUpdate">Delete/ Update</th>
-                            <th className="col hide-on-med-and-up center-align" id="moreColumn">More</th>
+                            <th className="col s1 m1 center-align hide-on-small-only" id="deleteUpdate">Delete/ Update</th>
+                            <th className="col hide-on-med-and-up center-align" id="moreColumn">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -295,7 +491,9 @@ class ExpenseLog extends Component {
                 <h5 className="center card-panel green lighten-5">
                     Total Balance: ${runningTotal}
                 </h5>
-                <div onClick={this.addForm} id="btnAddForm" className={showForm ? "btn-floating red darken-1 right pulse" : "btn-floating green darken-1 right pulse"}><i className="material-icons">{formSymbol}</i></div>
+                <div onClick={this.addForm} id="btnAddForm" className={showForm ? "btn-floating red darken-1 right pulse" : "btn-floating green darken-1 right pulse"}>
+                    <i className="material-icons">{formSymbol}</i>
+                </div>
                 {this.insertForm()}
                 {this.insertMore()}
             </div>

@@ -37,6 +37,7 @@ export default (WrappedComponent) => {
         };
 
         sendData = (date, loc, desc, drcr, key) => {
+            //Change to switch?
             if (date !== ""){
                 this.dbRef.doc(`${key}`).update({date:date});
             }
@@ -53,10 +54,10 @@ export default (WrappedComponent) => {
            
         deleteItem = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
+            let element = document.getElementById(`${itemRow}`);
+            
             //If the button is a delete button, delete that row
-
             if(e.target.innerText === "delete"){
-                e.preventDefault();
                 //Used vanilla JS to create delete modal and elements in it
                 let shadow = document.createElement("div");
                 let node = document.createElement("div");
@@ -90,7 +91,7 @@ export default (WrappedComponent) => {
                 
             } else {
                 //Turn delete button into cancel and turn update into edit.  
-                let element = document.getElementById(`${itemRow}`);
+                // let element = document.getElementById(`${itemRow}`);
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
                 this.updateItemOff(e);
@@ -101,6 +102,7 @@ export default (WrappedComponent) => {
                         document.getElementsByClassName('update')[i].disabled = false;
                         document.getElementsByClassName('update')[i].classList.remove("green");
                         document.getElementsByClassName("update")[i].classList.add("light-blue");
+                        console.log(document.getElementsByTagName("td")[i].innerText);
                     } 
                 }
 
@@ -142,7 +144,13 @@ export default (WrappedComponent) => {
         };
 
         render(){
-            return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItemOn={this.updateItemOn} updateItemOff={this.updateItemOff}/>
+            return <WrappedComponent {...this.props} 
+                sendData={this.sendData} 
+                updateLog={this.updateLog} 
+                sendLog={this.sendLog} 
+                deleteItem={this.deleteItem} 
+                updateItemOn={this.updateItemOn} 
+                updateItemOff={this.updateItemOff}/>
         };
     }
 

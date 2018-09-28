@@ -140,11 +140,6 @@ nav p {
     align-items: baseline;
 }
 
-.logoImage {
-    width: 70px;
-    margin: 0 25px;
-}
-
 .logoContainer a {
     color: white;
 }
@@ -299,4 +294,8 @@ nav p {
     #date {
         padding: 15px 0px;
     }
+}
+
+.top {
+    z-index: 3 !important;
 }
