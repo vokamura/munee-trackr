@@ -11,11 +11,35 @@ export default (props) => {
     return(
         <div className="moreShadow" onClick={props.hideMore} className={props.showMore ? "moreShadow display-none" : "moreShadow display-block"}>
             <div className="moreBody center-align">
-                <h4>Entry Details</h4>
-                <p>Date: {itemID.date}</p>
-                <p>Location: {itemID.location}</p>
-                <p>Description: {itemID.description}</p>
-                <p>Amount ${itemID.debitcredit}</p>
+
+                <h5>Entry Details</h5>
+                <div>Date: 
+                    <span id="editDate" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
+                </div>
+                <div>Location: 
+                    <span id="editLocation" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
+                </div>
+                <div>Description: 
+                    <span id="editDescription" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.description}</span>
+                </div>
+                <div>Amount $
+                    <span id="editAmount" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.debitcredit}</span>
+                </div>
+
+            <div>
+                <button 
+                    className="btn-floating waves-effect waves-light red top" 
+                    onClick={props.deleteMoreItem} itemnumber={itemID}
+                    >
+                        <i id="clickBehind" className="material-icons toggleDelete">delete</i>
+                </button>
+                <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
+                    onClick={props.updateMoreItem} itemnumber={itemID}
+                    >
+                        <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
+                </button>
+            </div> 
+
             </div>
         </div>
     )

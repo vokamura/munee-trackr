@@ -55,10 +55,8 @@ export default (WrappedComponent) => {
         deleteItem = (e) => {
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
-            console.log(element);
             
             //If the button is a delete button, delete that row
-
             if(e.target.innerText === "delete"){
                 //Used vanilla JS to create delete modal and elements in it
                 let shadow = document.createElement("div");
@@ -146,7 +144,13 @@ export default (WrappedComponent) => {
         };
 
         render(){
-            return <WrappedComponent {...this.props} sendData={this.sendData} updateLog={this.updateLog} sendLog={this.sendLog} deleteItem={this.deleteItem} updateItemOn={this.updateItemOn} updateItemOff={this.updateItemOff}/>
+            return <WrappedComponent {...this.props} 
+                sendData={this.sendData} 
+                updateLog={this.updateLog} 
+                sendLog={this.sendLog} 
+                deleteItem={this.deleteItem} 
+                updateItemOn={this.updateItemOn} 
+                updateItemOff={this.updateItemOff}/>
         };
     }
 
