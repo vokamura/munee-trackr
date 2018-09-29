@@ -283,12 +283,8 @@ class ExpenseLog extends Component {
     }
 
     updateMoreItem = (event) => {
-        // console.log(this.state.targetID);
-        // console.log(event.target);
         const {targetID} = this.state;
         let element = document.getElementsByClassName("moreBody")[0];
-        // console.log(element);
-        // console.log(element.getElementsByClassName("toggleEditSubmit")[0].innerText);
 
         if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
             for (let i = 0; i <4; i++){
@@ -303,7 +299,6 @@ class ExpenseLog extends Component {
             let newPlace = element.getElementsByTagName("span")[1].textContent;
             let newDescription = element.getElementsByTagName("span")[2].textContent;
             let newAmount = element.getElementsByTagName("span")[3].textContent;
-            console.log(newDate, newPlace, newDescription, newAmount);
 
             const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
@@ -323,28 +318,28 @@ class ExpenseLog extends Component {
                 newAmount = newAmount.toFixed(2);
             }
 
-            // if(!regexAmount.test(newAmount)){
-            //     this.setState({
-            //         insertError: 'Enter a dollar amount'
-            //     });
-            // } 
+            if(!regexAmount.test(newAmount)){
+                this.setState({
+                    insertError: 'Enter a dollar amount'
+                });
+            } 
 
-            // if (!dateRegex.test(newDate)){
-            //     this.setState({
-            //         insertError: 'Enter a date with the format mm/dd/yyyy'
-            //     });
-            // } 
+            if (!dateRegex.test(newDate)){
+                this.setState({
+                    insertError: 'Enter a date with the format mm/dd/yyyy'
+                });
+            } 
 
-            // if (!placeRegex.test(newPlace)){
-            //     this.setState({
-            //         insertError: 'Enter a location between 3 and 30 characters'
-            //     });
-            // } 
-            // if (!descriptionRegex.test(newDescription)){
-            //     this.setState({
-            //         insertError: 'Enter a description'
-            //     });
-            // } 
+            if (!placeRegex.test(newPlace)){
+                this.setState({
+                    insertError: 'Enter a location between 3 and 30 characters'
+                });
+            } 
+            if (!descriptionRegex.test(newDescription)){
+                this.setState({
+                    insertError: 'Enter a description'
+                });
+            } 
 
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
                 //Toggle done button to edit and cancel button to delete
@@ -365,16 +360,14 @@ class ExpenseLog extends Component {
                     key
                 )
 
-//             this.setState({
-//                 insertError: ''
-//             })
+            this.setState({
+                insertError: ''
+            })
 
             for (let i = 0; i <4; i++){
                 element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
                 element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
             }
-
-
             }
         }
     }
@@ -393,7 +386,6 @@ class ExpenseLog extends Component {
         });
     }
     
-
     insertMore(){
         const {showMore, targetID} = this.state;
         if(showMore){

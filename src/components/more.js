@@ -11,10 +11,11 @@ export default (props) => {
     return(
         <div className="moreShadow" onClick={props.hideMore} className={props.showMore ? "moreShadow display-none" : "moreShadow display-block"}>
             <div className="moreBody center-align">
-
+                {/* Turn this into a table */}
                 <h5>Entry Details</h5>
-                <div>Date: 
-                    <span id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
+                <div>
+                    <span className="left-align">Date: </span>
+                    <span className="right-align" id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
                 </div>
                 <div>Location: 
                     <span id="editLocation" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
