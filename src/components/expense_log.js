@@ -379,23 +379,18 @@ class ExpenseLog extends Component {
         }
     }
 
-    editMoreInput = (e) => {
+    editMoreInput = () => {      
+        const editDate = document.getElementById('editDate').innerHTML;
+        const editLocation = document.getElementById('editLocation').innerHTML;
+        const editDescription = document.getElementById('editDescription').innerHTML;
+        const editAmount = document.getElementById('editAmount').innerHTML;
 
-            console.log(e);
-
-
-                
-        // const editDate = document.getElementById('editDate').innerHTML;
-        // const editLocation = document.getElementById('editLocation').innerHTML;
-        // const editDescription = document.getElementById('editDescription').innerHTML;
-        // const editAmount = document.getElementById('editAmount').innerHTML;
-
-        // this.setState({
-        //     date: editDate,
-        //     location: editLocation,
-        //     description: editDescription,
-        //     debitcredit: editAmount
-        // });
+        this.setState({
+            date: editDate,
+            location: editLocation,
+            description: editDescription,
+            debitcredit: editAmount
+        });
     }
     
 
@@ -405,15 +400,16 @@ class ExpenseLog extends Component {
             return <MoreWindow 
                     shoreMore={showMore} hideMore={this.hideMore.bind(this)}  
                     deleteMoreItem={this.deleteMoreItem} 
+                    keyPresses={(e)=>{this.keyPresses(e)}} 
                     updateMoreItem={this.updateMoreItem}
                     editMoreInput={()=>{this.editMoreInput()}} 
                     targetID={targetID} 
                     log={this.props.log}/>
+
         }
     }
 
     render(){
-        console.log(this.state);
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
 

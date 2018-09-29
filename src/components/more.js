@@ -14,16 +14,16 @@ export default (props) => {
 
                 <h5>Entry Details</h5>
                 <div>Date: 
-                    <span id="editDate" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
+                    <span id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
                 </div>
                 <div>Location: 
-                    <span id="editLocation" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
+                    <span id="editLocation" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
                 </div>
                 <div>Description: 
-                    <span id="editDescription" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.description}</span>
+                    <span id="editDescription" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.description}</span>
                 </div>
                 <div>Amount $
-                    <span id="editAmount" onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.debitcredit}</span>
+                    <span id="editAmount" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.debitcredit}</span>
                 </div>
 
             <div>
