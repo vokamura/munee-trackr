@@ -100,9 +100,9 @@ export default (WrappedComponent) => {
                 for (var i=0; i < rows.length-1; i++){
                     if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                         document.getElementsByClassName('update')[i].disabled = false;
-                        document.getElementsByClassName('update')[i].classList.remove("green");
-                        document.getElementsByClassName("update")[i].classList.add("light-blue");
-                        console.log(document.getElementsByTagName("td")[i].innerText);
+                        // document.getElementsByClassName('update')[i].classList.remove("green");
+                        // document.getElementsByClassName("update")[i].classList.add("light-blue");
+                        // console.log(document.getElementsByTagName("td")[i].innerText);
                     } 
                 }
 
