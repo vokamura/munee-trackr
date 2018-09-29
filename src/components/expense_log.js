@@ -15,7 +15,11 @@ class ExpenseLog extends Component {
             insertError: '',
             showSplash: true,
             showMore: false,
-            targetID: ''
+            targetID: '',
+            date: '',
+            location: '',
+            description: '',
+            debitcredit: ''
         }
         this.addForm = this.addForm.bind(this);
     }
@@ -231,9 +235,6 @@ class ExpenseLog extends Component {
 
     deleteMoreItem = (event) => {
         const {targetID} = this.state;
-        console.log(this.state);
-        console.log(this);
-        // console.log(event.target.innerText);
         if(event.target.innerText === "delete"){
             //Used vanilla JS to create delete modal and elements in it
             let shadow = document.createElement("div");
@@ -270,11 +271,13 @@ class ExpenseLog extends Component {
                 document.getElementById("root").removeChild(shadow);
             });
         } else if (event.target.innerText === "cancel") {
-            console.log(event.target.innerText);
             let element = document.getElementsByClassName("moreBody")[0];
             element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
             element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
-            console.log(document.getElementsByClassName("toggleDelete")[0].innerText = "delete");
+            for (let i = 0; i <4; i++){
+                element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
+                element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
+            }
         }
         
     }
@@ -377,12 +380,9 @@ class ExpenseLog extends Component {
     }
 
     editMoreInput = (e) => {
-        // if(event.target.matches("span")){
-        //     this.setState({
-        //         showMore: true,
-        //     });
+
             console.log(e);
-        // }
+
 
                 
         // const editDate = document.getElementById('editDate').innerHTML;
