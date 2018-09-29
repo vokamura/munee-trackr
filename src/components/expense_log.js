@@ -270,7 +270,11 @@ class ExpenseLog extends Component {
                 document.getElementById("root").removeChild(shadow);
             });
         } else if (event.target.innerText === "cancel") {
-            console.log("button is now cancel");
+            console.log(event.target.innerText);
+            let element = document.getElementsByClassName("moreBody")[0];
+            element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
+            element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
+            console.log(document.getElementsByClassName("toggleDelete")[0].innerText = "delete");
         }
         
     }
@@ -311,10 +315,10 @@ class ExpenseLog extends Component {
 
             newAmount = parseFloat(newAmount);
 
-            //If the amount doesn't have any or enough decimals, add them in
-            // if(newAmount.toFixed(0) || newAmount.toFixed(1)){
-            //     newAmount = newAmount.toFixed(2);
-            // }
+            // If the amount doesn't have any or enough decimals, add them in
+            if(newAmount.toFixed(0) || newAmount.toFixed(1)){
+                newAmount = newAmount.toFixed(2);
+            }
 
             // if(!regexAmount.test(newAmount)){
             //     this.setState({
