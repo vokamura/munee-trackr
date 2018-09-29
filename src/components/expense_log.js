@@ -200,10 +200,8 @@ class ExpenseLog extends Component {
                         document.getElementsByClassName('update')[i].disabled = false;
                     } 
                 }
-
             }
         }
-
     }
 
     showMore(e){
@@ -221,17 +219,21 @@ class ExpenseLog extends Component {
         if(!e.target.matches("button")){
             this.setState({
                 showMore: false,
-                targetID: ''
+                // targetID: ''
             });
         }
-
+        if(e.target.matches("span")){
+            this.setState({
+                showMore: true,
+            });
+        }
     }
 
     deleteMoreItem = (event) => {
         const {targetID} = this.state;
         console.log(this.state);
         console.log(this);
-        console.log(event.target.innerText);
+        // console.log(event.target.innerText);
         if(event.target.innerText === "delete"){
             //Used vanilla JS to create delete modal and elements in it
             let shadow = document.createElement("div");
@@ -267,17 +269,19 @@ class ExpenseLog extends Component {
             cancelButton.addEventListener("click", function(){
                 document.getElementById("root").removeChild(shadow);
             });
-        } 
+        } else if (event.target.innerText === "cancel") {
+            console.log("button is now cancel");
+        }
         
     }
 
     updateMoreItem = (event) => {
-        console.log(this.state.targetID);
-        console.log(event.target);
+        // console.log(this.state.targetID);
+        // console.log(event.target);
         const {targetID} = this.state;
         let element = document.getElementsByClassName("moreBody")[0];
-        console.log(element);
-        console.log(element.getElementsByClassName("toggleEditSubmit")[0].innerText);
+        // console.log(element);
+        // console.log(element.getElementsByClassName("toggleEditSubmit")[0].innerText);
 
         if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
             for (let i = 0; i <4; i++){
@@ -358,36 +362,25 @@ class ExpenseLog extends Component {
 //                 insertError: ''
 //             })
 
-//             this.props.updateItemOff(e);
-            
-//             //If a button is editable, it disables all other edit buttons
-//             for (var i=0; i < rows.length-1; i++){
-//                 if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
-//                     document.getElementsByClassName('update')[i].disabled = false;
-//                 } 
-//             }
-                    if(!e.target.matches("span")){
-                        this.setState({
-                            showMore: false,
-                            // targetID: ''
-                        });
-                    }
+            for (let i = 0; i <4; i++){
+                element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
+                element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
+            }
 
+
+            }
         }
-
-
-        }
-
     }
 
-    editMoreInput = () => {
+    editMoreInput = (e) => {
         // if(event.target.matches("span")){
         //     this.setState({
         //         showMore: true,
         //     });
-            console.log("hello");
+            console.log(e);
         // }
 
+                
         // const editDate = document.getElementById('editDate').innerHTML;
         // const editLocation = document.getElementById('editLocation').innerHTML;
         // const editDescription = document.getElementById('editDescription').innerHTML;
@@ -416,6 +409,7 @@ class ExpenseLog extends Component {
     }
 
     render(){
+        console.log(this.state);
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
 
