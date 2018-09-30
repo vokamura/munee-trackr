@@ -101,6 +101,7 @@ class ExpenseLog extends Component {
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
+            console.log("edit");
             //Change update button to done, and change delete button to cancel
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
             const itemRow = e.target.getAttribute('itemnumber');
@@ -119,6 +120,7 @@ class ExpenseLog extends Component {
 
             this.props.updateItemOn(e);
         } else {
+            console.log("update");
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
 

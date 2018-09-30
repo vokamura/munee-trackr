@@ -14,7 +14,7 @@ export default (props) => {
                 {/* Turn this into a table */}
                 <h5>Entry Details</h5>
                 <div>
-                    <span className="left-align">Date: </span>
+                   Date: 
                     <span className="right-align" id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
                 </div>
                 <div>Location: 
