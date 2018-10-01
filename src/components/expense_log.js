@@ -196,6 +196,7 @@ class ExpenseLog extends Component {
             } 
 
             element.getElementsByTagName("td")[3].textContent = "$" + newAmount;
+
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
                 //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
@@ -208,6 +209,7 @@ class ExpenseLog extends Component {
                 this.setState({
                     changeBtn: false,
                     key: key,
+                    insertError: ''
                 });
 
                 this.props.sendData(
@@ -217,10 +219,6 @@ class ExpenseLog extends Component {
                     newAmount,
                     key
                 )
-
-                this.setState({
-                    insertError: ''
-                })
 
                 this.props.updateItemOff(e);
                 
@@ -371,19 +369,19 @@ class ExpenseLog extends Component {
                 this.setState({
                     insertError: 'Enter a description'
                 });
-            } 
-
+            }
 
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
                 //Toggle done button to edit and cancel button to delete
-                element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"
-                element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
+                element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
+                element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
             
                 let key = targetID;
             
                 this.setState({
                     key: key,
-                    changeBtn: false
+                    changeBtn: false,
+                    insertError: ''
                 });
 
                 this.props.sendData(
@@ -392,16 +390,12 @@ class ExpenseLog extends Component {
                     newDescription,
                     newAmount,
                     key
-                )
+                );
 
-            this.setState({
-                insertError: ''
-            });
-
-            for (let i = 0; i <4; i++){
-                element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
-                element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
-            }
+                for (let i = 0; i <4; i++){
+                    element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
+                    element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
+                }
             }
         }
     }
