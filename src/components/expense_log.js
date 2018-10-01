@@ -24,6 +24,18 @@ class ExpenseLog extends Component {
         this.addForm = this.addForm.bind(this);
     }
 
+    //Resets state of changeBtn so after submit new item, button is green
+    componentDidUpdate(){
+        const {changeBtn} = this.state;
+        for (let i=0; i < document.getElementsByClassName('update').length; i++){
+            if(changeBtn && document.getElementsByClassName('update')[i].children[0].innerHTML === "update"){
+                this.setState({
+                    changeBtn: false
+                });
+            }
+        }
+    }
+
     hideModal = () => {
         this.setState({
             showSplash: false
@@ -56,7 +68,7 @@ class ExpenseLog extends Component {
     insertForm() {
         const {showForm} = this.state;
         if(showForm){
-            return <ExpenseInput send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
+            return <ExpenseInput changeBtn={this.state.changeBtn} send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
         } 
     }
 
@@ -101,7 +113,6 @@ class ExpenseLog extends Component {
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
-            console.log("edit");
             //Change update button to done, and change delete button to cancel
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
             const itemRow = e.target.getAttribute('itemnumber');
@@ -115,12 +126,12 @@ class ExpenseLog extends Component {
             for (var i=0; i < rows.length-1; i++){
                 if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                     document.getElementsByClassName('update')[i].disabled = true;
+                    document.getElementsByClassName('cancelDelete')[i].disabled = true;
                 } 
             }
 
             this.props.updateItemOn(e);
         } else {
-            console.log("update");
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
 
@@ -200,10 +211,11 @@ class ExpenseLog extends Component {
 
                 this.props.updateItemOff(e);
                 
-                //If a button is editable, it disables all other edit buttons
+                //If a button is editable, it disables all other edit buttons and delete
                 for (var i=0; i < rows.length-1; i++){
                     if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                         document.getElementsByClassName('update')[i].disabled = false;
+                        document.getElementsByClassName('cancelDelete')[i].disabled = false;
                     } 
                 }
             }
@@ -403,6 +415,21 @@ class ExpenseLog extends Component {
         }
     }
 
+    handleDelete = (e) => {
+        this.props.deleteItem(e);
+        this.setState({
+            changeBtn: false
+        });
+        for (var i=0; i < document.getElementsByClassName('cancelDelete').length; i++){
+            if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                document.getElementsByClassName('cancelDelete')[i].disabled = false;
+                // document.getElementsByClassName('update')[i].classList.remove("green");
+                // document.getElementsByClassName("update")[i].classList.add("light-blue");
+                // console.log(document.getElementsByTagName("td")[i].innerText);
+            } 
+        }
+    }
+
     render(){
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
@@ -441,7 +468,8 @@ class ExpenseLog extends Component {
                         editInput={()=>{this.editInput()}} 
                         key={entry.id} entry={entry} 
                         runningTotal={runningTotal} 
-                        deleteItem={(e)=>{this.props.deleteItem(e)}} 
+                        // deleteItem={(e)=>{this.props.deleteItem(e)}} 
+                        handleDelete={(e)=>{this.handleDelete(e)}}
                         handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
