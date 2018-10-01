@@ -24,6 +24,19 @@ class ExpenseLog extends Component {
         this.addForm = this.addForm.bind(this);
     }
 
+    componentDidMount () {
+        window.addEventListener("resize", function() {
+            if (window.matchMedia("(min-width: 661px)").matches) {
+                // console.log("Screen width is at least 661px");
+                this.setState({
+                    showMore: false
+                });
+            } else {
+                // console.log("Screen less than 661px");
+            }
+        }.bind(this));     
+    }
+
     //Resets state of changeBtn so after submit new item, button is green
     componentDidUpdate(){
         const {changeBtn} = this.state;
@@ -183,6 +196,7 @@ class ExpenseLog extends Component {
             } 
 
             element.getElementsByTagName("td")[3].textContent = "$" + newAmount;
+
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
                 //Toggle done button to edit and cancel button to delete
                 e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "edit";
@@ -195,6 +209,7 @@ class ExpenseLog extends Component {
                 this.setState({
                     changeBtn: false,
                     key: key,
+                    insertError: ''
                 });
 
                 this.props.sendData(
@@ -204,10 +219,6 @@ class ExpenseLog extends Component {
                     newAmount,
                     key
                 )
-
-                this.setState({
-                    insertError: ''
-                })
 
                 this.props.updateItemOff(e);
                 
@@ -292,6 +303,7 @@ class ExpenseLog extends Component {
                 element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
                 element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
             }
+            this.setState({changeBtn: false});
         }
         
     }
@@ -307,6 +319,10 @@ class ExpenseLog extends Component {
             }
             event.target.getElementsByClassName("toggleEditSubmit")[0].innerText = "done";
             element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
+
+            this.setState({
+                changeBtn: true
+            });
 
         } else {
             let newDate = element.getElementsByTagName("span")[0].textContent;
@@ -353,17 +369,19 @@ class ExpenseLog extends Component {
                 this.setState({
                     insertError: 'Enter a description'
                 });
-            } 
+            }
 
             if (dateRegex.test(newDate) && regexAmount.test(newAmount) && newPlace !== "" && newDescription !== ""){
                 //Toggle done button to edit and cancel button to delete
-                element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"
-                element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
+                element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
+                element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
             
                 let key = targetID;
             
                 this.setState({
                     key: key,
+                    changeBtn: false,
+                    insertError: ''
                 });
 
                 this.props.sendData(
@@ -372,16 +390,12 @@ class ExpenseLog extends Component {
                     newDescription,
                     newAmount,
                     key
-                )
+                );
 
-            this.setState({
-                insertError: ''
-            })
-
-            for (let i = 0; i <4; i++){
-                element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
-                element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
-            }
+                for (let i = 0; i <4; i++){
+                    element.getElementsByTagName("span")[i].setAttribute("contenteditable", false);
+                    element.getElementsByTagName("span")[i].classList.remove("highlightCells");     
+                }
             }
         }
     }
@@ -401,7 +415,7 @@ class ExpenseLog extends Component {
     }
     
     insertMore(){
-        const {showMore, targetID} = this.state;
+        const {showMore, targetID, changeBtn} = this.state;
         if(showMore){
             return <MoreWindow 
                     shoreMore={showMore} hideMore={this.hideMore.bind(this)}  
@@ -410,7 +424,9 @@ class ExpenseLog extends Component {
                     updateMoreItem={this.updateMoreItem}
                     editMoreInput={()=>{this.editMoreInput()}} 
                     targetID={targetID} 
+                    changeBtn={changeBtn}
                     log={this.props.log}/>
+
 
         }
     }
@@ -432,6 +448,7 @@ class ExpenseLog extends Component {
 
     render(){
         const { changeBtn, showForm, insertError, showSplash} = this.state;
+        console.log(changeBtn);
         var formSymbol = "add";
 
         //Gets total running balance, turns it into a number, and then adds necessary decimals
