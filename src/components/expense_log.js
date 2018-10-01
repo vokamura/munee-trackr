@@ -24,6 +24,16 @@ class ExpenseLog extends Component {
         this.addForm = this.addForm.bind(this);
     }
 
+    //Resets state of changeBtn so after submit new item, button is green
+    componentDidUpdate(){
+        const {changeBtn} = this.state;
+        if(changeBtn && document.getElementsByClassName('update')[0].children[0].innerHTML === "edit"){
+            this.setState({
+                changeBtn: false
+            });
+        }
+    }
+
     hideModal = () => {
         this.setState({
             showSplash: false
@@ -56,7 +66,7 @@ class ExpenseLog extends Component {
     insertForm() {
         const {showForm} = this.state;
         if(showForm){
-            return <ExpenseInput send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
+            return <ExpenseInput changeBtn={this.state.changeBtn} send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
         } 
     }
 
@@ -404,6 +414,7 @@ class ExpenseLog extends Component {
     }
 
     render(){
+        console.log(this.state.changeBtn);
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
 
