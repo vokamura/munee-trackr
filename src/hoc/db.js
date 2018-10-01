@@ -59,7 +59,6 @@ export default (WrappedComponent) => {
             //If the button is a delete button, delete that row
             if(e.target.innerText === "delete"){
                 //Used vanilla JS to create delete modal and elements in it
-                console.log("delete");
                 let shadow = document.createElement("div");
                 let node = document.createElement("div");
                 let pNode = document.createElement("p");
@@ -93,7 +92,6 @@ export default (WrappedComponent) => {
             } else {
                 //Turn delete button into cancel and turn update into edit.  
                 // let element = document.getElementById(`${itemRow}`);
-                console.log("cancel");
                 element.getElementsByClassName("toggleDelete")[0].innerText = "delete";
                 element.getElementsByClassName("toggleEditSubmit")[0].innerText = "edit";
                 this.updateItemOff(e);

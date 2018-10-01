@@ -27,10 +27,12 @@ class ExpenseLog extends Component {
     //Resets state of changeBtn so after submit new item, button is green
     componentDidUpdate(){
         const {changeBtn} = this.state;
-        if(changeBtn && document.getElementsByClassName('update')[0].children[0].innerHTML === "edit"){
-            this.setState({
-                changeBtn: false
-            });
+        for (let i=0; i < document.getElementsByClassName('update').length; i++){
+            if(changeBtn && document.getElementsByClassName('update')[i].children[0].innerHTML === "update"){
+                this.setState({
+                    changeBtn: false
+                });
+            }
         }
     }
 
@@ -125,6 +127,7 @@ class ExpenseLog extends Component {
             for (var i=0; i < rows.length-1; i++){
                 if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                     document.getElementsByClassName('update')[i].disabled = true;
+                    document.getElementsByClassName('cancelDelete')[i].disabled = true;
                 } 
             }
 
@@ -210,10 +213,11 @@ class ExpenseLog extends Component {
 
                 this.props.updateItemOff(e);
                 
-                //If a button is editable, it disables all other edit buttons
+                //If a button is editable, it disables all other edit buttons and delete
                 for (var i=0; i < rows.length-1; i++){
                     if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
                         document.getElementsByClassName('update')[i].disabled = false;
+                        document.getElementsByClassName('cancelDelete')[i].disabled = false;
                     } 
                 }
             }
@@ -413,6 +417,14 @@ class ExpenseLog extends Component {
         }
     }
 
+    handleDelete = (e) => {
+        this.props.deleteItem(e);
+        console.log("set state of changebtn");
+        // this.setState({
+        //     changeBtn: false
+        // });
+    }
+
     render(){
         console.log(this.state.changeBtn);
         const { changeBtn, showForm, insertError, showSplash} = this.state;
@@ -452,7 +464,8 @@ class ExpenseLog extends Component {
                         editInput={()=>{this.editInput()}} 
                         key={entry.id} entry={entry} 
                         runningTotal={runningTotal} 
-                        deleteItem={(e)=>{this.props.deleteItem(e)}} 
+                        // deleteItem={(e)=>{this.props.deleteItem(e)}} 
+                        handleDelete={(e)=>{this.handleDelete(e)}}
                         handleChangeUpdateBtn={(e)=>{this.handleChangeUpdateBtn(e)}}/>
                 )
             });
