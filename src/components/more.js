@@ -30,13 +30,11 @@ export default (props) => {
             <div>
                 <button 
                     className="btn-floating waves-effect waves-light red top" 
-                    onClick={props.deleteMoreItem} itemnumber={itemID}
-                    >
+                    onClick={props.deleteMoreItem} itemnumber={itemID}>
                         <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                 </button>
                 <button className={props.changeBtn ? "btn-floating waves-effect waves-light green update" : "btn-floating waves-effect waves-light light-blue update"} 
-                    onClick={props.updateMoreItem} itemnumber={itemID}
-                    >
+                    onClick={props.updateMoreItem} itemnumber={itemID}>
                         <i id="clickBehind" className="material-icons submit toggleEditSubmit">edit</i>
                 </button>
             </div> 
