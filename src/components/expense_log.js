@@ -113,7 +113,6 @@ class ExpenseLog extends Component {
         const rows = document.getElementsByTagName('tr');
         
         if(!changeBtn){
-            console.log("edit");
             //Change update button to done, and change delete button to cancel
             e.target.getElementsByClassName('toggleEditSubmit')[0].innerText = "done";
             const itemRow = e.target.getAttribute('itemnumber');
@@ -133,7 +132,6 @@ class ExpenseLog extends Component {
 
             this.props.updateItemOn(e);
         } else {
-            console.log("update");
             const itemRow = e.target.getAttribute('itemnumber');
             let element = document.getElementById(`${itemRow}`);
 
@@ -419,14 +417,20 @@ class ExpenseLog extends Component {
 
     handleDelete = (e) => {
         this.props.deleteItem(e);
-        console.log("set state of changebtn");
-        // this.setState({
-        //     changeBtn: false
-        // });
+        this.setState({
+            changeBtn: false
+        });
+        for (var i=0; i < document.getElementsByClassName('cancelDelete').length; i++){
+            if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                document.getElementsByClassName('cancelDelete')[i].disabled = false;
+                // document.getElementsByClassName('update')[i].classList.remove("green");
+                // document.getElementsByClassName("update")[i].classList.add("light-blue");
+                // console.log(document.getElementsByTagName("td")[i].innerText);
+            } 
+        }
     }
 
     render(){
-        console.log(this.state.changeBtn);
         const { changeBtn, showForm, insertError, showSplash} = this.state;
         var formSymbol = "add";
 
