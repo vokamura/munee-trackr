@@ -42,19 +42,13 @@ h3, a {
     padding-top: 5%;
     padding-bottom: 5%;
     color: white;
-    width: 380px;
+    width: 80%;
     z-index: 3;
     background-color: rgba(0,0,0, .9);
     margin: 5% auto;
     overflow-y: auto;
     overflow-x: auto;
     height: 80vh;
-}
-
-@media only screen and (max-width: 430px){
-    #addForm {
-        height: 65vh;
-    }
 }
 
 /* TABLE */
