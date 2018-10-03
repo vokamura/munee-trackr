@@ -25,7 +25,7 @@ class ExpenseInput extends Component {
         e.preventDefault();
         const {date, location, description, debitcredit} = this.state;
 
-        const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
+        const dateRegex = /^((0|1)\d{1})\/((0|1|2|3)\d{1})\/((18|19|20)\d{2})/;
 
         this.locationCheck(location);
         this.descriptionCheck(description);
@@ -53,7 +53,7 @@ class ExpenseInput extends Component {
     }
 
     dateCheck = (date) => {
-        const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
+        const dateRegex = /^((0|1)\d{1})\/((0|1|2|3)\d{1})\/((18|19|20)\d{2})/;
         
         if (date === "" || !dateRegex.test(date)){
             this.setState({

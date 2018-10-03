@@ -153,7 +153,7 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("td")[2].textContent;
             let newAmount = element.getElementsByTagName("td")[3].textContent;
 
-            const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
+            const dateRegex = /^((0|1)\d{1})\/((0|1|2|3)\d{1})\/((18|19|20)\d{2})/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,30}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
@@ -330,7 +330,7 @@ class ExpenseLog extends Component {
             let newDescription = element.getElementsByTagName("span")[2].textContent;
             let newAmount = element.getElementsByTagName("span")[3].textContent;
 
-            const dateRegex = /^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})/;
+            const dateRegex = /^((0|1)\d{1})\/((0|1|2|3)\d{1})\/((18|19|20)\d{2})/;
             const placeRegex = /[a-zA-Z0-9\s]{3,20}/gm;
             const descriptionRegex = /[a-zA-Z0-9\s]{3,30}/gm;
             const regexAmount = /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/;
