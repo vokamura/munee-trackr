@@ -33,7 +33,7 @@ export default (props) => {
 
                     </div>
 
-                    <p className="splashInstructions teal-text text-lighten-2">Click anywhere in this box to close</p>
+                    <p className="splashInstructions teal-text text-lighten-2">Click anywhere to close</p>
 
             </div>
         </div>
