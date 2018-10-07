@@ -308,3 +308,17 @@ nav p {
 .top {
     z-index: 3 !important;
 }
+
+@media only screen and (max-width: 661px){
+    .hideButtons {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 662px){
+    .hideButtons {
+        display: block;
+    }
+}
+
+}
