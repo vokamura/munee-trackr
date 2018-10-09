@@ -26,16 +26,16 @@ class ExpenseLog extends Component {
 
     componentDidMount () {
         window.addEventListener("resize", function() {
-            if (window.matchMedia("(min-width: 661px)").matches) {
+            if (window.matchMedia("(min-width: 600px)").matches) {
                 // console.log("Screen width is at least 661px");
                 this.setState({
                     showMore: false
                 });
-                
+                //closes on 727px
             } 
-            // if (window.matchMedia("(max-width: 661px)").matches) {
-            //     console.log(document.getElementById("editAmount").isContentEditable);
-            // }
+            if (window.matchMedia("screen and (max-width: 600px)").matches) {
+                console.log(document.getElementById("editAmount").isContentEditable);
+            }
             // else {
             //     // console.log("Screen less than 661px");
             // }
