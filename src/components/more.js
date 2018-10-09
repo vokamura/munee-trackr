@@ -14,30 +14,32 @@ export default (props) => {
                 {/* Turn this into a table */}
                 <h5>Entry Details</h5>
             <table className="moreTable">
-                <tr>
-                    <td className="moreRow">Date: </td> 
-                    <td>
-                        <span className="right-align" id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="moreRow">Location: </td>
-                    <td>
-                        <span id="editLocation" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="moreRow">Description: </td>
-                    <td>
-                        <span id="editDescription" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.description}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="moreRow">Amount </td>
-                    <td>
-                        $<span id="editAmount" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.debitcredit}</span>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td className="moreRow">Date: </td> 
+                        <td>
+                            <span className="right-align" id="editDate" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.date}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="moreRow">Location: </td>
+                        <td>
+                            <span id="editLocation" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.location}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="moreRow">Description: </td>
+                        <td>
+                            <span id="editDescription" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.description}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="moreRow">Amount </td>
+                        <td>
+                            $<span id="editAmount" onKeyPress={(e) => props.keyPresses(e)}  onChange={props.editMoreInput} onBlur={props.editMoreInput}>{itemID.debitcredit}</span>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
             <div>

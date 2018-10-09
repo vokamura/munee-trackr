@@ -31,9 +31,14 @@ class ExpenseLog extends Component {
                 this.setState({
                     showMore: false
                 });
-            } else {
-                // console.log("Screen less than 661px");
-            }
+                
+            } 
+            // if (window.matchMedia("(max-width: 661px)").matches) {
+            //     console.log(document.getElementById("editAmount").isContentEditable);
+            // }
+            // else {
+            //     // console.log("Screen less than 661px");
+            // }
         }.bind(this));     
     }
 
@@ -448,7 +453,7 @@ class ExpenseLog extends Component {
 
     render(){
         const { changeBtn, showForm, insertError, showSplash} = this.state;
-        console.log(changeBtn);
+        // console.log(changeBtn);
         var formSymbol = "add";
 
         //Gets total running balance, turns it into a number, and then adds necessary decimals
