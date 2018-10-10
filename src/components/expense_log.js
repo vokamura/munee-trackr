@@ -26,19 +26,32 @@ class ExpenseLog extends Component {
 
     componentDidMount () {
         window.addEventListener("resize", function() {
-            if (window.matchMedia("(min-width: 661px)").matches) {
-                // console.log("Screen width is at least 661px");
+            if (window.matchMedia("(min-width: 600px)").matches) {
                 this.setState({
                     showMore: false
                 });
-                
             } 
-            // if (window.matchMedia("(max-width: 661px)").matches) {
-            //     console.log(document.getElementById("editAmount").isContentEditable);
-            // }
-            // else {
-            //     // console.log("Screen less than 661px");
-            // }
+            if (window.matchMedia("screen and (max-width: 600px)").matches) {
+                for (var i=0; i < document.getElementsByClassName('updated').length; i++){
+                    document.getElementsByClassName('updated')[i].setAttribute("contenteditable", false);
+                    document.getElementsByClassName('updated')[i].classList.remove("highlightCells");
+                }
+                for (var i=0; i< document.getElementsByClassName("toggleDelete").length; i++){
+                    document.getElementsByClassName("toggleDelete")[i].innerText = "delete";
+                document.getElementsByClassName("toggleEditSubmit")[i].innerText = "edit";
+                }
+                const rows = document.getElementsByTagName('tr');
+                for (var i=0; i < rows.length-1; i++){
+                    if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                        document.getElementsByClassName('update')[i].disabled = false;
+                        document.getElementsByClassName('cancelDelete')[i].disabled = false;
+                    } 
+                }
+                this.setState({
+                    changeBtn: false
+                });
+                
+            }
         }.bind(this));     
     }
 
@@ -317,12 +330,12 @@ class ExpenseLog extends Component {
         const {targetID} = this.state;
         let element = document.getElementsByClassName("moreBody")[0];
 
-        if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
+        if(element.getElementsByClassName("toggleEditMore")[0].innerText == "edit"){
             for (let i = 0; i <4; i++){
                 element.getElementsByTagName("span")[i].setAttribute("contenteditable", "");
                 element.getElementsByTagName("span")[i].classList.add("highlightCells");     
             }
-            event.target.getElementsByClassName("toggleEditSubmit")[0].innerText = "done";
+            event.target.getElementsByClassName("toggleEditMore")[0].innerText = "done";
             element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
 
             this.setState({

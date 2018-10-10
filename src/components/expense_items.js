@@ -34,7 +34,7 @@ export default (props) => {
                 <td id="lineAmount" className="">
                     ${lineamount}
                 </td>
-                <td className="center-align hide-on-small-only hideButtons">
+                <td className="center-align hide-on-small-only" id="hideButtons">
                     <button 
                         className="btn-floating waves-effect waves-light red cancelDelete" 
                         // onClick={props.deleteItem} itemnumber={props.entry.id}>
@@ -50,7 +50,7 @@ export default (props) => {
                     <button className="btn-floating waves-effect waves-light purple darken-1" 
                         onClick={props.showMore} 
                         itemnumber={props.entry.id}>
-                            <i id="clickBehind" className="material-icons submit toggleEditSubmit">add_circle_outline</i>
+                            <i id="clickBehind" className="material-icons submit toggleEditMore">add_circle_outline</i>
                     </button>
                 </td>
             </tr>
