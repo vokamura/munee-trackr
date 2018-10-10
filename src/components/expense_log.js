@@ -41,6 +41,16 @@ class ExpenseLog extends Component {
                     document.getElementsByClassName("toggleDelete")[i].innerText = "delete";
                 document.getElementsByClassName("toggleEditSubmit")[i].innerText = "edit";
                 }
+                const rows = document.getElementsByTagName('tr');
+                for (var i=0; i < rows.length-1; i++){
+                    if (document.getElementsByClassName('update')[i].children[0].innerHTML === "edit"){
+                        document.getElementsByClassName('update')[i].disabled = false;
+                        document.getElementsByClassName('cancelDelete')[i].disabled = false;
+                    } 
+                }
+                this.setState({
+                    changeBtn: false
+                });
                 
             }
         }.bind(this));     
