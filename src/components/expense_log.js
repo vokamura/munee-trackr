@@ -36,6 +36,12 @@ class ExpenseLog extends Component {
                     document.getElementsByClassName('updated')[i].setAttribute("contenteditable", false);
                     document.getElementsByClassName('updated')[i].classList.remove("highlightCells");
                 }
+                console.log(document.getElementsByClassName("toggleEditSubmit").innerText);
+                for (var i=0; i< document.getElementsByClassName("toggleDelete").length; i++){
+                    document.getElementsByClassName("toggleDelete")[i].innerText = "delete";
+                document.getElementsByClassName("toggleEditSubmit")[i].innerText = "edit";
+                }
+                
             }
         }.bind(this));     
     }
@@ -315,12 +321,12 @@ class ExpenseLog extends Component {
         const {targetID} = this.state;
         let element = document.getElementsByClassName("moreBody")[0];
 
-        if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
+        if(element.getElementsByClassName("toggleEditMore")[0].innerText == "edit"){
             for (let i = 0; i <4; i++){
                 element.getElementsByTagName("span")[i].setAttribute("contenteditable", "");
                 element.getElementsByTagName("span")[i].classList.add("highlightCells");     
             }
-            event.target.getElementsByClassName("toggleEditSubmit")[0].innerText = "done";
+            event.target.getElementsByClassName("toggleEditMore")[0].innerText = "done";
             element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
 
             this.setState({

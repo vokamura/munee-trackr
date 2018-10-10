@@ -50,7 +50,7 @@ export default (props) => {
                     <button className="btn-floating waves-effect waves-light purple darken-1" 
                         onClick={props.showMore} 
                         itemnumber={props.entry.id}>
-                            <i id="clickBehind" className="material-icons submit toggleEditSubmit">add_circle_outline</i>
+                            <i id="clickBehind" className="material-icons submit toggleEditMore">add_circle_outline</i>
                     </button>
                 </td>
             </tr>
