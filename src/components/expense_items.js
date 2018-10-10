@@ -34,7 +34,7 @@ export default (props) => {
                 <td id="lineAmount" className="">
                     ${lineamount}
                 </td>
-                <td className="center-align hide-on-small-only hideButtons">
+                <td className="center-align hide-on-small-only" id="hideButtons">
                     <button 
                         className="btn-floating waves-effect waves-light red cancelDelete" 
                         // onClick={props.deleteItem} itemnumber={props.entry.id}>

@@ -36,7 +36,6 @@ class ExpenseLog extends Component {
                     document.getElementsByClassName('updated')[i].setAttribute("contenteditable", false);
                     document.getElementsByClassName('updated')[i].classList.remove("highlightCells");
                 }
-                console.log(document.getElementsByClassName("toggleEditSubmit").innerText);
                 for (var i=0; i< document.getElementsByClassName("toggleDelete").length; i++){
                     document.getElementsByClassName("toggleDelete")[i].innerText = "delete";
                 document.getElementsByClassName("toggleEditSubmit")[i].innerText = "edit";

@@ -309,10 +309,10 @@ nav p {
     z-index: 3 !important;
 }
 
-/* @media only screen and  (min-width: 660px) and (max-width: 662px){
-    .hideButtons {
-        display: none;
+@media only screen and (max-width: 601px){
+    #hideButtons, #deleteUpdate {
+        display: none !important;
     }
-} */
+}
 
 
