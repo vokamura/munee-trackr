@@ -330,12 +330,12 @@ class ExpenseLog extends Component {
         const {targetID} = this.state;
         let element = document.getElementsByClassName("moreBody")[0];
 
-        if(element.getElementsByClassName("toggleEditMore")[0].innerText == "edit"){
+        if(element.getElementsByClassName("toggleEditSubmit")[0].innerText == "edit"){
             for (let i = 0; i <4; i++){
                 element.getElementsByTagName("span")[i].setAttribute("contenteditable", "");
                 element.getElementsByTagName("span")[i].classList.add("highlightCells");     
             }
-            event.target.getElementsByClassName("toggleEditMore")[0].innerText = "done";
+            event.target.getElementsByClassName("toggleEditSubmit")[0].innerText = "done";
             element.getElementsByClassName("toggleDelete")[0].innerText = "cancel";
 
             this.setState({
