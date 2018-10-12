@@ -10,8 +10,18 @@ export default (WrappedComponent) => {
 
         componentDidMount(){
             this.deleteOld();
+            this.checkDb();
             this.dbRef.orderBy('date').onSnapshot(this.props.updateExpenseLog);
         };
+
+        checkDb(){
+            this.dbRef.get().then((snap) => {
+                if(snap.empty){
+                    // console.log('no docs found');
+                    this.sendLog("01/01/2018", "Item auto-added", "This was auto added", "123.45");
+                }
+            })
+        }
 
         //When app is loaded, deletes documents older than 2 hours - might have a bug
         //Take this.deleteOld() from componentDidMount if stops working
