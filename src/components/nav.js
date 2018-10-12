@@ -35,11 +35,15 @@ class Nav extends Component {
         } 
     }
 
+    reload(){
+        location.reload();
+    }
+
     render(){
         return (
             <nav className="green darken-3">
                 <div className="nav-wrapper">
-                    <h3 className="brand-logo left">Munee Logger</h3>
+                    <h3 className="brand-logo left reload" onClick={this.reload}>Munee Logger</h3>
                     <ul className="right nav-mobile">
                         <li >
                             <a onClick={this.addAbout.bind(this)}>About</a>
