@@ -26,6 +26,10 @@ h3, a {
         width: 85%;
     }
 }
+
+.reload {
+    cursor: pointer;
+}
     
 /* FORM INPUT */
 .formShadow {
