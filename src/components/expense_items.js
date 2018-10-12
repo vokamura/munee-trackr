@@ -37,7 +37,6 @@ export default (props) => {
                 <td className="center-align hide-on-small-only" id="hideButtons">
                     <button 
                         className="btn-floating waves-effect waves-light red cancelDelete" 
-                        // onClick={props.deleteItem} itemnumber={props.entry.id}>
                         onClick={props.handleDelete} itemnumber={props.entry.id}>
                             <i id="clickBehind" className="material-icons toggleDelete">delete</i>
                     </button>
