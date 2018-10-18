@@ -4,7 +4,7 @@ import About from './about';
 class Nav extends Component {
     constructor(props){
         super(props);
-        this.state ={
+        this.state = {
             showAbout: false
         }
     }
