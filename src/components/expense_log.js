@@ -28,7 +28,8 @@ class ExpenseLog extends Component {
         window.addEventListener("resize", function() {
             if (window.matchMedia("(min-width: 600px)").matches) {
                 this.setState({
-                    showMore: false
+                    showMore: false,
+                    changeBtn: false
                 });
             } 
             if (window.matchMedia("screen and (max-width: 600px)").matches) {
@@ -99,7 +100,11 @@ class ExpenseLog extends Component {
     insertForm() {
         const {showForm} = this.state;
         if(showForm){
-            return <ExpenseInput changeBtn={this.state.changeBtn} send={this.props.sendLog} hideForm={this.hideForm.bind(this)} showForm={this.state.showForm}/>
+            return <ExpenseInput 
+                changeBtn={this.state.changeBtn} 
+                send={this.props.sendLog} 
+                hideForm={this.hideForm.bind(this)} 
+                showForm={this.state.showForm}/>
         } 
     }
 
